@@ -11,12 +11,6 @@
 
 @interface Graphics : NSObject
 
-- (void) drawCircle;
-- (void) drawCircleInRect: (CGRect) rect;
-- (void) drawRectangle: (CGRect) rect;
-- (void) drawPath;
-- (void) drawPolyline;
-
 + (NSString *) generateHash: (NSString *) str;
 
 #pragma mark - Color helpers
@@ -27,13 +21,13 @@
 
 #pragma mark - Defaults
 
-+ (UIColor*) FILL_COLOR_DARK  ;
-+ (UIColor*) FILL_COLOR_LIGHT ;
-+ (UIColor*) STROKE_COLOR     ;
++ (UIColor*) FILL_COLOR_DARK;
++ (UIColor*) FILL_COLOR_LIGHT;
++ (UIColor*) STROKE_COLOR;
 
-+ (CGFloat) STROKE_OPACITY   ;
-+ (CGFloat) OPACITY_MIN      ;
-+ (CGFloat) OPACITY_MAX      ;
++ (CGFloat) STROKE_OPACITY;
++ (CGFloat) OPACITY_MIN;
++ (CGFloat) OPACITY_MAX;
 
 
 @end

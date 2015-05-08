@@ -7,7 +7,6 @@
 //
 
 #import "GeoPatternView.h"
-#import "UIColor+MyColors.h"
 
 @interface GeoPatternView()
 @end
@@ -21,6 +20,7 @@
     NSDictionary *defaults = [Pattern defaults];
     [self generateFromString:string withOptions:defaults];
 }
+
 - (void) generateFromString: (NSString *) string withOptions: (NSDictionary *) options {
     
     // Adds color to the options dictionary

@@ -11,24 +11,6 @@
 
 @implementation Graphics
 
-- (void) drawCircleInRect: (CGRect) rect {
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:rect];
-    [[UIColor redColor] setFill];
-    // actually draws it
-    [circlePath fill];
-}
-- (UIColor *) drawBackground: (UIColor*) color {
-    
-    UIColor *backgroundColor;
-    
-    if (color) {
-        backgroundColor = color;
-    } else {
-        
-    }
-    
-    return backgroundColor;
-}
 + (NSString *)generateHash: (NSString *) str {
     const char *cStr = [str UTF8String];
     unsigned char result[CC_SHA1_DIGEST_LENGTH];

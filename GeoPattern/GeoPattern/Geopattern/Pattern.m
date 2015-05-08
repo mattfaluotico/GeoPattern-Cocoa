@@ -41,7 +41,6 @@
 
 - (void) generate {
     CGColorRef fillColor = [Graphics fillColor:100].CGColor;
-    
 };
 
 + (NSDictionary*) defaults {
