@@ -19,7 +19,17 @@
 
 + (CGFloat) opacity: (CGFloat) value;
 
-+ (UIColor *) backgroundColorFromOptions: (NSDictionary *) options
++ (UIColor *) backgroundColorFromOptions: (NSDictionary *) options;
+
+#pragma mark - Process Helers
+
++ (CGFloat) mapValue: (CGFloat) value
+    inRangeWithLower: (NSInteger) lower
+       andUpperBound: (NSInteger) upper
+toNewRangeWithLowerBound: (NSInteger) newLower
+       andUpperBound: (NSInteger) newUpper;
+
++ (NSInteger) intFromHex: (NSString *) hash atIndex: (NSInteger) index withLength: (NSInteger) length;
 
 #pragma mark - Defaults
 

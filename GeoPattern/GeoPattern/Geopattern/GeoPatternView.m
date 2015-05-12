@@ -7,6 +7,7 @@
 //
 
 #import "GeoPatternView.h"
+#import "Graphics.h"
 
 @interface GeoPatternView()
 @end
@@ -24,8 +25,8 @@
 - (void) generateFromString: (NSString *) string withOptions: (NSDictionary *) options {
     
     // Adds color to the options dictionary
-    NSMutableDictionary *optionsWithString = [options mutableCopy];
-    [optionsWithString setObject:string forKey:@"string"];
+    NSMutableDictionary *optionsWithHash = [options mutableCopy];
+    [optionsWithHash setObject:string forKey:@"hash"];
     
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -35,12 +36,14 @@
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
     CGContextSetFillColorSpace(context, patternSpace);
     CGColorSpaceRelease(patternSpace);
+
+    // Set background
+    self.backgroundColor = [Graphics backgroundColorFromOptions:optionsWithHash];
     
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter
-    void *o = (void*)CFBridgingRetain(optionsWithString);
+    void *o = (void*)CFBridgingRetain(optionsWithHash);
     
-    // Set background
     
     CGPatternRef pattern = CGPatternCreate(o,
                                            self.frame,

@@ -11,9 +11,9 @@
 #pragma mark - HSLColor
 
 @interface HSLColor : NSObject
-@property CGFloat hue;
-@property CGFloat saturation;
-@property CGFloat lightness;
+@property NSInteger hue;
+@property double saturation;
+@property double lightness;
 
 // HSL to RGB
 - (UIColor *) toUIColor;

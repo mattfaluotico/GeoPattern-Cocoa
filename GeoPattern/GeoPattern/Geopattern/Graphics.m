@@ -28,7 +28,7 @@
     return s;
 }
 
-#pragma mark - Helpers
+#pragma mark - Color Helpers
 
 + (UIColor *) fillColor: (NSInteger) value {
     return (value % 2 == 0) ? [Graphics FILL_COLOR_LIGHT] : [Graphics FILL_COLOR_DARK];
@@ -49,15 +49,33 @@
     if ([options objectForKey:@"color"]) {
         returnedColor = [options objectForKey:@"color"];
     } else {
+        NSString *hash = [options objectForKey:@"hash"];
+        NSInteger i = [Graphics intFromHex:hash atIndex:14 withLength:3];
+        NSInteger hueOffset = [Graphics mapValue:i inRangeWithLower:14 andUpperBound:4085 toNewRangeWithLowerBound:0 andUpperBound:359];
+        NSInteger satOffset = [Graphics intFromHex:hash atIndex:17 withLength:1];
         
+        UIColor *basedOptionColor = [Graphics BASE_COLOR];
         
+        if ([options objectForKey:@"baseColor"]) {
+            basedOptionColor = [options objectForKey:@"baseColor"];
+        }
         
+        HSLColor *base = [basedOptionColor toHSL];
+
+        base.hue = (((base.hue * 360 - hueOffset) + 360) % 360) / 360;
+        if (satOffset % 2 == 0) {;
+            base.saturation = MIN(1, ((base.saturation * 100 + satOffset) / 100) );
+        } else {
+            base.saturation = MIN(0, ((base.saturation * 100 + satOffset) / 100) );
+        }
+        
+        returnedColor = [base toUIColor];
     }
     
     return returnedColor;
 }
 
-#pragma mark - Helpers Arb.
+#pragma mark - Process Helpers
 
 + (CGFloat) mapValue: (CGFloat) value
         inRangeWithLower: (NSInteger) lower 
@@ -71,6 +89,27 @@ toNewRangeWithLowerBound: (NSInteger) newLower
     return (value - lower) * newRange / oldRange * newLower;
 }
 
+// Extracts a part of a hex string and returns an int
++ (NSInteger) intFromHex: (NSString *) hash atIndex: (NSInteger) index withLength: (NSInteger) length {
+    
+    unsigned result = 0;
+    
+    NSUInteger actualLength = hash.length;
+    
+    if (actualLength + 1 > length) {
+        length = 1;
+    }
+    
+    NSString * string = [hash substringWithRange:NSMakeRange(index, length)];
+    
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    
+    [scanner setScanLocation:0];
+    [scanner scanHexInt:&result];
+    
+    return (NSInteger)result;
+}
+
 #pragma mark - Defaults
 
 + (UIColor*) FILL_COLOR_DARK {
@@ -81,6 +120,9 @@ toNewRangeWithLowerBound: (NSInteger) newLower
 }
 + (UIColor*) STROKE_COLOR {
     return [UIColor colorWithRed:0 green:0 blue:0 alpha:1]; /*#000000*/
+}
++ (UIColor *) BASE_COLOR {
+    return [UIColor colorWithRed:0.459 green:0.118 blue:0.118 alpha:1];
 }
 
 + (CGFloat) STROKE_OPACITY {
