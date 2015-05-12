@@ -11,20 +11,26 @@
 #pragma mark - HSLColor
 
 @interface HSLColor : NSObject
-@property CGFloat H;
-@property CGFloat S;
-@property CGFloat L;
+@property CGFloat hue;
+@property CGFloat saturation;
+@property CGFloat lightness;
 
+// HSL to RGB
 - (UIColor *) toUIColor;
+// HSL to HEX
 - (NSString *) toHex;
 
 @end
 
 @interface UIColor (Conversions)
 
+// RGB to HEX
 - (NSString *) toHex;
+// RGB to HSL
 - (HSLColor *) toHSL;
+// HEX to RGB
 + (UIColor *) fromHex: (NSString *) hex;
+// HSL to RGB
 + (UIColor *) fromHSL: (HSLColor *) hsl;
 
 @end

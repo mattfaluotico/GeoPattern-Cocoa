@@ -19,6 +19,8 @@
 
 + (CGFloat) opacity: (CGFloat) value;
 
++ (UIColor *) backgroundColorFromOptions: (NSDictionary *) options
+
 #pragma mark - Defaults
 
 + (UIColor*) FILL_COLOR_DARK;

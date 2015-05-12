@@ -30,7 +30,7 @@
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
     static const CGPatternCallbacks callbacks = { 0, &DrawPattern, NULL };
-    
+    // save context before generating pattern
     CGContextSaveGState(context);
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
     CGContextSetFillColorSpace(context, patternSpace);
@@ -39,6 +39,8 @@
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter
     void *o = (void*)CFBridgingRetain(optionsWithString);
+    
+    // Set background
     
     CGPatternRef pattern = CGPatternCreate(o,
                                            self.frame,
@@ -71,7 +73,7 @@
 
 // Draws the repeatable pattern itself
 void DrawPattern (void *info, CGContextRef context) {
-    
+
     NSDictionary *options = (__bridge NSDictionary*)info;
     Pattern *pattern = [[Pattern alloc] initWithContext:context WithOptions:options];
     [pattern temp];

@@ -7,6 +7,7 @@
 //
 
 #import "Graphics.h"
+#import "UIColor+Conversions.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation Graphics
@@ -32,13 +33,45 @@
 + (UIColor *) fillColor: (NSInteger) value {
     return (value % 2 == 0) ? [Graphics FILL_COLOR_LIGHT] : [Graphics FILL_COLOR_DARK];
 }
-+ (CGFloat) opacity: (CGFloat) value {
 
-    CGFloat range = [Graphics OPACITY_MAX] - [Graphics OPACITY_MIN];
-    return (value) * range / 15 + [Graphics OPACITY_MIN];
++ (CGFloat) opacity: (CGFloat) value {
+    return [Graphics mapValue:value
+                 inRangeWithLower:0
+                andUpperBound:15
+     toNewRangeWithLowerBound:[Graphics OPACITY_MIN]
+                andUpperBound:[Graphics OPACITY_MAX]];
 }
 
-#pragma mark - Defaults 
++ (UIColor *) backgroundColorFromOptions: (NSDictionary *) options {
+    
+    UIColor *returnedColor = nil;
+    
+    if ([options objectForKey:@"color"]) {
+        returnedColor = [options objectForKey:@"color"];
+    } else {
+        
+        
+        
+    }
+    
+    return returnedColor;
+}
+
+#pragma mark - Helpers Arb.
+
++ (CGFloat) mapValue: (CGFloat) value
+        inRangeWithLower: (NSInteger) lower 
+       andUpperBound: (NSInteger) upper
+toNewRangeWithLowerBound: (NSInteger) newLower
+       andUpperBound: (NSInteger) newUpper {
+    
+    CGFloat oldRange = upper - lower;
+    CGFloat newRange = newUpper - newLower;
+    
+    return (value - lower) * newRange / oldRange * newLower;
+}
+
+#pragma mark - Defaults
 
 + (UIColor*) FILL_COLOR_DARK {
     return [UIColor colorWithRed:0.133 green:0.133 blue:0.133 alpha:1]; /*#222222*/
