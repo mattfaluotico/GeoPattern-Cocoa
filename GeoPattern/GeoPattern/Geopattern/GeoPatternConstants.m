@@ -13,6 +13,7 @@
 NSString *const kGeoPatternString = @"kGeoPatternString" ;
 NSString *const kGeoPatternColor = @"kGeoPatternColor" ;
 NSString *const kGeoPatternBaseColor = @"kGeoPatternBaseColor" ;
-NSString *const kGeoPatternPatternType = @"kGeoPatternPatternType" ;
+NSString *const kGeoPatternType = @"kGeoPatternPatternType" ;
+NSString *const kGeoPatternHash = @"kGeoPatternHash" ;
 
 @end

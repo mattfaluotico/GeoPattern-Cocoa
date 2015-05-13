@@ -8,6 +8,7 @@
 
 #import "Pattern.h"
 #import "Graphics.h"
+#import "GeoPatternConstants.h"
 
 @interface Pattern()
 @property CGContextRef context;
@@ -21,12 +22,12 @@
     self = [super init];
     self.context = context;
     self.options = options;
-    self.hashValue = [Graphics generateHash:[options objectForKey:@"string"]];
+    self.hashValue = [options objectForKey:kGeoPatternHash];
     return self;
 }
 
 - (void) temp {
-    CGColorRef color = ((UIColor*)[self.options objectForKey:@"color"]).CGColor;
+    CGColorRef color = ((UIColor*)[self.options objectForKey:kGeoPatternColor]).CGColor;
     
     UIColor * dotColor = [UIColor colorWithCGColor:color];
     
@@ -45,7 +46,7 @@
 
 + (NSDictionary*) defaults {
     return @{
-             @"color" : [UIColor redColor]
+             kGeoPatternColor : [UIColor redColor]
              };
 }
 

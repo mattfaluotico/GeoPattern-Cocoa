@@ -9,6 +9,7 @@
 #import "Graphics.h"
 #import "UIColor+Conversions.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "GeoPatternConstants.h"
 
 @implementation Graphics
 
@@ -46,18 +47,18 @@
     
     UIColor *returnedColor = nil;
     
-    if ([options objectForKey:@"color"]) {
-        returnedColor = [options objectForKey:@"color"];
+    if ([options objectForKey:kGeoPatternColor]) {
+        returnedColor = [options objectForKey:kGeoPatternColor];
     } else {
-        NSString *hash = [options objectForKey:@"hash"];
+        NSString *hash = [options objectForKey:kGeoPatternHash];
         NSInteger i = [Graphics intFromHex:hash atIndex:14 withLength:3];
         NSInteger hueOffset = [Graphics mapValue:i inRangeWithLower:14 andUpperBound:4085 toNewRangeWithLowerBound:0 andUpperBound:359];
         NSInteger satOffset = [Graphics intFromHex:hash atIndex:17 withLength:1];
         
         UIColor *basedOptionColor = [Graphics BASE_COLOR];
         
-        if ([options objectForKey:@"baseColor"]) {
-            basedOptionColor = [options objectForKey:@"baseColor"];
+        if ([options objectForKey:kGeoPatternBaseColor]) {
+            basedOptionColor = [options objectForKey:kGeoPatternBaseColor];
         }
         
         HSLColor *base = [basedOptionColor toHSL];

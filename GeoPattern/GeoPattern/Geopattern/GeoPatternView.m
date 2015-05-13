@@ -7,6 +7,7 @@
 //
 
 #import "GeoPatternView.h"
+#import "GeoPatternConstants.h"
 #import "Graphics.h"
 
 @interface GeoPatternView()
@@ -26,11 +27,13 @@
     
     // Adds color to the options dictionary
     NSMutableDictionary *optionsWithHash = [options mutableCopy];
-    [optionsWithHash setObject:string forKey:@"hash"];
+    [optionsWithHash setObject:string forKey:kGeoPatternString];
+    [optionsWithHash setObject:[Graphics generateHash:string] forKey:kGeoPatternHash];
     
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
     static const CGPatternCallbacks callbacks = { 0, &DrawPattern, NULL };
+    
     // save context before generating pattern
     CGContextSaveGState(context);
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);

@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, PATTERN) {
 extern NSString *const kGeoPatternString;
 extern NSString *const kGeoPatternColor;
 extern NSString *const kGeoPatternBaseColor;
-extern NSString *const kGeoPatternPatternType;
+extern NSString *const kGeoPatternType;
+extern NSString *const kGeoPatternHash;
 
 @end
