@@ -23,23 +23,5 @@
 
 + (NSDictionary *) defaults;
 
-typedef NS_ENUM(NSInteger, PATTERN) {
-    OCTOGONS,
-    OVERLAPPINGCIRCLES,
-    PLUSSIGNS,
-    XES,
-    SINEWAVES,
-    HEXAGONS,
-    OVERLAPPINGRINGS,
-    PLAID,
-    TRIANGLES,
-    SQUARES,
-    CONCENTRICCIRCLES,
-    DIAMONDS,
-    TESSELLATION,
-    NESTEDSQUARES,
-    MOSAICSQUARES,
-    CHEVRONS
-};
 
 @end

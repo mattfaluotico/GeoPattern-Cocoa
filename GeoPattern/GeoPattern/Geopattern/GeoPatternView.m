@@ -69,7 +69,6 @@
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
     
-    [self generateFromString:@"Matt"];
 }
 
 #pragma mark - Handling Callbacks

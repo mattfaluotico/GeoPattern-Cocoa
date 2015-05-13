@@ -19,6 +19,7 @@
 		AC1333CC1AFC234100C4190A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1333CB1AFC234100C4190A /* CoreGraphics.framework */; };
 		AC1333CF1AFC257A00C4190A /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1333CE1AFC257A00C4190A /* Pattern.m */; };
 		AC3AF5281AFD51E700369800 /* UIColor+Conversions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3AF5271AFD51E700369800 /* UIColor+Conversions.m */; };
+		AC41D91B1B02FB82003C5FE2 /* GeoPatternConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AC41D91A1B02FB82003C5FE2 /* GeoPatternConstants.m */; };
 		ACDD1FD81AFD132B00C30D1E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDD1FD71AFD132B00C30D1E /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,9 @@
 		AC1333CE1AFC257A00C4190A /* Pattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pattern.m; path = Geopattern/Pattern.m; sourceTree = "<group>"; };
 		AC3AF5261AFD51E700369800 /* UIColor+Conversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Conversions.h"; path = "Geopattern/UIColor+Conversions.h"; sourceTree = "<group>"; };
 		AC3AF5271AFD51E700369800 /* UIColor+Conversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Conversions.m"; path = "Geopattern/UIColor+Conversions.m"; sourceTree = "<group>"; };
+		AC41D9181B02FAEC003C5FE2 /* GeoPatterns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoPatterns.h; sourceTree = "<group>"; };
+		AC41D9191B02FB82003C5FE2 /* GeoPatternConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatternConstants.h; path = Geopattern/GeoPatternConstants.h; sourceTree = "<group>"; };
+		AC41D91A1B02FB82003C5FE2 /* GeoPatternConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPatternConstants.m; path = Geopattern/GeoPatternConstants.m; sourceTree = "<group>"; };
 		ACDD1FD71AFD132B00C30D1E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -151,6 +155,7 @@
 		AC1333C41AFC21D700C4190A /* GeoPattern */ = {
 			isa = PBXGroup;
 			children = (
+				AC41D9181B02FAEC003C5FE2 /* GeoPatterns.h */,
 				AC1333D31AFC3FE700C4190A /* Helpers */,
 				AC1333C81AFC229300C4190A /* GeoPatternView.h */,
 				AC1333C91AFC229300C4190A /* GeoPatternView.m */,
@@ -163,6 +168,8 @@
 			children = (
 				AC3AF5261AFD51E700369800 /* UIColor+Conversions.h */,
 				AC3AF5271AFD51E700369800 /* UIColor+Conversions.m */,
+				AC41D9191B02FB82003C5FE2 /* GeoPatternConstants.h */,
+				AC41D91A1B02FB82003C5FE2 /* GeoPatternConstants.m */,
 				AC1333C51AFC21FA00C4190A /* Graphics.h */,
 				AC1333C61AFC21FA00C4190A /* Graphics.m */,
 				AC1333CD1AFC257A00C4190A /* Pattern.h */,
@@ -277,6 +284,7 @@
 				AC3AF5281AFD51E700369800 /* UIColor+Conversions.m in Sources */,
 				AC1333A31AFC21C900C4190A /* AppDelegate.m in Sources */,
 				AC1333C71AFC21FA00C4190A /* Graphics.m in Sources */,
+				AC41D91B1B02FB82003C5FE2 /* GeoPatternConstants.m in Sources */,
 				AC1333A01AFC21C900C4190A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
