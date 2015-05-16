@@ -27,6 +27,7 @@
 }
 
 - (void) temp {
+    
     CGColorRef color = ((UIColor*)[self.options objectForKey:kGeoPatternColor]).CGColor;
     
     UIColor * dotColor = [UIColor colorWithCGColor:color];

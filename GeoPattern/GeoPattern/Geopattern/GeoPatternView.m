@@ -18,14 +18,16 @@
 #pragma mark - Generate
 
 - (void) generateFromString: (NSString *) string {
-
+    
+    // set needs display
+    
     NSDictionary *defaults = [Pattern defaults];
     [self generateFromString:string withOptions:defaults];
 }
 
 - (void) generateFromString: (NSString *) string withOptions: (NSDictionary *) options {
     
-    // Adds color to the options dictionary
+    // Adds String and Hash to the options dictionary
     NSMutableDictionary *optionsWithHash = [options mutableCopy];
     [optionsWithHash setObject:string forKey:kGeoPatternString];
     [optionsWithHash setObject:[Graphics generateHash:string] forKey:kGeoPatternHash];
@@ -67,10 +69,10 @@
 #pragma mark - Override
 
 - (void) drawRect: (CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    UIColor *backgroundColor = [UIColor whiteColor];
-    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
-    CGContextFillRect(context, rect);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    UIColor *backgroundColor = [UIColor whiteColor];
+//    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+//    CGContextFillRect(context, rect);
     
 }
 
@@ -78,7 +80,7 @@
 
 // Draws the repeatable pattern itself
 void DrawPattern (void *info, CGContextRef context) {
-
+    NSLog(@"drawing");
     NSDictionary *options = (__bridge NSDictionary*)info;
     Pattern *pattern = [[Pattern alloc] initWithContext:context WithOptions:options];
     [pattern temp];

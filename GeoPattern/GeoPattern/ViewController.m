@@ -11,13 +11,19 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet GeoPatternView *goeview;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+//    [self.goeview generateFromString:@"Matt"];
+    
+    GeoPatternView *v = [[GeoPatternView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    [v generateFromString:@"Matt"];
+    [self.view addSubview:v];
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 

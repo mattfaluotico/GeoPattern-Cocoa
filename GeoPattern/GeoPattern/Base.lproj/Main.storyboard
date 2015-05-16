@@ -29,6 +29,9 @@
                             <constraint firstAttribute="trailing" secondItem="yoa-IZ-R7B" secondAttribute="trailing" id="wr5-Mn-0Vq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="goeview" destination="yoa-IZ-R7B" id="ELR-FK-oWJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
