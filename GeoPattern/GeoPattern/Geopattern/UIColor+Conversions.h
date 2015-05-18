@@ -11,7 +11,7 @@
 #pragma mark - HSLColor
 
 @interface HSLColor : NSObject
-@property NSInteger hue;
+@property double hue;
 @property double saturation;
 @property double lightness;
 

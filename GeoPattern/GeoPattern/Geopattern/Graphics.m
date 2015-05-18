@@ -63,7 +63,7 @@
         
         HSLColor *base = [basedOptionColor toHSL];
 
-        base.hue = (((base.hue * 360 - hueOffset) + 360) % 360) / 360;
+        base.hue = ((NSInteger)((base.hue * 360 - hueOffset) + 360) % 360) / 360;
         if (satOffset % 2 == 0) {;
             base.saturation = MIN(1, ((base.saturation * 100 + satOffset) / 100) );
         } else {

@@ -13,6 +13,7 @@
 
 #import "Graphics.h"
 #import "Pattern.h"
+#import "UIColor+Conversions.h"
 
 @interface GeoPatternTests : XCTestCase
 
@@ -60,5 +61,35 @@
     
     XCTAssert([hash isEqualToString:@"6e6c409873b65d686d9262e34ee6281c722bc786"], @"Matches Jason Long value");
 }
+
+#pragma mark testing colors
+
+- (void) testRGBtoHSL {
+    UIColor *c = [UIColor colorWithRed:(50/255.0) green:(60/255.0) blue:(70/255.0) alpha:1];
+    HSLColor *h =[c toHSL];
+    NSInteger hueNormal = floor(h.hue * 360);
+    NSInteger satNormal = floor(h.saturation * 100);
+    NSInteger lightNormal = floor(h.lightness * 100);
+    BOOL hueYes = hueNormal == 210;
+    BOOL satYes = satNormal == 16;
+    BOOL lightYes = lightNormal == 23;
+    XCTAssert(hueYes && satYes && lightYes, @"Colors match online converter");
+}
+
+- (void) testRGBtoHEX {
+    UIColor *c = [UIColor colorWithRed:(50/255.0) green:(60/255.0) blue:(70/255.0) alpha:1];
+    NSString *asHex = [c toHex];
+    BOOL isSame = [asHex isEqualToString:@"#323C46"];
+    XCTAssert(isSame, @"matches hex from online covnverter");
+}
+
+- (void) testHEXtoRGB {
+    NSString *hex = @"#DB7093";
+    UIColor *colorFromHex = [UIColor fromHex:hex];
+//    rgb(219,112,147)
+    UIColor *color = [UIColor colorWithRed:(219/255.0) green:(112/255.0) blue:(147/255.0) alpha:1];
+    BOOL same = [colorFromHex isEqual:color];
+    XCTAssert(same, @"colors are the same");
+ }
 
 @end

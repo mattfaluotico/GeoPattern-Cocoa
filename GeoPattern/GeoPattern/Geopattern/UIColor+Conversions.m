@@ -12,12 +12,15 @@
 
 @implementation HSLColor
 
+// c
 - (UIColor *)toUIColor {
     return [UIColor fromHSL:self];
 }
 
+// c
 - (NSString *)toHex {
-
+    UIColor *c = [self toUIColor];
+    return [c toHex];
 }
 
 @end
@@ -27,13 +30,13 @@
 @implementation UIColor (Conversions)
 
 + (UIColor *)fromHSL:(HSLColor *)hsl {
-    
+    return [UIColor colorWithHue:hsl.hue saturation:hsl.saturation brightness:hsl.lightness alpha:1];
 }
 
+// c
 + (UIColor *)fromHex:(NSString *)hex {
     NSString *colorString = [[hex stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
     
-    NSLog(@"colorString :%@",colorString);
     CGFloat alpha, red, blue, green;
     
     // #RGB
@@ -45,6 +48,7 @@
     return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
 
+// c
 - (NSString *)toHex {
 
     struct RGBColor colors = [UIColor getComponentsFromColor:self];
@@ -55,8 +59,39 @@
             lroundf(colors.blue * 255)];
 }
 
+// c
 - (HSLColor *)toHSL {
+    struct RGBColor colors = [UIColor getComponentsFromColor:self];
     
+    CGFloat max = MAX(colors.red, MAX(colors.green, colors.blue));
+    CGFloat min = MIN(colors.red, MIN(colors.green, colors.blue));
+    HSLColor *hsl = [HSLColor new];
+    
+    hsl.lightness = (max + min) / 2;
+    
+    if (max == min) {
+        hsl.hue = hsl.saturation = 0;
+    } else {
+        CGFloat diff = max - min;
+        hsl.saturation = (hsl.lightness > 0.5) ? (diff / (2 - max - min)) : (diff / (max + min));
+        
+        if (max == colors.red) {
+            hsl.hue = ( (colors.green - colors.blue) / diff) + ((colors.green < colors.blue) ? 6 : 0);
+        } else if (max == colors.green) {
+            hsl.hue = (colors.blue - colors.red) / diff + 2;
+        } else {
+            hsl.hue = (colors.red - colors.green) / diff + 4;
+        }
+        
+        hsl.hue /= 6;
+    }
+    
+    return hsl;
+    
+}
+
+- (void) lol {
+
 }
 
 #pragma mark - Extracting components
@@ -79,6 +114,15 @@
     colors.blue = components[2];
     
     return colors;
+}
+
++ (double) hue2rgbComponent: (double) p andQ: (double) q andT: (double) t {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3.0 - t) * 6;
+    return p;
 }
 
 // Strcut for easier RGB management
