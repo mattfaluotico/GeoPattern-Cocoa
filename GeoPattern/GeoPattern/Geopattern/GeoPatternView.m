@@ -17,20 +17,48 @@
 
 #pragma mark - Generate
 
+- (void) generate {
+    [self setNeedsDisplay];
+}
+
 - (void) generateFromString: (NSString *) string {
-    
-    // set needs display
-    
-    NSDictionary *defaults = [Pattern defaults];
-    [self generateFromString:string withOptions:defaults];
+    self.string = string;
+    self.options = [Pattern defaults];
+    [self generate];
 }
 
 - (void) generateFromString: (NSString *) string withOptions: (NSDictionary *) options {
     
+    self.string = string;
+    self.options = options;
+    
+    [self generate];
+    
+}
+
+#pragma mark - Override
+
+- (void) drawRect: (CGRect)rect {
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIColor *backgroundColor = [UIColor whiteColor];
+    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+    CGContextFillRect(context, rect);
+    
+    if (self.string || self.options) {
+        [self generateAtRect:rect];
+    }
+
+    
+}
+
+#pragma mark - Primary generation method
+
+- (void) generateAtRect: (CGRect) rect {
     // Adds String and Hash to the options dictionary
-    NSMutableDictionary *optionsWithHash = [options mutableCopy];
-    [optionsWithHash setObject:string forKey:kGeoPatternString];
-    [optionsWithHash setObject:[Graphics generateHash:string] forKey:kGeoPatternHash];
+    NSMutableDictionary *optionsWithHash = [self.options mutableCopy];
+    [optionsWithHash setObject:self.string forKey:kGeoPatternString];
+    [optionsWithHash setObject:[Graphics generateHash:self.string] forKey:kGeoPatternHash];
     
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -41,7 +69,7 @@
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
     CGContextSetFillColorSpace(context, patternSpace);
     CGColorSpaceRelease(patternSpace);
-
+    
     // Set background
     self.backgroundColor = [Graphics backgroundColorFromOptions:optionsWithHash];
     
@@ -63,22 +91,12 @@
     CGPatternRelease(pattern);
     CGContextFillRect(context, self.bounds);
     CGContextRestoreGState(context);
-    
-}
-
-#pragma mark - Override
-
-- (void) drawRect: (CGRect)rect {
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    UIColor *backgroundColor = [UIColor whiteColor];
-//    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
-//    CGContextFillRect(context, rect);
-    
 }
 
 #pragma mark - Handling Callbacks
 
-// Draws the repeatable pattern itself
+// Draws the pattern itself. Info is a void pointer holding the users options
+// context is the graphic context from the view
 void DrawPattern (void *info, CGContextRef context) {
     NSLog(@"drawing");
     NSDictionary *options = (__bridge NSDictionary*)info;

@@ -136,6 +136,4 @@ toNewRangeWithLowerBound: (NSInteger) newLower
     return 0.15;
 }
 
-
-                               
 @end
