@@ -80,13 +80,14 @@
 + (CGFloat) mapValue: (CGFloat) value
         inRangeWithLower: (NSInteger) lower 
        andUpperBound: (NSInteger) upper
-toNewRangeWithLowerBound: (NSInteger) newLower
-       andUpperBound: (NSInteger) newUpper {
+toNewRangeWithLowerBound: (double) newLower
+       andUpperBound: (double) newUpper {
     
     CGFloat oldRange = upper - lower;
     CGFloat newRange = newUpper - newLower;
     
-    return (value - lower) * newRange / oldRange * newLower;
+    CGFloat val = (((value - lower) * newRange) / oldRange) + newLower;
+    return val;
 }
 
 // Extracts a part of a hex string and returns an NSInteger

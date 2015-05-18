@@ -26,8 +26,8 @@
 + (CGFloat) mapValue: (CGFloat) value
     inRangeWithLower: (NSInteger) lower
        andUpperBound: (NSInteger) upper
-toNewRangeWithLowerBound: (NSInteger) newLower
-       andUpperBound: (NSInteger) newUpper;
+toNewRangeWithLowerBound: (double) newLower
+       andUpperBound: (double) newUpper;
 
 + (NSInteger) intFromHex: (NSString *) hash atIndex: (NSInteger) index withLength: (NSInteger) length;
 

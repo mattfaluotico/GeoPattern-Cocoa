@@ -89,38 +89,47 @@ static inline double radians (double degrees)  {
 - (void) generateOctogons {
     
 }
+
 - (void) generateOverlappingcircles {
     
 }
+
 - (void) generatePlussigns {
     
 }
+
 - (void) generateXes {
     
 }
+
 - (void) generateSinewaves {
     
 }
+
 - (void) generateHexagons {
     
 }
+
 - (void) generateOverlappingrings {
     
 }
+
 - (void) generatePlaid {
     
 }
+
 - (void) generateTriangles {
     
 }
+
 - (void) generateSquares {
     
     NSInteger fromHex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
-    double squareSize = [Graphics mapValue:fromHex inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
-    
-    squareSize = (squareSize != 0) ?: 1;
-    
-    // TODO: set size
+    double squareSize = [Graphics mapValue:fromHex
+                          inRangeWithLower:0
+                             andUpperBound:15
+                  toNewRangeWithLowerBound:10
+                             andUpperBound:60];
     
     NSInteger counter = 0;
     NSInteger y;
@@ -130,6 +139,7 @@ static inline double radians (double degrees)  {
         for (x = 0; x < 6; x++) {
             NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
             CGFloat opacity = [Graphics opacity:val];
+            NSLog(@"%f", opacity);
             UIColor *fillColor = [Graphics fillColor:val];
             
             UIColor *fillOpacity = [fillColor colorWithAlphaComponent:opacity];
@@ -144,21 +154,27 @@ static inline double radians (double degrees)  {
     
     
 }
+
 - (void) generateConcentriccircles {
     
 }
+
 - (void) generateDiamonds {
     
 }
+
 - (void) generateTessellation {
     
 }
+
 - (void) generateNestedsquares {
     
 }
+
 - (void) generateMosaicsquares {
     
 }
+
 - (void) generateChevrons {
     
 }

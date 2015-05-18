@@ -58,8 +58,11 @@
     
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Callbacks for generating a pattern
     static const CGPatternCallbacks callbacks = { 0, &DrawPattern, NULL };
     
+    // Set the background color
     UIColor *backgroundColor = [Graphics backgroundColor:optionsWithHash];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
@@ -78,8 +81,8 @@
     CGPatternRef pattern = CGPatternCreate(o,
                                            self.frame,
                                            CGAffineTransformIdentity,
-                                           32,
-                                           32,
+                                           60,
+                                           60,
                                            kCGPatternTilingConstantSpacing,
                                            true,
                                            &callbacks);
