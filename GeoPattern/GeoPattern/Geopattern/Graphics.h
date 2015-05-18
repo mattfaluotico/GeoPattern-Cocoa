@@ -19,7 +19,7 @@
 
 + (CGFloat) opacity: (CGFloat) value;
 
-+ (UIColor *) backgroundColorFromOptions: (NSDictionary *) options;
++ (UIColor *) backgroundColor: (NSDictionary *) options;
 
 #pragma mark - Process Helers
 

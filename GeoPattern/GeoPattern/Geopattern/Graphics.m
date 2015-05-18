@@ -43,13 +43,11 @@
                 andUpperBound:[Graphics OPACITY_MAX]];
 }
 
-+ (UIColor *) backgroundColorFromOptions: (NSDictionary *) options {
++ (UIColor *) backgroundColor: (NSDictionary *) options {
     
-    UIColor *returnedColor = nil;
+    UIColor *returnedColor = [options objectForKey:kGeoPatternColor];
     
-    if ([options objectForKey:kGeoPatternColor]) {
-        returnedColor = [options objectForKey:kGeoPatternColor];
-    } else {
+    if (!returnedColor) {
         NSString *hash = [options objectForKey:kGeoPatternHash];
         NSInteger i = [Graphics intFromHex:hash atIndex:14 withLength:3];
         NSInteger hueOffset = [Graphics mapValue:i inRangeWithLower:14 andUpperBound:4085 toNewRangeWithLowerBound:0 andUpperBound:359];
@@ -78,6 +76,7 @@
 
 #pragma mark - Process Helpers
 
+// Map value in the range lower and upper, to the new range (newUpper, newLower)
 + (CGFloat) mapValue: (CGFloat) value
         inRangeWithLower: (NSInteger) lower 
        andUpperBound: (NSInteger) upper
@@ -90,8 +89,10 @@ toNewRangeWithLowerBound: (NSInteger) newLower
     return (value - lower) * newRange / oldRange * newLower;
 }
 
-// Extracts a part of a hex string and returns an int
-+ (NSInteger) intFromHex: (NSString *) hash atIndex: (NSInteger) index withLength: (NSInteger) length {
+// Extracts a part of a hex string and returns an NSInteger
++ (NSInteger) intFromHex: (NSString *) hash
+                 atIndex: (NSInteger) index
+              withLength: (NSInteger) length {
     
     unsigned result = 0;
     

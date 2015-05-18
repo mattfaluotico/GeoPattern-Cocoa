@@ -20,6 +20,7 @@
 		AC1333CF1AFC257A00C4190A /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1333CE1AFC257A00C4190A /* Pattern.m */; };
 		AC3AF5281AFD51E700369800 /* UIColor+Conversions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3AF5271AFD51E700369800 /* UIColor+Conversions.m */; };
 		AC41D91B1B02FB82003C5FE2 /* GeoPatternConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AC41D91A1B02FB82003C5FE2 /* GeoPatternConstants.m */; };
+		AC4ED8731B0A43AD000B4028 /* ShapeDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC4ED8721B0A43AD000B4028 /* ShapeDrawer.m */; };
 		ACDD1FD81AFD132B00C30D1E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDD1FD71AFD132B00C30D1E /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		AC41D9181B02FAEC003C5FE2 /* GeoPatterns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoPatterns.h; sourceTree = "<group>"; };
 		AC41D9191B02FB82003C5FE2 /* GeoPatternConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatternConstants.h; path = Geopattern/GeoPatternConstants.h; sourceTree = "<group>"; };
 		AC41D91A1B02FB82003C5FE2 /* GeoPatternConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPatternConstants.m; path = Geopattern/GeoPatternConstants.m; sourceTree = "<group>"; };
+		AC4ED8711B0A43AD000B4028 /* ShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeDrawer.h; path = Geopattern/ShapeDrawer.h; sourceTree = "<group>"; };
+		AC4ED8721B0A43AD000B4028 /* ShapeDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShapeDrawer.m; path = Geopattern/ShapeDrawer.m; sourceTree = "<group>"; };
 		ACDD1FD71AFD132B00C30D1E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -174,6 +177,8 @@
 				AC1333C61AFC21FA00C4190A /* Graphics.m */,
 				AC1333CD1AFC257A00C4190A /* Pattern.h */,
 				AC1333CE1AFC257A00C4190A /* Pattern.m */,
+				AC4ED8711B0A43AD000B4028 /* ShapeDrawer.h */,
+				AC4ED8721B0A43AD000B4028 /* ShapeDrawer.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				AC1333CA1AFC229300C4190A /* GeoPatternView.m in Sources */,
 				AC1333A61AFC21C900C4190A /* ViewController.m in Sources */,
 				AC3AF5281AFD51E700369800 /* UIColor+Conversions.m in Sources */,
+				AC4ED8731B0A43AD000B4028 /* ShapeDrawer.m in Sources */,
 				AC1333A31AFC21C900C4190A /* AppDelegate.m in Sources */,
 				AC1333C71AFC21FA00C4190A /* Graphics.m in Sources */,
 				AC41D91B1B02FB82003C5FE2 /* GeoPatternConstants.m in Sources */,

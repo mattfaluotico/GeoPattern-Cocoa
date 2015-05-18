@@ -40,10 +40,6 @@
 
 - (void) drawRect: (CGRect)rect {
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    UIColor *backgroundColor = [UIColor whiteColor];
-    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
-    CGContextFillRect(context, rect);
     
     if (self.string || self.options) {
         [self generateAtRect:rect];
@@ -64,14 +60,15 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     static const CGPatternCallbacks callbacks = { 0, &DrawPattern, NULL };
     
+    UIColor *backgroundColor = [Graphics backgroundColor:optionsWithHash];
+    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+    CGContextFillRect(context, rect);
+    
     // save context before generating pattern
     CGContextSaveGState(context);
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
     CGContextSetFillColorSpace(context, patternSpace);
     CGColorSpaceRelease(patternSpace);
-    
-    // Set background
-    self.backgroundColor = [Graphics backgroundColorFromOptions:optionsWithHash];
     
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter
@@ -98,10 +95,11 @@
 // Draws the pattern itself. Info is a void pointer holding the users options
 // context is the graphic context from the view
 void DrawPattern (void *info, CGContextRef context) {
-    NSLog(@"drawing");
-    NSDictionary *options = (__bridge NSDictionary*)info;
-    Pattern *pattern = [[Pattern alloc] initWithContext:context WithOptions:options];
-    [pattern temp];
+
+    NSDictionary *args = (__bridge NSDictionary*)info;
+    Pattern *pattern = [[Pattern alloc] initWithContext:context WithOptions:args];
+//    [pattern temp];
+    [pattern generate];
     
 }
 

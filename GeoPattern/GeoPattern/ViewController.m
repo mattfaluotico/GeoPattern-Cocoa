@@ -21,7 +21,9 @@
 //    [self.goeview generateFromString:@"Matt"];
     
     GeoPatternView *v = [[GeoPatternView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    [v generateFromString:@"Matt"];
+    [v generateFromString:@"Matt" withOptions:@{
+                                                kGeoPatternType : [NSNumber numberWithInteger :GeoPatternSquares]
+                                                }];
     [self.view addSubview:v];
     
     // Do any additional setup after loading the view, typically from a nib.

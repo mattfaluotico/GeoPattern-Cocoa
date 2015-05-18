@@ -11,22 +11,22 @@
 @interface GeoPatternConstants : NSObject
 
 typedef NS_ENUM(NSInteger, PATTERN) {
-    PatternOctogons,
-    PatternOverlappingcircles,
-    PatternPlussigns,
-    PatternXes,
-    PatternSinewaves,
-    PatternHexagons,
-    PatternOverlappingrings,
-    PatternPlaid,
-    PatternTriangles,
-    PatternSquares,
-    PatternConcentriccircles,
-    PatternDiamonds,
-    PatternTessellation,
-    PatternNestedsquares,
-    PatternMosaicsquares,
-    PatternChevrons
+    GeoPatternOctogons,
+    GeoPatternOverlappingcircles,
+    GeoPatternPlussigns,
+    GeoPatternXes,
+    GeoPatternSinewaves,
+    GeoPatternHexagons,
+    GeoPatternOverlappingrings,
+    GeoPatternPlaid,
+    GeoPatternTriangles,
+    GeoPatternSquares,
+    GeoPatternConcentriccircles,
+    GeoPatternDiamonds,
+    GeoPatternTessellation,
+    GeoPatternNestedsquares,
+    GeoPatternMosaicsquares,
+    GeoPatternChevrons
 };
 
 #pragma mark - Options
