@@ -19,6 +19,7 @@
 
 - (id) initWithContext: (CGContextRef ) context WithOptions: (NSDictionary *) options;
 - (void) temp;
++ (CGSize) calculateSizeFromOptions: (NSDictionary *) options;
 - (void) generate;
 
 + (NSDictionary *) defaults;

@@ -50,7 +50,12 @@
     if (!returnedColor) {
         NSString *hash = [options objectForKey:kGeoPatternHash];
         NSInteger i = [Graphics intFromHex:hash atIndex:14 withLength:3];
-        NSInteger hueOffset = [Graphics mapValue:i inRangeWithLower:14 andUpperBound:4085 toNewRangeWithLowerBound:0 andUpperBound:359];
+        NSInteger hueOffset = [Graphics
+                               mapValue:i
+                               inRangeWithLower:0
+                               andUpperBound:4095
+                               toNewRangeWithLowerBound:0
+                               andUpperBound:359];
         NSInteger satOffset = [Graphics intFromHex:hash atIndex:17 withLength:1];
         
         UIColor *basedOptionColor = [Graphics BASE_COLOR];
@@ -60,14 +65,18 @@
         }
         
         HSLColor *base = [basedOptionColor toHSL];
-
-        base.hue = ((NSInteger)((base.hue * 360 - hueOffset) + 360) % 360) / 360;
-        if (satOffset % 2 == 0) {;
+        
+        double f = ((base.hue * 360 - hueOffset) + 360);
+        f = fmod(f, 360);
+        base.hue = f / 360.0;
+        if (satOffset % 2 == 0) {
             base.saturation = MIN(1, ((base.saturation * 100 + satOffset) / 100) );
         } else {
-            base.saturation = MIN(0, ((base.saturation * 100 + satOffset) / 100) );
+            base.saturation = MAX(0, ((base.saturation * 100 - satOffset) / 100) );
         }
-        
+        NSLog(@"sat: %f", base.saturation);
+        NSLog(@"light: %f", base.lightness);
+        NSLog(@"hue: %f", base.hue);
         returnedColor = [base toUIColor];
     }
     
@@ -99,7 +108,7 @@ toNewRangeWithLowerBound: (double) newLower
     
     NSUInteger actualLength = hash.length;
     
-    if (actualLength + 1 > length) {
+    if (actualLength + 1 < length) {
         length = 1;
     }
     
@@ -125,7 +134,7 @@ toNewRangeWithLowerBound: (double) newLower
     return [UIColor colorWithRed:0 green:0 blue:0 alpha:1]; /*#000000*/
 }
 + (UIColor *) BASE_COLOR {
-    return [UIColor colorWithRed:0.459 green:0.118 blue:0.118 alpha:1];
+    return [UIColor colorWithRed:0.576 green:0.235 blue:0.235 alpha:1]; /*#933c3c*/
 }
 
 + (CGFloat) STROKE_OPACITY {

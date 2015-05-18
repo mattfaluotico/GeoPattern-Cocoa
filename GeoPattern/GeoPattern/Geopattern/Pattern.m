@@ -73,6 +73,18 @@
     }
 };
 
++ (CGSize) calculateSizeFromOptions: (NSDictionary *) options {
+    NSString *hex = [options objectForKey:kGeoPatternHash];
+    NSInteger fromHex = [Graphics intFromHex:hex atIndex:0 withLength:1];
+    double squareSize = [Graphics mapValue:fromHex
+                          inRangeWithLower:0
+                             andUpperBound:15
+                  toNewRangeWithLowerBound:10
+                             andUpperBound:60];
+    
+    return CGSizeMake(squareSize * 6, squareSize * 6);
+}
+
 + (NSDictionary*) defaults {
     return @{
              kGeoPatternBaseColor : [UIColor redColor]
@@ -139,7 +151,6 @@ static inline double radians (double degrees)  {
         for (x = 0; x < 6; x++) {
             NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
             CGFloat opacity = [Graphics opacity:val];
-            NSLog(@"%f", opacity);
             UIColor *fillColor = [Graphics fillColor:val];
             
             UIColor *fillOpacity = [fillColor colorWithAlphaComponent:opacity];

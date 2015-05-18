@@ -73,16 +73,21 @@
     CGContextSetFillColorSpace(context, patternSpace);
     CGColorSpaceRelease(patternSpace);
     
+    // Get the size
+    
+    CGSize size = [Pattern calculateSizeFromOptions:optionsWithHash];
+    
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter
     void *o = (void*)CFBridgingRetain(optionsWithHash);
     
     
+    
     CGPatternRef pattern = CGPatternCreate(o,
                                            self.frame,
                                            CGAffineTransformIdentity,
-                                           60,
-                                           60,
+                                           size.width,
+                                           size.height,
                                            kCGPatternTilingConstantSpacing,
                                            true,
                                            &callbacks);
