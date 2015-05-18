@@ -30,7 +30,25 @@
 @implementation UIColor (Conversions)
 
 + (UIColor *)fromHSL:(HSLColor *)hsl {
-    return [UIColor colorWithHue:hsl.hue saturation:hsl.saturation brightness:hsl.lightness alpha:1];
+//    return [UIColor colorWithHue:hsl.hue saturation:hsl.saturation brightness:hsl.lightness alpha:1];
+    
+    struct RGBColor rgb;
+    
+    CGFloat hue = hsl.hue;
+    CGFloat sat = hsl.saturation;
+    CGFloat lig = hsl.lightness;
+    
+    if (sat == 0) {
+        rgb.red = rgb.green = rgb.blue = lig;
+    } else {
+        double q = (lig < 0.5) ? (lig * (1 + sat)) : ((lig + sat) - (lig * sat));
+        double p = (2 * lig - q);
+        rgb.red = [UIColor hue2rgbComponent:p andQ:q andT:(hue + (1/3.0))];
+        rgb.green = [UIColor hue2rgbComponent:p andQ:q andT:(hue)];
+        rgb.blue = [UIColor hue2rgbComponent:p andQ:q andT:(hue - (1/3.0))];
+    }
+    
+    return [UIColor colorWithRed:rgb.red green:rgb.green blue:rgb.blue alpha:1];
 }
 
 // c
@@ -119,9 +137,9 @@
 + (double) hue2rgbComponent: (double) p andQ: (double) q andT: (double) t {
     if (t < 0) t += 1;
     if (t > 1) t -= 1;
-    if (t < 1 / 6) return p + (q - p) * 6 * t;
-    if (t < 1 / 2) return q;
-    if (t < 2 / 3) return p + (q - p) * (2 / 3.0 - t) * 6;
+    if (t < 1 / 6.0) return p + (q - p) * 6 * t;
+    if (t < 1 / 2.0) return q;
+    if (t < 2 / 3.0) return p + (q - p) * (2 / 3.0 - t) * 6;
     return p;
 }
 
