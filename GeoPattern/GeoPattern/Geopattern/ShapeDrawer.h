@@ -17,4 +17,17 @@
                atWidth: (CGFloat) width
              inContext: (CGContextRef) context;
 
++ (void) drawCircleIn: (CGRect) rect
+              withFill: (UIColor *) fill
+            withStroke: (UIColor *) stroke
+               atWidth: (CGFloat) width
+             inContext: (CGContextRef) context;
+
++ (void) drawCircleWithCenter: (CGPoint) center
+                   withRadius: (CGFloat) radius
+                    withFill : (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWith
+                    inContext: (CGContextRef) context;
+
 @end

@@ -51,7 +51,13 @@
     return CGSizeMake(squareSize * 6, squareSize * 6);
 }
 + (CGSize) sizeForConcentriccircles: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    
+    NSInteger hex = [Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1];
+    CGFloat scale = hex;
+    CGFloat ringSize = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    CGFloat strokeWidth = ringSize / 5.0;
+    
+    return CGSizeMake((ringSize + strokeWidth) * 6, (ringSize + strokeWidth) * 6);
 }
 + (CGSize) sizeForDiamonds: (NSDictionary*) options {
     return CGSizeMake(0,0);

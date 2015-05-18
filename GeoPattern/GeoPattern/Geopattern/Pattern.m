@@ -187,6 +187,39 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateConcentriccircles {
+    NSInteger hex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat scale = hex;
+    CGFloat ringSize = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    CGFloat strokeWidth = ringSize / 5.0;
+    
+    NSInteger counter = 0, x = 0, y =0;
+    
+    for (y = 0; y < 6; y++) {
+        for (x = 0; x < 6; x++) {
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *stroke = [Graphics fillColor:val];
+            UIColor *fill = [UIColor clearColor];
+            
+            stroke = [stroke colorWithAlphaComponent:opacity];
+            
+            CGFloat centerX = x * ringSize + x * strokeWidth + ((ringSize + strokeWidth) / 2.0);
+            CGFloat centerY = y * ringSize + y * strokeWidth + ((ringSize + strokeWidth) / 2.0);
+            CGPoint center = CGPointMake(centerX, centerY);
+            
+            [ShapeDrawer drawCircleWithCenter:center withRadius:ringSize / 2 withFill:fill withStroke:stroke atWidth:strokeWidth inContext:self.context];
+            
+            val = [Graphics intFromHex:self.hashValue atIndex:39-counter withLength:1];
+            opacity = [Graphics opacity:val];
+            fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            stroke = [UIColor clearColor];
+            
+            
+            [ShapeDrawer drawCircleWithCenter:center withRadius:ringSize / 4 withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
+            
+            counter++;
+        }
+    }
     
 }
 
