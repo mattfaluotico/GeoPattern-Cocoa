@@ -10,6 +10,7 @@
 #import "Graphics.h"
 #import "GeoPatternConstants.h"
 #import "ShapeDrawer.h"
+#import "SizeCalculator.h"
 
 @interface Pattern()
 @property CGContextRef context;
@@ -74,15 +75,34 @@
 };
 
 + (CGSize) calculateSizeFromOptions: (NSDictionary *) options {
-    NSString *hex = [options objectForKey:kGeoPatternHash];
-    NSInteger fromHex = [Graphics intFromHex:hex atIndex:0 withLength:1];
-    double squareSize = [Graphics mapValue:fromHex
-                          inRangeWithLower:0
-                             andUpperBound:15
-                  toNewRangeWithLowerBound:10
-                             andUpperBound:60];
+    PATTERN pattern;
     
-    return CGSizeMake(squareSize * 6, squareSize * 6);
+    if ([options objectForKey:kGeoPatternType]) {
+        pattern = [[options objectForKey:kGeoPatternType] integerValue];
+    } else {
+        NSString *hash = [options objectForKeyedSubscript:kGeoPatternHash];
+        pattern = [Graphics intFromHex:hash atIndex:20 withLength:1];
+    }
+    
+    switch (pattern) {
+        case GeoPatternOctogons          : return [SizeCalculator sizeForOctogons: options]; break;
+        case GeoPatternOverlappingcircles: return [SizeCalculator sizeForOverlappingcircles: options]; break;
+        case GeoPatternPlussigns         : return [SizeCalculator sizeForPlussigns: options]; break;
+        case GeoPatternXes               : return [SizeCalculator sizeForXes: options]; break;
+        case GeoPatternSinewaves         : return [SizeCalculator sizeForSinewaves: options]; break;
+        case GeoPatternHexagons          : return [SizeCalculator sizeForHexagons: options]; break;
+        case GeoPatternOverlappingrings  : return [SizeCalculator sizeForOverlappingrings: options]; break;
+        case GeoPatternPlaid             : return [SizeCalculator sizeForPlaid: options]; break;
+        case GeoPatternTriangles         : return [SizeCalculator sizeForTriangles: options]; break;
+        case GeoPatternSquares           : return [SizeCalculator sizeForSquares: options]; break;
+        case GeoPatternConcentriccircles : return [SizeCalculator sizeForConcentriccircles: options]; break;
+        case GeoPatternDiamonds          : return [SizeCalculator sizeForDiamonds: options]; break;
+        case GeoPatternTessellation      : return [SizeCalculator sizeForTessellation: options]; break;
+        case GeoPatternNestedsquares     : return [SizeCalculator sizeForNestedsquares: options]; break;
+        case GeoPatternMosaicsquares     : return [SizeCalculator sizeForMosaicsquares: options]; break;
+        case GeoPatternChevrons          : return [SizeCalculator sizeForChevrons: options]; break;
+        default                          : return [SizeCalculator sizeForSquares: options];
+    }
 }
 
 + (NSDictionary*) defaults {
@@ -157,7 +177,7 @@ static inline double radians (double degrees)  {
             UIColor *strokeColor = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
             CGRect rect = CGRectMake(x * squareSize, y * squareSize, squareSize, squareSize);
             
-            [ShapeDrawer drawRectangle:rect withFill:fillOpacity withStroke:strokeColor inContext:self.context];
+            [ShapeDrawer drawRectangle:rect withFill:fillOpacity withStroke:strokeColor atWidth: 1 inContext:self.context];
             
             counter++;
         }
@@ -179,6 +199,48 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateNestedsquares {
+    
+    NSInteger hashInt = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat blockSize = [Graphics mapValue:hashInt inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:4 andUpperBound:12];
+    CGFloat squareSize = blockSize * 7;
+    
+    NSInteger counter = 0, x = 0,y = 0;
+    
+    for (y = 0; y < 6; y++) {
+        for (x = 0; x < 6; x++) {
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *stroke = [Graphics fillColor:val];
+            UIColor *fill = [UIColor clearColor];
+            
+//            fill = [fill colorWithAlphaComponent:opacity];
+            stroke = [stroke colorWithAlphaComponent:opacity];
+            
+            CGRect rect = CGRectMake(x * squareSize + x * blockSize * 2 + blockSize / 2.0,
+                                     y * squareSize + y * blockSize * 2 + blockSize / 2.0,
+                                     squareSize,
+                                     squareSize);
+            
+            [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth: blockSize inContext:self.context];
+            
+            val = [Graphics intFromHex:self.hashValue atIndex:39-counter withLength:1];
+            opacity = [Graphics opacity:val];
+            stroke = [Graphics fillColor:val];
+            
+//            fill = [fill colorWithAlphaComponent:opacity];
+            stroke = [stroke colorWithAlphaComponent:opacity];
+            
+            
+            rect = CGRectMake(x * squareSize + x * blockSize * 2 + blockSize / 2.0 + blockSize * 2,
+                              y * squareSize + y * blockSize * 2 + blockSize / 2.0 + blockSize * 2,
+                              blockSize * 3,
+                              blockSize * 3);
+            
+            [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth: blockSize inContext:self.context];
+            
+            counter++;
+        }
+    }
     
 }
 

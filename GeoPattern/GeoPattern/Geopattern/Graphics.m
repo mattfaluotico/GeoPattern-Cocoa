@@ -74,9 +74,7 @@
         } else {
             base.saturation = MAX(0, ((base.saturation * 100 - satOffset) / 100) );
         }
-        NSLog(@"sat: %f", base.saturation);
-        NSLog(@"light: %f", base.lightness);
-        NSLog(@"hue: %f", base.hue);
+
         returnedColor = [base toUIColor];
     }
     

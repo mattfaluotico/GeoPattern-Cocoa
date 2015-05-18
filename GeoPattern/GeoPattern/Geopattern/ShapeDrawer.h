@@ -11,6 +11,10 @@
 
 @interface ShapeDrawer : NSObject
 
-+ (void) drawRectangle: (CGRect) rect withFill: (UIColor *) fill withStroke: (UIColor *) stroke inContext: (CGContextRef) context;
++ (void) drawRectangle: (CGRect) rect
+              withFill: (UIColor *) fill
+            withStroke: (UIColor *) stroke
+               atWidth: (CGFloat) width
+             inContext: (CGContextRef) context;
 
 @end
