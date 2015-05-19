@@ -16,7 +16,13 @@
     return CGSizeMake(0,0);
 }
 + (CGSize) sizeForOverlappingcircles: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+
+    NSInteger hex = [Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1];
+    CGFloat scale = hex;
+    CGFloat diameter = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:25 andUpperBound:200];
+    CGFloat radius = diameter / 2.0;
+    
+    return CGSizeMake(radius * 6, radius * 6);
 }
 + (CGSize) sizeForPlussigns: (NSDictionary*) options {
     return CGSizeMake(0,0);

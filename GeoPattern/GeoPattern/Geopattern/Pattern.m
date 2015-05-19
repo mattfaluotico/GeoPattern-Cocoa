@@ -123,7 +123,40 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateOverlappingcircles {
+    NSInteger hex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat scale = hex;
+    CGFloat diameter = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:25 andUpperBound:200];
+    CGFloat radius = diameter / 2.0;
     
+    NSInteger counter = 0, x = 0, y =0;
+    
+    for (y=0; y<6; y++) {
+        for (x = 0; x <6; x++) {
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            
+            CGPoint center = CGPointMake(x * radius, y *radius);
+            [ShapeDrawer drawCircleWithCenter:center withRadius:radius withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
+            
+            if (x==0) {
+                center = CGPointMake(6 * radius, y * radius);
+                [ShapeDrawer drawCircleWithCenter:center withRadius:radius withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
+            }
+            
+            if (y==0) {
+                center = CGPointMake(x * radius, 6 * radius);
+                [ShapeDrawer drawCircleWithCenter:center withRadius:radius withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
+            }
+            
+            if (x==0 && y==0) {
+                center = CGPointMake(6 * radius, 6 * radius);
+                [ShapeDrawer drawCircleWithCenter:center withRadius:radius withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
+            }
+            
+            counter++;
+        }
+    }
 }
 
 - (void) generatePlussigns {
