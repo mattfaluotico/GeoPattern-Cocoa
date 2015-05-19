@@ -74,8 +74,8 @@
     CGColorSpaceRelease(patternSpace);
     
     // Get the size
-    
     CGSize size = [Pattern calculateSizeFromOptions:optionsWithHash];
+    [optionsWithHash setObject:[NSValue valueWithCGSize:size] forKey:@"size"];
     
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter

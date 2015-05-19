@@ -244,6 +244,48 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generatePlaid {
+    CGFloat height = 0;
+    CGFloat width = 0;
+    NSValue *rect_ = [self.options objectForKey:@"size"];
+    CGSize size = [rect_ CGSizeValue];
+    
+    NSInteger counter = 0, val, space;
+    NSString *hex = self.hashValue;
+    
+    
+    while (counter < 36) {
+        space = [Graphics intFromHex:hex atIndex:counter withLength:1];
+        height += (space + 5);
+        val = [Graphics intFromHex:hex atIndex:counter + 1 withLength:1];
+        CGFloat opacity = [Graphics opacity:val];
+        UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+        NSInteger stripeHeight = val + 5;
+
+        CGRect rect = CGRectMake(0, height, size.width, stripeHeight);
+        
+        [ShapeDrawer drawRectangle:rect withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
+        
+        height += stripeHeight;
+        counter +=2;
+    }
+    
+    counter = 0;
+    
+    while (counter < 36) {
+        space = [Graphics intFromHex:hex atIndex:counter withLength:1];
+        width += (space + 5);
+        val = [Graphics intFromHex:hex atIndex:counter + 1 withLength:1];
+        CGFloat opacity = [Graphics opacity:val];
+        UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+        NSInteger stripeWidth = val + 5;
+        
+        CGRect rect = CGRectMake(width, 0, stripeWidth, size.height);
+        
+        [ShapeDrawer drawRectangle:rect withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
+        
+        width += stripeWidth;
+        counter +=2;
+    }
     
 }
 

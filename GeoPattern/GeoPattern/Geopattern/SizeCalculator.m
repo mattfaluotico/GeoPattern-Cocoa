@@ -45,7 +45,33 @@
     return CGSizeMake(ringSize * 6, ringSize * 6);
 }
 + (CGSize) sizeForPlaid: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    CGFloat height = 0;
+    CGFloat width = 0;
+    
+    NSInteger counter = 0, val, space;
+    NSString *hex = [options objectForKey:kGeoPatternHash];
+    
+    while (counter < 36) {
+        space = [Graphics intFromHex:hex atIndex:counter withLength:1];
+        height += (space + 5);
+        val = [Graphics intFromHex:hex atIndex:counter + 1 withLength:1];
+        NSInteger stripeHeight = val + 5;
+        height += stripeHeight;
+        counter +=2;
+    }
+    
+    counter = 0;
+    
+    while (counter < 36) {
+        space = [Graphics intFromHex:hex atIndex:counter withLength:1];
+        width += (space + 5);
+        val = [Graphics intFromHex:hex atIndex:counter + 1 withLength:1];
+        NSInteger stripeWidth = val + 5;
+        width += stripeWidth;
+        counter +=2;
+    }
+    
+    return CGSizeMake(width, height);
 }
 + (CGSize) sizeForTriangles: (NSDictionary*) options {
     return CGSizeMake(0,0);
