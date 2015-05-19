@@ -97,7 +97,10 @@
     return CGSizeMake((ringSize + strokeWidth) * 6, (ringSize + strokeWidth) * 6);
 }
 + (CGSize) sizeForDiamonds: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    NSString *hash = [options objectForKey:kGeoPatternHash];
+    CGFloat width = [Graphics mapValue:[Graphics intFromHex:hash atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
+    CGFloat height = [Graphics mapValue:[Graphics intFromHex:hash atIndex:1 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
+    return CGSizeMake(width * 6, height * 3);
 }
 + (CGSize) sizeForTessellation: (NSDictionary*) options {
     return CGSizeMake(0,0);

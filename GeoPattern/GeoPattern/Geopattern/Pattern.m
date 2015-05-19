@@ -363,7 +363,61 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateDiamonds {
+    CGFloat width = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
+    CGFloat height = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:1 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
     
+    NSInteger counter = 0, x, y;
+    
+    for (y=0; y<6; y++) {
+        for (x=0; x <6; x++) {
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            
+            double dx = (y % 2 == 0) ? 0 : width / 2.0;
+            
+            CGFloat tx = x * width - (width / 2.0) + dx;
+            CGFloat ty = height / 2.0 * y - height / 2;
+            
+            NSArray *points = [self dd:width height:height];
+            NSArray *mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+            
+            [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
+            
+            if (x == 0) {
+                
+                tx = 6 * width - (width / 2.0) + dx;
+                ty = height / 2.0 * y - height / 2;
+                
+                mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+                [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
+
+            }
+            
+            if (y == 0) {
+                
+                tx = x * width - (width / 2.0) + dx;
+                ty = height / 2.0 * 6 - height / 2;
+                
+                mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+                [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
+                
+            }
+            
+            
+            if (x == 0 && y == 0) {
+                
+                tx = 6 * width - (width / 2.0) + dx;
+                ty = height / 2.0 * 6 - height / 2;
+                
+                mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+                [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
+            }
+            
+            counter++;
+        }
+    }
 }
 
 - (void) generateTessellation {
@@ -424,6 +478,28 @@ static inline double radians (double degrees)  {
     
 }
 
+#pragma mark - Point builder
 
+- (NSArray *) applyTanslation: (CGPoint) translation toPoints: (NSArray*) points {
+    
+    NSMutableArray *map = [NSMutableArray new];
+    
+    for (NSValue *point_ in points) {
+        CGPoint point = [point_ CGPointValue];
+        point.x += translation.x;
+        point.y += translation.y;
+        [map addObject:[NSValue valueWithCGPoint:point]];
+    }
+    
+    return map;
+}
+
+- (NSArray *) dd: (CGFloat) width height: (CGFloat) height {
+    return @[ [NSValue valueWithCGPoint:(CGPointMake(width/2.0, 0))],
+                         [NSValue valueWithCGPoint:(CGPointMake(width, height/2.0))],
+                         [NSValue valueWithCGPoint:(CGPointMake(width/2.0, height))],
+                         [NSValue valueWithCGPoint:(CGPointMake(0, height/2.0))]
+                         ];
+}
 
 @end

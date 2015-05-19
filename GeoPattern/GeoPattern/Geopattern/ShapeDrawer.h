@@ -11,11 +11,15 @@
 
 @interface ShapeDrawer : NSObject
 
+#pragma mark - Rectangle
+
 + (void) drawRectangle: (CGRect) rect
               withFill: (UIColor *) fill
             withStroke: (UIColor *) stroke
                atWidth: (CGFloat) width
              inContext: (CGContextRef) context;
+
+#pragma mark - Elipse
 
 + (void) drawCircleIn: (CGRect) rect
               withFill: (UIColor *) fill
@@ -29,5 +33,39 @@
                    withStroke: (UIColor *) stroke
                       atWidth: (CGFloat) strokeWith
                     inContext: (CGContextRef) context;
+
+#pragma mark - Diamond
+
++ (void) drawDiamondWithWidth: (CGFloat) width
+                   withHeight: (CGFloat) height
+                    withFill : (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWith
+                    inContext: (CGContextRef) context;
+
+#pragma mark - Generic Shape Drawing
+
++ (void) drawShapeWithPoints: (NSArray *) points
+                    withFill : (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWith
+                    inContext: (CGContextRef) context;
+
+#pragma mark - Shapes that take Tranformation effects
+
++ (void) drawDiamondWithWidth: (CGFloat) width
+                   withHeight: (CGFloat) height
+                    withFill : (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWith
+                    inContext: (CGContextRef) context
+             transformEffects: (CGAffineTransform)tranforms;
+
++ (void) drawShapeWithPoints: (NSArray *) points
+                   withFill : (UIColor *) fill
+                  withStroke: (UIColor *) stroke
+                     atWidth: (CGFloat) strokeWith
+                   inContext: (CGContextRef) context
+             transformEffects: (CGAffineTransform)tranforms;
 
 @end
