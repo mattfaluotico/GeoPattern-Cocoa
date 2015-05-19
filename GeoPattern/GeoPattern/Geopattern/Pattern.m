@@ -143,7 +143,71 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateOverlappingrings {
+    NSInteger hex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat scale = hex;
+    CGFloat ringSize = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    CGFloat strokeWidth = ringSize / 4.0;
     
+    NSInteger counter = 0, x,y;
+    
+    for (y = 0; y <6; y++) {
+        for (x=0;x<6;x++) {
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *stroke = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *fill = [UIColor clearColor];
+            
+            CGPoint center = CGPointMake(x * ringSize, y * ringSize);
+            CGFloat radius = ringSize - (strokeWidth / 2.0);
+            
+            [ShapeDrawer
+             drawCircleWithCenter:center
+             withRadius:radius
+             withFill:fill
+             withStroke:stroke
+             atWidth:strokeWidth
+             inContext:self.context];
+            
+            if (x==0) {
+                center = CGPointMake(6 * ringSize, y * ringSize);
+                radius = ringSize - (strokeWidth/2.0);
+                [ShapeDrawer
+                 drawCircleWithCenter:center
+                 withRadius:radius
+                 withFill:fill
+                 withStroke:stroke
+                 atWidth:strokeWidth
+                 inContext:self.context];
+            }
+            
+            if (y ==0) {
+                center = CGPointMake(x * ringSize, 6 * ringSize);
+                radius = ringSize - (strokeWidth/2.0);
+                [ShapeDrawer
+                 drawCircleWithCenter:center
+                 withRadius:radius
+                 withFill:fill
+                 withStroke:stroke
+                 atWidth:strokeWidth
+                 inContext:self.context];
+            }
+            
+            if (x==0 && y==0) {
+                center = CGPointMake(6 * ringSize, 6 * ringSize);
+                radius = ringSize - (strokeWidth/2.0);
+                [ShapeDrawer
+                 drawCircleWithCenter:center
+                 withRadius:radius
+                 withFill:fill
+                 withStroke:stroke
+                 atWidth:strokeWidth
+                 inContext:self.context];
+            }
+            
+            counter++;
+        }
+    }
+
 }
 
 - (void) generatePlaid {

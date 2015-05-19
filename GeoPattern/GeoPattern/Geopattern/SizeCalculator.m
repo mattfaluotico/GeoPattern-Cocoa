@@ -31,7 +31,12 @@
     return CGSizeMake(0,0);
 }
 + (CGSize) sizeForOverlappingrings: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+
+    NSInteger hex = [Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1];
+    CGFloat scale = hex;
+    CGFloat ringSize = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    
+    return CGSizeMake(ringSize * 6, ringSize * 6);
 }
 + (CGSize) sizeForPlaid: (NSDictionary*) options {
     return CGSizeMake(0,0);
