@@ -488,7 +488,61 @@ static inline double radians (double degrees)  {
 
 - (void) generateMosaicsquares {
     
-}
+    NSInteger hexVal = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat triangleSize = [Graphics mapValue:hexVal inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:15 andUpperBound:50];
+    
+    NSInteger counter = 0, x = 0, y = 0;
+    
+    for (y = 0; y < 4; y++) {
+        for (x = 0; x < 4; x++) {
+            if (x % 2 == 0) {
+                if (y % 2 == 0) {
+                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSArray *values = @[[NSNumber numberWithInteger:i]];
+                    
+                    [self doOuterTrianglesX:x * triangleSize * 2
+                                          y:y * triangleSize * 2
+                                       size:triangleSize
+                                     andVal:values];
+                } else{
+                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSInteger j = [Graphics intFromHex:self.hashValue atIndex:counter + 1 withLength:1];
+                    
+                    NSArray *values = @[[NSNumber numberWithInteger:i],
+                                        [NSNumber numberWithInteger:j]];
+                    
+                    [self doInnerTrianglesX:x * triangleSize * 2
+                                          y:y * triangleSize * 2
+                                       size:triangleSize
+                                     andVal:values];
+                }
+            } else {
+                if (y % 2 == 0) {
+                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSInteger j = [Graphics intFromHex:self.hashValue atIndex:counter + 1 withLength:1];
+                    
+                    NSArray *values = @[[NSNumber numberWithInteger:i],
+                                        [NSNumber numberWithInteger:j]];
+                    
+                    [self doInnerTrianglesX:x * triangleSize * 2
+                                          y:y * triangleSize * 2
+                                       size:triangleSize
+                                     andVal:values];
+                } else {
+                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSArray *values = @[[NSNumber numberWithInteger:i]];
+                    
+                    [self doOuterTrianglesX:x * triangleSize * 2
+                                          y:y * triangleSize * 2
+                                       size:triangleSize
+                                     andVal:values];
+                }
+            }
+            
+            counter++;
+        }
+    }
+ }
 
 - (void) generateChevrons {
     CGFloat width = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
@@ -541,4 +595,137 @@ static inline double radians (double degrees)  {
 
 #pragma mark - Point builder
 
+- (void) doInnerTrianglesX: (NSInteger) x y: (NSInteger) y size: (CGFloat) size andVal: (NSArray *) values {
+    NSInteger val = [[values objectAtIndex:0] integerValue];
+    CGFloat opacity = [Graphics opacity:val];
+    UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+    UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+    
+    CGFloat tx = x + size,
+    ty = y;
+    CGPoint scale = CGPointMake(-1, 1);
+    
+    CGAffineTransform t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    tx = x + size;
+    ty = y + size * 2;
+    scale.x = 1;
+    scale.y = -1;
+    t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    // update vals
+    val = [[values objectAtIndex:1] integerValue];
+    opacity = [Graphics opacity: val];
+    fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+    
+    tx = x + size;
+    ty = y + size * 2;
+    scale.x = -1;
+    scale.y = -1;
+    
+    t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    tx = x + size;
+    ty = y;
+    scale.x = 1;
+    scale.y = 1;
+    
+    t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+
+    
+    
+}
+
+- (void) doOuterTrianglesX: (NSInteger) x y: (NSInteger) y size: (CGFloat) size andVal: (NSArray *) values {
+    NSInteger val = [[values objectAtIndex:0] integerValue];
+    CGFloat opacity = [Graphics opacity:val];
+    UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+    UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+    
+    CGFloat tx = x,
+    ty = y + size;
+    
+    CGPoint scale = CGPointMake(1, -1);
+    
+    CGAffineTransform t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    tx = x + size * 2;
+    ty = y + size;
+    scale.x = -1;
+    scale.y = -1;
+    t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    tx = x;
+    ty = y + size;
+    scale.x = 1;
+    scale.y = 1;
+    
+    t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    tx = x + size * 2;
+    ty = y + size;
+    scale.x = -1;
+    scale.y = 1;
+    
+    t = CGAffineTransformMakeTranslation(tx, ty);
+    
+    [ShapeDrawer drawRightTriangleWithLength:size
+                               withFill:fill
+                             withStroke:stroke
+                                atWidth:1
+                               inConext:self.context
+                       transformEffects:CGAffineTransformScale(t, scale.x, scale.y)];
+    
+    
+    
+}
 @end

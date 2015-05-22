@@ -86,4 +86,11 @@
                    inContext: (CGContextRef) context
              transformEffects: (CGAffineTransform)tranforms;
 
++ (void)drawRightTriangleWithLength:(CGFloat)length
+                      withFill:(UIColor *)fill
+                    withStroke:(UIColor *)stroke
+                       atWidth:(CGFloat)strokeWidth
+                      inConext:(CGContextRef)context
+              transformEffects:(CGAffineTransform)tranforms;
+
 @end

@@ -125,7 +125,16 @@
     return CGSizeMake(size, size);
 }
 + (CGSize) sizeForMosaicsquares: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+
+    NSInteger hexVal = [Graphics
+                        intFromHex:[options objectForKey:kGeoPatternHash]
+                        atIndex:0
+                        withLength:1];
+    
+    CGFloat triangleSize = [Graphics mapValue:hexVal inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:15 andUpperBound:50];
+    
+    return CGSizeMake(triangleSize * 8, triangleSize * 8);
+    
 }
 + (CGSize) sizeForChevrons: (NSDictionary*) options {
     

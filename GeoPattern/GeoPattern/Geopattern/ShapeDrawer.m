@@ -83,6 +83,7 @@
     [ShapeDrawer drawChevronWithWidth:width withHeight:height withFill:fill withStroke:stroke atWidth:strokeWidth inConext:context transformEffects:CGAffineTransformIdentity];
 }
 
+
 + (void) drawShapeWithPoints: (NSArray *) points
                    withFill : (UIColor *) fill
                   withStroke: (UIColor *) stroke
@@ -221,6 +222,23 @@
     [path stroke];
     
     UIGraphicsPopContext();
+    
+}
+
+
++ (void)drawRightTriangleWithLength:(CGFloat)length
+                    withFill:(UIColor *)fill
+                  withStroke:(UIColor *)stroke
+                     atWidth:(CGFloat)strokeWidth
+                    inConext:(CGContextRef)context
+            transformEffects:(CGAffineTransform)tranforms {
+    
+    NSArray *points = @[[NSValue valueWithCGPoint:CGPointMake(0, 0)],
+                             [NSValue valueWithCGPoint:CGPointMake(length, length)],
+                             [NSValue valueWithCGPoint:CGPointMake(0, length)]
+                             ];
+    
+    [ShapeDrawer drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:strokeWidth inContext:context transformEffects:tranforms];
     
 }
 
