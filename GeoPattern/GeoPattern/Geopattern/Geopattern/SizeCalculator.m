@@ -98,18 +98,8 @@
 }
 + (CGSize) sizeForDiamonds: (NSDictionary*) options {
     NSString *hash = [options objectForKey:kGeoPatternHash];
-    CGFloat width = [Graphics mapValue:[Graphics intFromHex:hash atIndex:0 withLength:1]
-                      inRangeWithLower:0
-                         andUpperBound:15
-              toNewRangeWithLowerBound:10
-                         andUpperBound:50];
-    
-    CGFloat height = [Graphics mapValue:[Graphics intFromHex:hash atIndex:1 withLength:1]
-                       inRangeWithLower:0
-                          andUpperBound:15
-               toNewRangeWithLowerBound:10
-                          andUpperBound:50];
-    NSLog(@"%f", height);
+    CGFloat width = [Graphics mapValue:[Graphics intFromHex:hash atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
+    CGFloat height = [Graphics mapValue:[Graphics intFromHex:hash atIndex:1 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
     return CGSizeMake(width * 6, height * 3);
 }
 + (CGSize) sizeForTessellation: (NSDictionary*) options {
@@ -128,11 +118,7 @@
     return CGSizeMake(0,0);
 }
 + (CGSize) sizeForChevrons: (NSDictionary*) options {
-    
-    CGFloat width = [Graphics mapValue:[Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:30 andUpperBound:80];
-    CGFloat height = width;
-    return CGSizeMake(width * 6, height * 6);
-    
+    return CGSizeMake(0,0);
 }
 
 

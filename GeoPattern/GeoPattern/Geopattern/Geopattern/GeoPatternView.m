@@ -88,7 +88,7 @@
                                            CGAffineTransformIdentity,
                                            size.width,
                                            size.height,
-                                           kCGPatternTilingNoDistortion,
+                                           kCGPatternTilingConstantSpacing,
                                            true,
                                            &callbacks);
     CGFloat alpha = 1.0;

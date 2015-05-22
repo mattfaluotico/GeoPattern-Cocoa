@@ -43,15 +43,6 @@
                       atWidth: (CGFloat) strokeWith
                     inContext: (CGContextRef) context;
 
-#pragma mark - Chevron 
-
-+ (void) drawChevronWithWidth: (CGFloat) width
-                   withHeight: (CGFloat) height
-                     withFill: (UIColor *) fill
-                   withStroke: (UIColor *) stroke
-                      atWidth: (CGFloat) strokeWidth
-                     inConext: (CGContextRef) context;
-
 #pragma mark - Generic Shape Drawing
 
 + (void) drawShapeWithPoints: (NSArray *) points
@@ -59,7 +50,6 @@
                    withStroke: (UIColor *) stroke
                       atWidth: (CGFloat) strokeWith
                     inContext: (CGContextRef) context;
-
 
 #pragma mark - Shapes that take Tranformation effects
 
@@ -69,14 +59,6 @@
                    withStroke: (UIColor *) stroke
                       atWidth: (CGFloat) strokeWith
                     inContext: (CGContextRef) context
-             transformEffects: (CGAffineTransform)tranforms;
-
-+ (void) drawChevronWithWidth: (CGFloat) width
-                   withHeight: (CGFloat) height
-                     withFill: (UIColor *) fill
-                   withStroke: (UIColor *) stroke
-                      atWidth: (CGFloat) strokeWidth
-                     inConext: (CGContextRef) context
              transformEffects: (CGAffineTransform)tranforms;
 
 + (void) drawShapeWithPoints: (NSArray *) points

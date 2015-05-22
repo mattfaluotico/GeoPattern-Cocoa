@@ -375,30 +375,23 @@ static inline double radians (double degrees)  {
             UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
             UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
             
-            double dx = (y % 2 == 0) ? 0 : (width / 2.0);
+            double dx = (y % 2 == 0) ? 0 : width / 2.0;
             
             CGFloat tx = x * width - (width / 2.0) + dx;
             CGFloat ty = height / 2.0 * y - height / 2;
             
-            [ShapeDrawer drawDiamondWithWidth:width
-                                   withHeight:height 
-                                     withFill:fill
-                                   withStroke:stroke
-                                      atWidth:0
-                                    inContext:self.context
-                             transformEffects:CGAffineTransformMakeTranslation(tx, ty)];
+            NSArray *points = [self dd:width height:height];
+            NSArray *mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+            
+            [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
             
             if (x == 0) {
                 
                 tx = 6 * width - (width / 2.0) + dx;
                 ty = height / 2.0 * y - height / 2;
-                [ShapeDrawer drawDiamondWithWidth:width
-                                       withHeight:height
-                                         withFill:fill
-                                       withStroke:stroke
-                                          atWidth:0
-                                        inContext:self.context
-                                 transformEffects:CGAffineTransformMakeTranslation(tx, ty)];
+                
+                mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+                [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
 
             }
             
@@ -406,13 +399,9 @@ static inline double radians (double degrees)  {
                 
                 tx = x * width - (width / 2.0) + dx;
                 ty = height / 2.0 * 6 - height / 2;
-                [ShapeDrawer drawDiamondWithWidth:width
-                                       withHeight:height
-                                         withFill:fill
-                                       withStroke:stroke
-                                          atWidth:0
-                                        inContext:self.context
-                                 transformEffects:CGAffineTransformMakeTranslation(tx, ty)];
+                
+                mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+                [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
                 
             }
             
@@ -421,14 +410,9 @@ static inline double radians (double degrees)  {
                 
                 tx = 6 * width - (width / 2.0) + dx;
                 ty = height / 2.0 * 6 - height / 2;
-                [ShapeDrawer drawDiamondWithWidth:width
-                                       withHeight:height
-                                         withFill:fill
-                                       withStroke:stroke
-                                          atWidth:0
-                                        inContext:self.context
-                                 transformEffects:CGAffineTransformMakeTranslation(tx, ty)];
                 
+                mapped = [self applyTanslation:CGPointMake(tx, ty) toPoints:points];
+                [ShapeDrawer drawShapeWithPoints:mapped withFill:fill withStroke:stroke atWidth:0 inContext:self.context];
             }
             
             counter++;
@@ -491,54 +475,31 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateChevrons {
-    CGFloat width = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
-                      inRangeWithLower:0
-                         andUpperBound:15
-              toNewRangeWithLowerBound:30
-                         andUpperBound:80];
-    
-    CGFloat height = width;
-    
-    NSInteger counter = 0, y, x;
-    
-    for (y=0; y<6; y++) {
-        for (x=0; x<6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *stroke = [[Graphics STROKE_COLOR]
-                                colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-            CGFloat strokeWidth = 1;
-            
-            CGFloat tx = x * width, ty = y * height * 0.66 - height / 2;
-            
-            [ShapeDrawer drawChevronWithWidth:width
-                                   withHeight:height
-                                     withFill:fill
-                                   withStroke:stroke
-                                      atWidth:strokeWidth
-                                     inConext:self.context
-                             transformEffects:CGAffineTransformMakeTranslation(tx, ty)];
-            
-            if (y==0) {
-                
-                ty = 6 * height * 0.66 - height / 2;
-                
-                [ShapeDrawer drawChevronWithWidth:width
-                                       withHeight:height
-                                         withFill:fill
-                                       withStroke:stroke
-                                          atWidth:strokeWidth
-                                         inConext:self.context
-                                 transformEffects:CGAffineTransformMakeTranslation(tx, ty)];
-            }
-            
-            counter++;
-        }
-    }
     
 }
 
 #pragma mark - Point builder
+
+- (NSArray *) applyTanslation: (CGPoint) translation toPoints: (NSArray*) points {
+    
+    NSMutableArray *map = [NSMutableArray new];
+    
+    for (NSValue *point_ in points) {
+        CGPoint point = [point_ CGPointValue];
+        point.x += translation.x;
+        point.y += translation.y;
+        [map addObject:[NSValue valueWithCGPoint:point]];
+    }
+    
+    return map;
+}
+
+- (NSArray *) dd: (CGFloat) width height: (CGFloat) height {
+    return @[ [NSValue valueWithCGPoint:(CGPointMake(width/2.0, 0))],
+                         [NSValue valueWithCGPoint:(CGPointMake(width, height/2.0))],
+                         [NSValue valueWithCGPoint:(CGPointMake(width/2.0, height))],
+                         [NSValue valueWithCGPoint:(CGPointMake(0, height/2.0))]
+                         ];
+}
 
 @end

@@ -73,13 +73,22 @@
     
 }
 
++ (void)drawChevronWithWidth:(CGFloat)width
+                  withHeight:(CGFloat)height
+                    withFill:(UIColor *)fill
+                  withStroke:(UIColor *)stroke 
+                     atWidth:(CGFloat)strokeWidth
+                    inConext:(CGContextRef)context{
+    
+    [ShapeDrawer drawChevronWithWidth:width withHeight:height withFill:fill withStroke:stroke atWidth:strokeWidth inConext:context transformEffects:CGAffineTransformIdentity];
+}
+
 + (void) drawShapeWithPoints: (NSArray *) points
                    withFill : (UIColor *) fill
                   withStroke: (UIColor *) stroke
                      atWidth: (CGFloat) strokeWith
                    inContext: (CGContextRef) context {
     
-    UIGraphicsPushContext(context);
     UIBezierPath *shapePath = [UIBezierPath bezierPath];
     CGPoint starPoint = [[points objectAtIndex:0] CGPointValue];
     [shapePath moveToPoint:starPoint];
@@ -94,9 +103,66 @@
     if (strokeWith > 0) {
         shapePath.lineWidth = strokeWith;
     }
+    [stroke setStroke];
+    [fill setFill];
+    [shapePath fill];
+    [shapePath stroke];
+    
+}
+
+// --------------------------
+
++ (void) drawDiamondWithWidth: (CGFloat) width
+                   withHeight: (CGFloat) height
+                    withFill : (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWith
+                    inContext: (CGContextRef) context
+             transformEffects: (CGAffineTransform)tranforms {
+
+    
+    NSArray *points = @[ [NSValue valueWithCGPoint:(CGPointMake(width/2.0, 0))],
+                         [NSValue valueWithCGPoint:(CGPointMake(width, height/2.0))],
+                         [NSValue valueWithCGPoint:(CGPointMake(width/2.0, height))],
+                         [NSValue valueWithCGPoint:(CGPointMake(0, height/2.0))]
+                         ];
+    
+    [ShapeDrawer drawShapeWithPoints:points
+                            withFill:fill
+                          withStroke:stroke
+                             atWidth:strokeWith
+                           inContext:context
+                     transformEffects:tranforms];
+    
+}
+
++ (void) drawShapeWithPoints: (NSArray *) points
+                   withFill : (UIColor *) fill
+                  withStroke: (UIColor *) stroke
+                     atWidth: (CGFloat) strokeWith
+                   inContext: (CGContextRef) context
+             transformEffects: (CGAffineTransform)tranforms {
+    
+    UIGraphicsPushContext(context);
+    
+    UIBezierPath *shapePath = [UIBezierPath bezierPath];
+    CGPoint starPoint = [[points objectAtIndex:0] CGPointValue];
+    [shapePath moveToPoint:starPoint];
+    
+    for (NSValue *point_ in points) {
+        CGPoint point = [point_ CGPointValue];
+        [shapePath addLineToPoint:point];
+    }
+    
+    [shapePath closePath];
+        
+    if (strokeWith > 0) {
+        shapePath.lineWidth = strokeWith;
+    }
     
     [stroke setStroke];
     [fill setFill];
+    [shapePath applyTransform:tranforms];
     [shapePath fill];
     [shapePath stroke];
     
@@ -104,5 +170,58 @@
     
 }
 
++ (void)drawChevronWithWidth:(CGFloat)width
+                  withHeight:(CGFloat)height
+                    withFill:(UIColor *)fill
+                  withStroke:(UIColor *)stroke
+                     atWidth:(CGFloat)strokeWidth
+                    inConext:(CGContextRef)context
+            transformEffects:(CGAffineTransform)tranforms {
+    
+    CGFloat e = height * 0.66;
+    
+    NSArray *pointsFirst = @[[NSValue valueWithCGPoint:CGPointMake(0, 0)],
+                             [NSValue valueWithCGPoint:CGPointMake(width / 2.0, height - e)],
+                             [NSValue valueWithCGPoint:CGPointMake(width / 2.0, height)],
+                             [NSValue valueWithCGPoint:CGPointMake(0, e)]
+                             ];
+    
+    NSArray *pointsSecon = @[[NSValue valueWithCGPoint:CGPointMake(width / 2.0, height - e)],
+                             [NSValue valueWithCGPoint:CGPointMake(width, 0)],
+                             [NSValue valueWithCGPoint:CGPointMake(width, e)],
+                             [NSValue valueWithCGPoint:CGPointMake(width / 2.0, height)]
+                             ];
+    UIGraphicsPushContext(context);
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:[[pointsFirst objectAtIndex:0] CGPointValue]];
+    
+    for (NSValue *point_ in pointsFirst) {
+        CGPoint point = [point_ CGPointValue];
+        [path addLineToPoint:point];
+    }
+    
+    [path closePath];
+    
+    [path moveToPoint:[[pointsSecon objectAtIndex:0] CGPointValue]];
+    
+    for (NSValue *point_ in pointsSecon) {
+        CGPoint point = [point_ CGPointValue];
+        [path addLineToPoint:point];
+    }
+    
+    [path closePath];
+    if (strokeWidth > 0) {
+        path.lineWidth = strokeWidth;
+    }
+    
+    [stroke setStroke];
+    [fill setFill];
+    [path applyTransform:tranforms];
+    [path fill];
+    [path stroke];
+    
+    UIGraphicsPopContext();
+    
+}
 
 @end
