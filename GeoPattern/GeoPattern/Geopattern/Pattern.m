@@ -111,7 +111,6 @@
              };
 }
 
-// TEMP
 static inline double radians (double degrees)  {
     return degrees * M_PI/180;
 }
@@ -444,16 +443,12 @@ static inline double radians (double degrees)  {
                      toNewRangeWithLowerBound:5
                                 andUpperBound:40];
     
-    NSLog(@"side length: %f", sideLength);
-    
     CGFloat sq = 1.7320508075688772;
     CGFloat hexHeight = sideLength * sq;
     CGFloat hexWidth = sideLength  * 2;
     CGFloat triangleHeight = sideLength / 2.0 * sq;
     CGFloat tileWidth = sideLength * 3 + triangleHeight * 2.0;
     CGFloat tileHeight = (hexHeight * 2) + (sideLength * 2);
-    
-    NSLog(@"tile height: %f", tileHeight);
     
     NSInteger counter = 0;
     
@@ -468,44 +463,46 @@ static inline double radians (double degrees)  {
         
         
         switch (counter) {
+                // good
             case 0: {
-                fill = [UIColor redColor];
                 CGRect rect = CGRectMake(-sideLength / 2, -sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
 
-                fill = [UIColor blueColor];
                 rect = CGRectMake(tileWidth - sideLength / 2, -sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
                 
-                fill = [UIColor blackColor];
                 rect = CGRectMake(-sideLength / 2, tileHeight - sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
-                fill = [UIColor whiteColor];
+
                 rect = CGRectMake(tileWidth - sideLength / 2, tileHeight - sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
                 break;
             }
+                // good
             case 1: {
                 CGRect rect = CGRectMake(hexWidth / 2 + triangleHeight, hexHeight / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
                 break;
             }
+                // good
             case 2: {
                 CGRect rect = CGRectMake(-sideLength / 2, tileHeight / 2 - sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
+                
                 rect = CGRectMake(tileWidth - sideLength / 2, tileHeight / 2 - sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
                 break;
             }
+                // good
             case 3: {
                 CGRect rect = CGRectMake(hexWidth / 2 + triangleHeight, hexHeight * 1.5 + sideLength, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
                 break;
             }
+                // good
             case 4: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2, -sideLength / 2);
                 CGAffineTransform r = CGAffineTransformRotate(t, 0);
-                CGAffineTransform tr = CGAffineTransformTranslate(r, sideLength / 2, triangleHeight / 2);
                 CGAffineTransform s;
                 
                 [ShapeDrawer
@@ -513,12 +510,11 @@ static inline double radians (double degrees)  {
                  withSideLength:sideLength withFill:fill
                  withStroke:stroke atWidth:1
                  inConext:self.context
-                 transformEffects:tr];
+                 transformEffects:r];
                 
                 t = CGAffineTransformMakeTranslation(sideLength / 2, tileHeight - (-sideLength / 2));
                 r = CGAffineTransformRotate(t, 0);
-                tr = CGAffineTransformTranslate(r, sideLength / 2, triangleHeight / 2);
-                s = CGAffineTransformScale(tr, 1, -1);
+                s = CGAffineTransformScale(r, 1, -1);
                 
                 [ShapeDrawer
                  drawRotatedTriangleWithWidth:triangleHeight
@@ -528,11 +524,11 @@ static inline double radians (double degrees)  {
                  transformEffects:s];
                 break;
             }
+                // good
             case 5: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(tileWidth - sideLength / 2, -sideLength / 2);
                 CGAffineTransform r = CGAffineTransformRotate(t, 0);
-                CGAffineTransform tr = CGAffineTransformTranslate(r, sideLength / 2, triangleHeight / 2);
-                CGAffineTransform s = CGAffineTransformScale(tr, -1, 1);
+                CGAffineTransform s = CGAffineTransformScale(r, -1, 1);
                 
                 [ShapeDrawer
                  drawRotatedTriangleWithWidth:triangleHeight
@@ -543,8 +539,7 @@ static inline double radians (double degrees)  {
                 
                 t = CGAffineTransformMakeTranslation(tileWidth - sideLength / 2, tileHeight + sideLength / 2);
                 r = CGAffineTransformRotate(t, 0);
-                tr = CGAffineTransformTranslate(r, sideLength / 2, triangleHeight / 2);
-                s = CGAffineTransformScale(tr, -1, -1);
+                s = CGAffineTransformScale(t, -1, -1);
                 
                 [ShapeDrawer
                  drawRotatedTriangleWithWidth:triangleHeight
@@ -553,6 +548,7 @@ static inline double radians (double degrees)  {
                  inConext:self.context
                  transformEffects:s];
                 break;
+                // good
             } case 6: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation((tileWidth / 2) + (sideLength / 2),
                                                                        hexHeight /2);
@@ -565,9 +561,10 @@ static inline double radians (double degrees)  {
                  transformEffects:t];
                 break;
             } case 7: {
+                // good
                 CGAffineTransform t = CGAffineTransformMakeTranslation(tileWidth - tileWidth / 2 - sideLength / 2,
                                                                        hexHeight /2);
-                CGAffineTransform s = CGAffineTransformScale(t, 1, -1);
+                CGAffineTransform s = CGAffineTransformScale(t, -1, 1);
                 
                 [ShapeDrawer
                  drawRotatedTriangleWithWidth:triangleHeight
@@ -576,6 +573,7 @@ static inline double radians (double degrees)  {
                  inConext:self.context
                  transformEffects:s];
                 break;
+                // good
             } case 8: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(tileWidth / 2 + sideLength / 2,
                                                                        tileHeight - hexHeight / 2);
@@ -587,6 +585,9 @@ static inline double radians (double degrees)  {
                  withStroke:stroke atWidth:1
                  inConext:self.context
                  transformEffects:s];
+                break;
+                
+                // good
             } case 9: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(tileWidth - tileWidth / 2 - sideLength / 2,
                                                                        tileHeight - hexHeight / 2);
@@ -599,6 +600,7 @@ static inline double radians (double degrees)  {
                  inConext:self.context
                  transformEffects:s];
                 break;
+                // good
             } case 10: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
                                                                        tileHeight / 2 - sideLength / 2);
@@ -622,6 +624,7 @@ static inline double radians (double degrees)  {
                  inConext:self.context
                  transformEffects:s];
                 break;
+                // good
             } case 12: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
                                                                        sideLength / 2);
@@ -630,67 +633,72 @@ static inline double radians (double degrees)  {
                 
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
                 break;
+                // good
             } case 13: {
-                CGAffineTransform t = CGAffineTransformMakeTranslation(-tileHeight + sideLength / 2,
+                CGAffineTransform s = CGAffineTransformMakeScale(-1, 1);
+                CGAffineTransform t = CGAffineTransformTranslate(s,
+                                                                   -tileWidth + sideLength / 2,
                                                                        sideLength / 2);
-                CGAffineTransform s = CGAffineTransformScale(t, -1, 1);
-                CGAffineTransform r = CGAffineTransformRotate(s, radians(-30));
+                CGAffineTransform r = CGAffineTransformRotate(t, radians(-30));
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
                 break;
+                // good
             } case 14: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
                                                                        tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform r = CGAffineTransformRotate(t, radians(30));
-    
+                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
-                [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
+                [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
                 break;
+                // good
             } case 15: {
-                CGAffineTransform t = CGAffineTransformMakeTranslation(-tileHeight + sideLength / 2,
-                                                                       tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform s = CGAffineTransformScale(t, -1, 1);
-                CGAffineTransform r = CGAffineTransformRotate(s, radians(30));
-                CGAffineTransform tr = CGAffineTransformTranslate(r, 0, sideLength);
+                CGAffineTransform s = CGAffineTransformMakeScale(-1, 1);
+                CGAffineTransform t = CGAffineTransformTranslate(s,
+                                                                 -tileWidth + sideLength / 2,
+                                                                 tileHeight / 2 - sideLength / 2 - sideLength);
+                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
                 break;
+                // good
             } case 16: {
-                CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
+                CGAffineTransform s = CGAffineTransformMakeScale(1, -1);
+                CGAffineTransform t = CGAffineTransformTranslate(s,
+                                                                       sideLength / 2,
                                                                      -tileHeight + tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform s = CGAffineTransformScale(t, 1, -1);
-                CGAffineTransform r = CGAffineTransformRotate(s, radians(30));
-                CGAffineTransform tr = CGAffineTransformTranslate(r, 0, sideLength);
+                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
                 break;
+                // good
             } case 17: {
-                CGAffineTransform t = CGAffineTransformMakeTranslation(-tileHeight + sideLength / 2,
+                CGAffineTransform s = CGAffineTransformMakeScale(-1, -1);
+                CGAffineTransform t = CGAffineTransformTranslate(s, -tileWidth + sideLength / 2,
                                                                        -tileHeight + tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform s = CGAffineTransformScale(t, -1, -1);
-                CGAffineTransform r = CGAffineTransformRotate(s, radians(30));
-                CGAffineTransform tr = CGAffineTransformTranslate(r, 0, sideLength);
+                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
                 break;
             } case 18: {
-                CGAffineTransform t = CGAffineTransformMakeTranslation( sideLength / 2,
+                CGAffineTransform s = CGAffineTransformMakeScale(1, -1);
+                CGAffineTransform t = CGAffineTransformTranslate(s, sideLength / 2,
                                                                        -tileHeight + sideLength / 2);
-                CGAffineTransform s = CGAffineTransformScale(t, -1, -1);
-                CGAffineTransform r = CGAffineTransformRotate(s, radians(-30));
+                CGAffineTransform r = CGAffineTransformRotate(t, radians(-30));
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
                 break;
             } case 19: {
-                CGAffineTransform t = CGAffineTransformMakeTranslation(-tileHeight + sideLength / 2,
-                                                                       -tileHeight + tileHeight / 2);
-                CGAffineTransform s = CGAffineTransformScale(t, -1, -1);
-                CGAffineTransform r = CGAffineTransformRotate(s, radians(30));
+                CGAffineTransform s = CGAffineTransformMakeScale(-1, -1);
+                CGAffineTransform t = CGAffineTransformTranslate(s, -tileWidth + sideLength / 2,
+                                                                   -tileHeight + sideLength / 2);
+                
+                CGAffineTransform r = CGAffineTransformRotate(t, radians(-30));
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
