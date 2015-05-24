@@ -93,4 +93,19 @@
                       inConext:(CGContextRef)context
               transformEffects:(CGAffineTransform)tranforms;
 
++ (void)drawRotatedTriangleWithWidth: (CGFloat) width
+                      withSideLength: (CGFloat) sideLength
+                            withFill:(UIColor *)fill
+                          withStroke:(UIColor *)stroke
+                             atWidth:(CGFloat)strokeWidth
+                            inConext:(CGContextRef)context
+                    transformEffects:(CGAffineTransform)tranforms;
+
++ (void) drawRectangle: (CGRect) rect
+              withFill: (UIColor *) fill
+            withStroke: (UIColor *) stroke
+               atWidth: (CGFloat) width
+             inContext: (CGContextRef) context
+      transformEffects:(CGAffineTransform)tranforms;
+
 @end

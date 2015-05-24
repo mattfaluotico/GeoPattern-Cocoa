@@ -30,7 +30,6 @@
 @implementation UIColor (Conversions)
 
 + (UIColor *)fromHSL:(HSLColor *)hsl {
-//    return [UIColor colorWithHue:hsl.hue saturation:hsl.saturation brightness:hsl.lightness alpha:1];
     
     struct RGBColor rgb;
     
@@ -51,7 +50,6 @@
     return [UIColor colorWithRed:rgb.red green:rgb.green blue:rgb.blue alpha:1];
 }
 
-// c
 + (UIColor *)fromHex:(NSString *)hex {
     NSString *colorString = [[hex stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
     
@@ -66,7 +64,6 @@
     return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
 
-// c
 - (NSString *)toHex {
 
     struct RGBColor colors = [UIColor getComponentsFromColor:self];
@@ -77,7 +74,7 @@
             lroundf(colors.blue * 255)];
 }
 
-// c
+
 - (HSLColor *)toHSL {
     struct RGBColor colors = [UIColor getComponentsFromColor:self];
     
@@ -106,10 +103,6 @@
     
     return hsl;
     
-}
-
-- (void) lol {
-
 }
 
 #pragma mark - Extracting components

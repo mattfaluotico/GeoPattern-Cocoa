@@ -10,7 +10,11 @@
 
 @implementation ShapeDrawer
 
-+ (void) drawRectangle: (CGRect) rect withFill: (UIColor *) fill withStroke: (UIColor *) stroke atWidth: (CGFloat) width inContext: (CGContextRef) context {
++ (void) drawRectangle: (CGRect) rect
+              withFill: (UIColor *) fill
+            withStroke: (UIColor *) stroke
+               atWidth: (CGFloat) width
+             inContext: (CGContextRef) context {
     
     CGContextSetFillColorWithColor(context, fill.CGColor);
     CGContextFillRect(context, rect);
@@ -112,6 +116,7 @@
 }
 
 // --------------------------
+
 
 + (void) drawDiamondWithWidth: (CGFloat) width
                    withHeight: (CGFloat) height
@@ -240,6 +245,41 @@
     
     [ShapeDrawer drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:strokeWidth inContext:context transformEffects:tranforms];
     
+}
+
++ (void)drawRotatedTriangleWithWidth: (CGFloat) width
+                      withSideLength: (CGFloat) sideLength
+                           withFill:(UIColor *)fill
+                         withStroke:(UIColor *)stroke
+                            atWidth:(CGFloat)strokeWidth
+                           inConext:(CGContextRef)context
+                   transformEffects:(CGAffineTransform)tranforms {
+    
+    CGFloat height = sideLength / 2;
+    
+    NSArray *points = @[[NSValue valueWithCGPoint:CGPointMake(0, 0)],
+                        [NSValue valueWithCGPoint:CGPointMake(width, height)],
+                        [NSValue valueWithCGPoint:CGPointMake(0, sideLength)]
+                        ];
+    
+    [ShapeDrawer drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:strokeWidth inContext:context transformEffects:tranforms];
+    
+}
+
++ (void) drawRectangle: (CGRect) rect
+              withFill: (UIColor *) fill
+            withStroke: (UIColor *) stroke
+               atWidth: (CGFloat) width
+             inContext: (CGContextRef) context
+      transformEffects:(CGAffineTransform)tranforms {
+    
+    NSArray *points = @[ [NSValue valueWithCGPoint:rect.origin],
+                         [NSValue valueWithCGPoint:CGPointMake(rect.size.width, 0)],
+                         [NSValue valueWithCGPoint:CGPointMake(rect.size.width, rect.size.height)],
+                         [NSValue valueWithCGPoint:CGPointMake(0, rect.size.height)]
+                         ];
+    
+    [self drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:width inContext:context transformEffects:tranforms];
 }
 
 @end
