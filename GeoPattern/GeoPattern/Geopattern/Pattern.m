@@ -438,30 +438,49 @@ static inline double radians (double degrees)  {
 
 - (void) generateTessellation {
  
-    NSInteger sideLength = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:5 andUpperBound:40];
-    CGFloat hexHeight = sideLength * sqrt(3);
+    CGFloat sideLength = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
+                             inRangeWithLower:0
+                                andUpperBound:15
+                     toNewRangeWithLowerBound:5
+                                andUpperBound:40];
+    
+    NSLog(@"side length: %f", sideLength);
+    
+    CGFloat sq = 1.7320508075688772;
+    CGFloat hexHeight = sideLength * sq;
     CGFloat hexWidth = sideLength  * 2;
-    CGFloat triangleHeight = sideLength / 2 * sqrt(3);
-    CGFloat tileWidth = sideLength * 3 + triangleHeight * 2;
-    CGFloat tileHeight = (hexWidth * 2) + (sideLength * 2);
+    CGFloat triangleHeight = sideLength / 2.0 * sq;
+    CGFloat tileWidth = sideLength * 3 + triangleHeight * 2.0;
+    CGFloat tileHeight = (hexHeight * 2) + (sideLength * 2);
+    
+    NSLog(@"tile height: %f", tileHeight);
     
     NSInteger counter = 0;
     
     for (counter = 0; counter < 20; counter++) {
+        
+        // STYLES
+        
         NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
         CGFloat opacity = [Graphics opacity:val];
-        UIColor *fill = [[Graphics fillColor:opacity] colorWithAlphaComponent:opacity];
+        UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
         UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
         
         
         switch (counter) {
             case 0: {
+                fill = [UIColor redColor];
                 CGRect rect = CGRectMake(-sideLength / 2, -sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
+
+                fill = [UIColor blueColor];
                 rect = CGRectMake(tileWidth - sideLength / 2, -sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
+                
+                fill = [UIColor blackColor];
                 rect = CGRectMake(-sideLength / 2, tileHeight - sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
+                fill = [UIColor whiteColor];
                 rect = CGRectMake(tileWidth - sideLength / 2, tileHeight - sideLength / 2, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context];
                 break;
@@ -604,55 +623,39 @@ static inline double radians (double degrees)  {
                  transformEffects:s];
                 break;
             } case 12: {
-                UIGraphicsPushContext(self.context);
-                CGContextSetFillColorWithColor(self.context, fill.CGColor);
-                CGContextSetStrokeColorWithColor(self.context, stroke.CGColor);
-                
+                CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
+                                                                       sideLength / 2);
+                CGAffineTransform r = CGAffineTransformRotate(t, radians(-30));
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
-                CGContextTranslateCTM(self.context, sideLength / 2, sideLength / 2);
-                CGContextRotateCTM(self.context, radians(-30));
-                CGContextFillRect(self.context, rect);
-                CGContextStrokeRectWithWidth(self.context, rect, 1);
-                UIGraphicsPopContext();
                 
+                [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
                 break;
             } case 13: {
-                UIGraphicsPushContext(self.context);
-                CGContextSetFillColorWithColor(self.context, fill.CGColor);
-                CGContextSetStrokeColorWithColor(self.context, stroke.CGColor);
+                CGAffineTransform t = CGAffineTransformMakeTranslation(-tileHeight + sideLength / 2,
+                                                                       sideLength / 2);
+                CGAffineTransform s = CGAffineTransformScale(t, -1, 1);
+                CGAffineTransform r = CGAffineTransformRotate(s, radians(-30));
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
-                CGContextTranslateCTM(self.context, -tileWidth + sideLength / 2, sideLength / 2);
-                CGContextRotateCTM(self.context, radians(-30));
-                CGContextScaleCTM(self.context, -1, 1);
-                CGContextFillRect(self.context, rect);
-                CGContextStrokeRectWithWidth(self.context, rect, 1);
-                UIGraphicsPopContext();
+                [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
                 break;
             } case 14: {
-                UIGraphicsPushContext(self.context);
-                CGContextSetFillColorWithColor(self.context, fill.CGColor);
-                CGContextSetStrokeColorWithColor(self.context, stroke.CGColor);
-                
+                CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
+                                                                       tileHeight / 2 - sideLength / 2 - sideLength);
+                CGAffineTransform r = CGAffineTransformRotate(t, radians(30));
+    
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
-                CGContextTranslateCTM(self.context, sideLength / 2, tileHeight / 2 - sideLength / 2 - sideLength);
-                CGContextRotateCTM(self.context, radians(30));
-                CGContextFillRect(self.context, rect);
-                CGContextStrokeRectWithWidth(self.context, rect, 1);
-                UIGraphicsPopContext();
+                [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:r];
                 break;
             } case 15: {
-                UIGraphicsPushContext(self.context);
-                CGContextSetFillColorWithColor(self.context, fill.CGColor);
-                CGContextSetStrokeColorWithColor(self.context, stroke.CGColor);
+                CGAffineTransform t = CGAffineTransformMakeTranslation(-tileHeight + sideLength / 2,
+                                                                       tileHeight / 2 - sideLength / 2 - sideLength);
+                CGAffineTransform s = CGAffineTransformScale(t, -1, 1);
+                CGAffineTransform r = CGAffineTransformRotate(s, radians(30));
+                CGAffineTransform tr = CGAffineTransformTranslate(r, 0, sideLength);
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
-                CGContextTranslateCTM(self.context, -tileWidth + sideLength / 2, tileHeight / 2 - sideLength / 2 - sideLength);
-                CGContextRotateCTM(self.context, radians(30));
-                CGContextScaleCTM(self.context, -1, 1);
-                CGContextFillRect(self.context, rect);
-                CGContextStrokeRectWithWidth(self.context, rect, 1);
-                UIGraphicsPopContext();
+                [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
                 break;
             } case 16: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,

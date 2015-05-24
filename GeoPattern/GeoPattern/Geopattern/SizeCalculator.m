@@ -114,14 +114,15 @@
 }
 + (CGSize) sizeForTessellation: (NSDictionary*) options {
     
-    NSInteger sideLength = [Graphics mapValue:[Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:5 andUpperBound:40];
-    CGFloat hexHeight = sideLength * sqrt(3);
+    CGFloat sideLength = [Graphics mapValue:[Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:5 andUpperBound:40];
+    CGFloat sq = 1.7320508075688772;
+    CGFloat hexHeight = sideLength * sq;
     CGFloat hexWidth = sideLength  * 2;
-    CGFloat triangleHeight = sideLength / 2 * sqrt(3);
-    CGFloat tileWidth = sideLength * 3 + triangleHeight * 2;
-    CGFloat titleHeight = (hexWidth * 2) + (sideLength * 2);
+    CGFloat triangleHeight = sideLength / 2.0 * sq;
+    CGFloat tileWidth = sideLength * 3 + triangleHeight * 2.0;
+    CGFloat tileHeight = (hexHeight * 2) + (sideLength * 2);
     
-    return CGSizeMake(tileWidth, titleHeight);
+    return CGSizeMake(tileWidth, tileHeight);
 }
 + (CGSize) sizeForNestedsquares: (NSDictionary*) options {
     
