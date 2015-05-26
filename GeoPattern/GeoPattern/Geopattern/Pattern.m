@@ -168,6 +168,47 @@ static inline double radians (double degrees)  {
 
 - (void) generateSinewaves {
     
+    NSInteger period, amplitude, waveWidth;
+    period = floor([Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
+                     inRangeWithLower:0
+                        andUpperBound:15
+             toNewRangeWithLowerBound:100
+                        andUpperBound:400]);
+    amplitude = floor([Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:1 withLength:1]
+                     inRangeWithLower:0
+                        andUpperBound:15
+             toNewRangeWithLowerBound:30
+                        andUpperBound:100]);
+    waveWidth = floor([Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:2 withLength:1]
+                     inRangeWithLower:0
+                        andUpperBound:15
+             toNewRangeWithLowerBound:3
+                        andUpperBound:30]);
+    
+    
+    NSInteger i = 0;
+    
+    // M0 39 C 52.5 0, 97.5 0, 150 39 S 247.5 78, 300 39 S 397.5 0, 450, 39
+    
+    for (i=0;i < 36; i++) {
+        
+        NSInteger val = [Graphics intFromHex:self.hashValue atIndex:i withLength:1];
+        CGFloat opacity = [Graphics opacity:val];
+        UIColor *stroke = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+        UIColor *fill = [UIColor clearColor];
+        CGFloat strokeWidth = waveWidth;
+        CGFloat xOffset = (period / 4) * 0.7;
+        
+        CGAffineTransform t = CGAffineTransformMakeTranslation(-period / 4, waveWidth * i - amplitude * 1.5);
+        
+        [ShapeDrawer drawWaveWithPeriod:period amplitude:amplitude waveWidth:waveWidth xOffset:xOffset fill:fill stroke:stroke strokeWidth:strokeWidth inContext:self.context withTransforms:t];
+        
+        t = CGAffineTransformMakeTranslation(-period / 4, waveWidth * i - amplitude * 1.5 + waveWidth * 36);
+        
+        [ShapeDrawer drawWaveWithPeriod:period amplitude:amplitude waveWidth:waveWidth xOffset:xOffset fill:fill stroke:stroke strokeWidth:strokeWidth inContext:self.context withTransforms:t];
+    }
+    
+    
 }
 
 - (void) generateHexagons {

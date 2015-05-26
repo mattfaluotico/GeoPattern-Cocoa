@@ -31,7 +31,28 @@
     return CGSizeMake(0,0);
 }
 + (CGSize) sizeForSinewaves: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    NSInteger period, amplitude, wavelength;
+    NSString *hashValue = [options objectForKey:kGeoPatternHash];
+    
+    period = floor([Graphics mapValue:[Graphics intFromHex:hashValue atIndex:0 withLength:1]
+                     inRangeWithLower:0
+                        andUpperBound:15
+             toNewRangeWithLowerBound:100
+                        andUpperBound:400]);
+    
+    amplitude = floor([Graphics mapValue:[Graphics intFromHex:hashValue atIndex:1 withLength:1]
+                        inRangeWithLower:0
+                           andUpperBound:15
+                toNewRangeWithLowerBound:30
+                           andUpperBound:100]);
+
+    wavelength = floor([Graphics mapValue:[Graphics intFromHex:hashValue atIndex:2 withLength:1]
+                         inRangeWithLower:0
+                            andUpperBound:15
+                 toNewRangeWithLowerBound:3
+                            andUpperBound:30]);
+
+    return CGSizeMake(period, wavelength * 36);
 }
 + (CGSize) sizeForHexagons: (NSDictionary*) options {
     return CGSizeMake(0,0);

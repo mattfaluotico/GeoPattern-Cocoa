@@ -282,4 +282,55 @@
     [self drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:width inContext:context transformEffects:tranforms];
 }
 
++ (void) drawWaveWithPeriod: (NSInteger) period
+                  amplitude: (NSInteger) amplitude
+                  waveWidth: (NSInteger) waveWidth
+                    xOffset: (CGFloat) xOffset
+                       fill: (UIColor *) fill
+                     stroke: (UIColor *) stroke
+                strokeWidth: (CGFloat) strokeWidth
+                  inContext: (CGContextRef) context
+             withTransforms: (CGAffineTransform) transforms {
+    
+    UIGraphicsPushContext(context);
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    // M0 39
+    CGPoint start = CGPointMake(0, amplitude);
+    [path moveToPoint:start];
+    // C 52.5 0, 97.5 0, 150 39
+    CGPoint controlPoint1 = CGPointMake(xOffset, 0);
+    CGPoint controlPoint2 = CGPointMake((period / 2 - xOffset), 0);
+    CGPoint toPoint = CGPointMake((period / 2), amplitude);
+    
+    [path addCurveToPoint:toPoint controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+    
+    // S 247.5 78, 300 39
+    controlPoint1.y = amplitude * 2;
+    controlPoint1.x = toPoint.x + xOffset;
+    toPoint = CGPointMake(period, amplitude);
+    controlPoint2 = CGPointMake(period - xOffset, amplitude * 2);
+    [path addCurveToPoint:toPoint controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+    
+    // S 397.5 0, 450, 39
+    controlPoint1.y = 0;
+    controlPoint1.x = period + xOffset;
+    controlPoint2 = CGPointMake((period * 1.5 - xOffset), 0);
+    toPoint = CGPointMake((period * 1.5), amplitude);
+    [path addCurveToPoint:toPoint controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+    
+    if (strokeWidth > 0) {
+        path.lineWidth = strokeWidth;
+    }
+    
+    [stroke setStroke];
+    [fill setFill];
+    [path applyTransform:transforms];
+    [path fill];
+    [path stroke];
+    
+    UIGraphicsPopContext();
+}
+
 @end

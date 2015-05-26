@@ -108,4 +108,14 @@
              inContext: (CGContextRef) context
       transformEffects:(CGAffineTransform)tranforms;
 
++ (void) drawWaveWithPeriod: (NSInteger) period
+                  amplitude: (NSInteger) amplitude
+                  waveWidth: (NSInteger) waveWidth
+                    xOffset: (CGFloat) xOffset
+                       fill: (UIColor *) fill
+                     stroke: (UIColor *) stroke
+                strokeWidth: (CGFloat) strokeWidth
+                  inContext: (CGContextRef) context
+             withTransforms: (CGAffineTransform) transforms;
+
 @end
