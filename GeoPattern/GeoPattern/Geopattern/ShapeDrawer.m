@@ -272,6 +272,31 @@
     
 }
 
++ (void)drawHexagonWithSize:(CGFloat)size
+                   withFill:(UIColor *)fill
+                 withStroke:(UIColor *)stroke
+                    atWidth:(CGFloat)strokeWidth
+                   inConext:(CGContextRef)context
+           transformEffects:(CGAffineTransform)tranforms {
+    
+    CGFloat c = size;
+    CGFloat a = c / 2;
+    CGFloat b = sin(60 * M_PI/180) * c;
+    
+    NSArray *points = @[
+                        [NSValue valueWithCGPoint: CGPointMake(0, b)],
+                        [NSValue valueWithCGPoint: CGPointMake(a, 0)],
+                        [NSValue valueWithCGPoint: CGPointMake(a + c, 0)],
+                        [NSValue valueWithCGPoint: CGPointMake(2 * c, b)],
+                        [NSValue valueWithCGPoint: CGPointMake(a + c, 2 * b)],
+                        [NSValue valueWithCGPoint: CGPointMake(a, 2 * b)]
+                        ];
+    
+    [ShapeDrawer drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:strokeWidth inContext:context transformEffects:tranforms];
+    
+}
+
+
 + (void)drawRotatedTriangleWithWidth: (CGFloat) width
                       withSideLength: (CGFloat) sideLength
                            withFill:(UIColor *)fill

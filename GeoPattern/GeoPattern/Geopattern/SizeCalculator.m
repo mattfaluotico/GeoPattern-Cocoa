@@ -58,7 +58,13 @@
     return CGSizeMake(period, wavelength * 36);
 }
 + (CGSize) sizeForHexagons: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    CGFloat scale = [Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1];
+    CGFloat size = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:8 andUpperBound:60];
+    CGFloat hexHeight = size * sqrt(3);
+    CGFloat hexWidth = size * 2;
+    
+    return CGSizeMake(hexWidth * 3 + size * 3,
+                      hexHeight * 6);
 }
 + (CGSize) sizeForOverlappingrings: (NSDictionary*) options {
 

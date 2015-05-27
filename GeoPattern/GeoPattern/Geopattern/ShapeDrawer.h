@@ -125,4 +125,11 @@
                    inConext:(CGContextRef)context
            transformEffects:(CGAffineTransform)tranforms;
 
++ (void)drawHexagonWithSize:(CGFloat)size
+                   withFill:(UIColor *)fill
+                 withStroke:(UIColor *)stroke
+                    atWidth:(CGFloat)strokeWidth
+                   inConext:(CGContextRef)context
+           transformEffects:(CGAffineTransform)tranforms;
+
 @end
