@@ -119,6 +119,29 @@ static inline double radians (double degrees)  {
 
 - (void) generateOctogons {
     
+    CGFloat size = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    NSInteger counter = 0, x = 0, y = 0;
+    
+    for (y = 0;y< 6; y++) {
+        for (x = 0;x<6; x++) {
+        
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            
+            CGAffineTransform t = CGAffineTransformMakeTranslation(x * size, y * size);
+            
+            [ShapeDrawer drawOctogonWithSize:size
+                                    withFill:fill
+                                  withStroke:stroke
+                                     atWidth:1
+                                    inConext:self.context
+                            transformEffects:t];
+            
+            counter++;
+        }
+    }
 }
 
 - (void) generateOverlappingcircles {

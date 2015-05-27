@@ -13,7 +13,10 @@
 @implementation SizeCalculator
 
 + (CGSize) sizeForOctogons: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    CGFloat size = [Graphics mapValue:[Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    
+    return CGSizeMake(size * 6, size * 6);
+    
 }
 + (CGSize) sizeForOverlappingcircles: (NSDictionary*) options {
 
@@ -130,7 +133,6 @@
                           andUpperBound:15
                toNewRangeWithLowerBound:10
                           andUpperBound:50];
-    NSLog(@"%f", height);
     return CGSizeMake(width * 6, height * 3);
 }
 + (CGSize) sizeForTessellation: (NSDictionary*) options {

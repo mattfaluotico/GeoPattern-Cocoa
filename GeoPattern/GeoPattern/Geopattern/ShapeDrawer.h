@@ -118,4 +118,11 @@
                   inContext: (CGContextRef) context
              withTransforms: (CGAffineTransform) transforms;
 
++ (void)drawOctogonWithSize:(CGFloat)size
+                   withFill:(UIColor *)fill
+                 withStroke:(UIColor *)stroke
+                    atWidth:(CGFloat)strokeWidth
+                   inConext:(CGContextRef)context
+           transformEffects:(CGAffineTransform)tranforms;
+
 @end

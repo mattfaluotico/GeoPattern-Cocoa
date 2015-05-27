@@ -247,6 +247,31 @@
     
 }
 
++ (void)drawOctogonWithSize:(CGFloat)size
+                           withFill:(UIColor *)fill
+                         withStroke:(UIColor *)stroke
+                            atWidth:(CGFloat)strokeWidth
+                           inConext:(CGContextRef)context
+                   transformEffects:(CGAffineTransform)tranforms {
+    
+    CGFloat s = size;
+    CGFloat c = s * 0.33;
+    
+    NSArray *points = @[
+                        [NSValue valueWithCGPoint: CGPointMake(c, 0)],
+                        [NSValue valueWithCGPoint: CGPointMake(s - c, 0)],
+                        [NSValue valueWithCGPoint: CGPointMake(s, c)],
+                        [NSValue valueWithCGPoint: CGPointMake(s, s - c)],
+                        [NSValue valueWithCGPoint: CGPointMake(s - c, s)],
+                        [NSValue valueWithCGPoint: CGPointMake(c, s)],
+                        [NSValue valueWithCGPoint: CGPointMake(0, s - c)],
+                        [NSValue valueWithCGPoint: CGPointMake(0, c)],
+                        ];
+    
+    [ShapeDrawer drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:strokeWidth inContext:context transformEffects:tranforms];
+    
+}
+
 + (void)drawRotatedTriangleWithWidth: (CGFloat) width
                       withSideLength: (CGFloat) sideLength
                            withFill:(UIColor *)fill
