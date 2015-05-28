@@ -28,7 +28,15 @@
     return CGSizeMake(radius * 6, radius * 6);
 }
 + (CGSize) sizeForPlussigns: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+
+    NSString *hex = [options objectForKey:kGeoPatternHash];
+    CGFloat squareSize = [Graphics mapValue:[Graphics intFromHex:hex atIndex:0 withLength:1]
+                           inRangeWithLower:0
+                              andUpperBound:15
+                   toNewRangeWithLowerBound:10
+                              andUpperBound:25];
+    
+    return CGSizeMake(squareSize * 12, squareSize * 12);
 }
 + (CGSize) sizeForXes: (NSDictionary*) options {
     return CGSizeMake(0,0);

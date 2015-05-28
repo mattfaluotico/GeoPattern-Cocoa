@@ -182,6 +182,87 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generatePlussigns {
+    CGFloat squareSize = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:25];
+    CGFloat plusSize = squareSize * 3;
+    
+    NSInteger counter = 0;
+    
+    for (NSInteger y = 0; y < 6; y++) {
+        for (NSInteger x  = 0; x < 6; x++) {
+            
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            
+            NSInteger dx = (y % 2 == 0) ? 0 : 1;
+            
+            CGFloat tx, ty;
+            CGAffineTransform t;
+            
+            tx = x * plusSize - x * squareSize + dx * squareSize - squareSize;
+            ty = y * plusSize - y * squareSize - plusSize / 2.0;
+
+            t = CGAffineTransformMakeTranslation(tx, ty);
+            
+            [ShapeDrawer drawPlusSignWithSize:squareSize
+                                         fill:fill
+                                       stroke:stroke
+                                  strokeWidth:1
+                                    inContext:self.context
+                               withTransforms:t];
+            
+            if (x == 0) {
+                tx = 4 * plusSize - x * squareSize + dx * squareSize - squareSize;
+                ty = y * plusSize - y * squareSize - plusSize / 2.0;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:1
+                                        inContext:self.context
+                                   withTransforms:t];
+
+            }
+            
+            
+            if (y == 0) {
+                
+                tx = x * plusSize - x * squareSize + dx * squareSize - squareSize;
+                ty = 4 * plusSize - y * squareSize - plusSize / 2;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:1
+                                        inContext:self.context
+                                   withTransforms:t];
+
+            }
+            
+            if (x == 0 && y == 0) {
+                
+                tx = 4 * plusSize - x * squareSize + dx * squareSize - squareSize;
+                ty = 4 * plusSize - y * squareSize - plusSize / 2.0;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:1
+                                        inContext:self.context
+                                   withTransforms:t];
+
+            }
+            
+            counter++;
+        }
+    }
     
 }
 
