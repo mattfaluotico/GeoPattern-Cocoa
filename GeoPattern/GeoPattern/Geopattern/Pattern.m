@@ -602,6 +602,66 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateTriangles {
+    CGFloat scale = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat sideLength = [Graphics mapValue:scale
+                           inRangeWithLower:0
+                              andUpperBound:15
+                   toNewRangeWithLowerBound:15
+                              andUpperBound:80];
+    CGFloat triangleHeight = sideLength / 2 * sqrt(3);
+    
+    NSInteger counter, x, y;
+    counter = 0;
+    
+    for (y = 0; y < 6; y++) {
+        for (x = 0; x < 6; x++) {
+            
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            
+            // style
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            
+            CGAffineTransform r, t;
+            CGFloat rotationInDegs;
+            
+            if (y % 2 == 0) {
+                rotationInDegs = (x % 2 == 0) ? 180 : 0;
+            } else {
+                rotationInDegs = (x % 2 != 0) ? 180 : 0;
+            }
+            
+            t = CGAffineTransformMakeTranslation(x * sideLength * 0.5 - sideLength / 2
+                                                 , triangleHeight * y);
+            
+            r = [Graphics rotate:rotationInDegs aroundPoint:CGPointMake(sideLength / 2, triangleHeight / 2) previousTransform:t];
+            
+            [ShapeDrawer drawTriangleWithSideLength:sideLength
+                                             height:triangleHeight
+                                           withFill:fill
+                                         withStroke:stroke
+                                            atWidth:1
+                                           inConext:self.context
+                                   transformEffects:r];
+            
+            if (x == 0) {
+                t = CGAffineTransformMakeTranslation(6 * sideLength * 0.5 - sideLength / 2
+                                                     , triangleHeight * y);
+                r = [Graphics rotate:rotationInDegs aroundPoint:CGPointMake(sideLength / 2, triangleHeight / 2) previousTransform:t];
+                
+                [ShapeDrawer drawTriangleWithSideLength:sideLength
+                                                 height:triangleHeight
+                                               withFill:fill
+                                             withStroke:stroke
+                                                atWidth:1
+                                               inConext:self.context
+                                       transformEffects:r];
+            }
+            
+            counter++;
+        }
+    }
     
 }
 

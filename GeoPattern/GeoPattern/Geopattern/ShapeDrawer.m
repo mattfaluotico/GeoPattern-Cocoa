@@ -430,4 +430,23 @@
     UIGraphicsPopContext();
 }
 
++ (void)drawTriangleWithSideLength:(CGFloat) sideLength
+                            height:(CGFloat) height
+                           withFill:(UIColor *)fill
+                         withStroke:(UIColor *)stroke
+                            atWidth:(CGFloat)strokeWidth
+                           inConext:(CGContextRef)context
+                   transformEffects:(CGAffineTransform)tranforms {
+    
+    
+    CGFloat haldWidth = sideLength / 2;
+    
+    NSArray *points = @[[NSValue valueWithCGPoint:CGPointMake(haldWidth, 0)],
+                        [NSValue valueWithCGPoint:CGPointMake(sideLength, height)],
+                        [NSValue valueWithCGPoint:CGPointMake(0, height)]
+                        ];
+    
+    [ShapeDrawer drawShapeWithPoints:points withFill:fill withStroke:stroke atWidth:strokeWidth inContext:context transformEffects:tranforms];
+}
+
 @end

@@ -121,7 +121,19 @@
     return CGSizeMake(width, height);
 }
 + (CGSize) sizeForTriangles: (NSDictionary*) options {
-    return CGSizeMake(0,0);
+    
+    NSString *hash = [options objectForKey:kGeoPatternHash];
+    
+    CGFloat scale = [Graphics intFromHex:hash atIndex:0 withLength:1];
+    
+    CGFloat sideLength = [Graphics mapValue:scale
+                           inRangeWithLower:0
+                              andUpperBound:15
+                   toNewRangeWithLowerBound:15
+                              andUpperBound:80];
+    CGFloat triangleHeight = sideLength / 2 * sqrt(3);
+    
+    return CGSizeMake(sideLength * 3, triangleHeight * 6);
 }
 + (CGSize) sizeForSquares: (NSDictionary*) options {
     NSString *hex = [options objectForKey:kGeoPatternHash];
