@@ -267,6 +267,107 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateXes {
+    CGFloat squareSize = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:25];
+    CGFloat xSize = squareSize * 3 * 0.943;
+    
+    CGFloat tx,ty,dy;
+    CGAffineTransform t, r;
+    NSInteger counter = 0, x , y;
+    
+    for (y = 0; y < 6; y++) {
+        for (x = 0; x < 6; x++) {
+            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Graphics opacity:val];
+            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [UIColor clearColor];
+            
+            dy = x % 2 == 0 ? y * xSize - xSize * 0.5 : y * xSize - xSize * 0.5 + xSize / 4;
+            
+            // draw
+            
+            tx = x * xSize / 2 - xSize / 2,
+            ty = dy - y * xSize / 2;
+            
+            t = CGAffineTransformMakeTranslation(tx, ty);
+            r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+            
+            [ShapeDrawer drawPlusSignWithSize:squareSize
+                                         fill:fill
+                                       stroke:stroke
+                                  strokeWidth:0
+                                    inContext:self.context
+                               withTransforms:r];
+            
+            if (x == 0) {
+                tx = 6 * xSize / 2 - xSize / 2,
+                ty = dy - y * xSize / 2;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:0
+                                        inContext:self.context
+                                   withTransforms:r];
+            }
+            
+            if (y == 0) {
+                dy = (x % 2 == 0) ? 
+                    6 * xSize - xSize / 2 :
+                    6 * xSize - xSize / 2 + xSize / 4;
+                
+                tx = x * xSize / 2 - xSize / 2,
+                ty = dy - 6 * xSize / 2;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:0
+                                        inContext:self.context
+                                   withTransforms:r];
+            
+            }
+        
+            
+            if (y == 5) {
+                tx = x * xSize / 2 - xSize / 2,
+                ty = dy - 11 * xSize / 2;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:0
+                                        inContext:self.context
+                                   withTransforms:r];
+            }
+            
+            if (x == 0 && y == 0) {
+             
+                tx = 6 * xSize / 2 - xSize / 2,
+                ty = dy - 6 * xSize / 2;
+                
+                t = CGAffineTransformMakeTranslation(tx, ty);
+                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                
+                [ShapeDrawer drawPlusSignWithSize:squareSize
+                                             fill:fill
+                                           stroke:stroke
+                                      strokeWidth:0
+                                        inContext:self.context
+                                   withTransforms:r];
+            }
+            
+            counter++;
+        }
+    }
     
 }
 

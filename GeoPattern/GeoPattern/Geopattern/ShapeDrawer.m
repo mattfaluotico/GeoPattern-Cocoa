@@ -399,9 +399,18 @@
     
     // drawing rectangle 1
     UIBezierPath *path  = [UIBezierPath bezierPathWithRect:rect1];
-    UIBezierPath *path2 = [UIBezierPath bezierPathWithRect:rect2];
+    
+    CGPoint start = CGPointMake(rect2.origin.x, rect2.origin.y);
+    CGPoint first = CGPointMake(rect2.origin.x + rect2.size.width, rect2.origin.y);
+    CGPoint second = CGPointMake(rect2.origin.x + rect2.size.width, rect2.origin.y + rect2.size.height);
+    CGPoint third = CGPointMake(rect2.origin.x, rect2.origin.y + rect2.size.height);
+    
     [path closePath];
-    [path2 closePath];
+    [path moveToPoint:start];
+    [path addLineToPoint:first];
+    [path addLineToPoint:second];
+    [path addLineToPoint:third];
+    [path closePath];
     
     // drawign rectanlge 2
     
@@ -410,15 +419,13 @@
     
     if (strokeWidth > 0) {
         path.lineWidth = strokeWidth;
-        path2.lineWidth = strokeWidth;
+//        path2.lineWidth = strokeWidth;
     }
     
     [path applyTransform:transforms];
-    [path2 applyTransform:transforms];
+//    [path2 applyTransform:transforms];
     [path fill];
-    [path2 fill];
-    [path stroke];
-    [path2 stroke];
+//    [path2 fill];
     
     UIGraphicsPopContext();
 }
