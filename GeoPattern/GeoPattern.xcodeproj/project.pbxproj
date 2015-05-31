@@ -162,9 +162,9 @@
 			isa = PBXGroup;
 			children = (
 				AC41D9181B02FAEC003C5FE2 /* GeoPatterns.h */,
-				AC1333D31AFC3FE700C4190A /* Helpers */,
 				AC1333C81AFC229300C4190A /* GeoPatternView.h */,
 				AC1333C91AFC229300C4190A /* GeoPatternView.m */,
+				AC1333D31AFC3FE700C4190A /* Helpers */,
 			);
 			name = GeoPattern;
 			sourceTree = "<group>";
