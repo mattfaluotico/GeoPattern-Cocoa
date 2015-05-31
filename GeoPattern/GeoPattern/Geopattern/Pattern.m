@@ -105,6 +105,26 @@
     }
 }
 
++ (BOOL) shouldUseImagingMode: (NSDictionary *) options {
+    
+    PATTERN pattern;
+    
+    if ([options objectForKey:kGeoPatternType]) {
+        pattern = [[options objectForKey:kGeoPatternType] integerValue];
+    } else {
+        NSString *hash = [options objectForKeyedSubscript:kGeoPatternHash];
+        pattern = [Helpers intFromHex:hash atIndex:20 withLength:1];
+    }
+    
+    return (
+            pattern == GeoPatternTriangles ||
+            pattern == GeoPatternXes ||
+            pattern == GeoPatternTessellation ||
+            pattern == GeoPatternDiamonds
+            );
+    
+}
+
 + (NSDictionary*) defaults {
     return @{
              kGeoPatternBaseColor : [UIColor redColor]
@@ -1238,7 +1258,7 @@ static inline double radians (double degrees)  {
     
 }
 
-#pragma mark - Shape Point Helpers
+#pragma mark - Mosaic Triangle Helpers
 
 - (void) doInnerTrianglesX: (NSInteger) x y: (NSInteger) y size: (CGFloat) size andVal: (NSArray *) values {
     NSInteger val = [[values objectAtIndex:0] integerValue];

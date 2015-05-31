@@ -168,6 +168,7 @@
                           andUpperBound:15
                toNewRangeWithLowerBound:10
                           andUpperBound:50];
+    
     return CGSizeMake(width * 6, height * 3);
 }
 + (CGSize) sizeForTessellation: (NSDictionary*) options {
@@ -210,5 +211,9 @@
     return CGSizeMake(width * 6, height * 6);
     
 }
+
+// TODO: Add all image mode shapes
+
+
 
 @end

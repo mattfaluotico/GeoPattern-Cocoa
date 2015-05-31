@@ -31,6 +31,6 @@
 
 // Use imaging mode of CGPattern Mode
 
-+ (BOOL) shouldUseImagingMode;
+
 
 @end
