@@ -35,9 +35,7 @@
     
     NSString *s = [NSString stringWithFormat:@"%@%@", textField.text, string];
     
-    [self.goeview generateFromString:s withOptions:@{
-                                                     kGeoPatternType : [NSNumber numberWithInteger :GeoPatternDiamonds]
-                                                     }];
+    [self.goeview generateFromString:s];
     
     return YES;
 }

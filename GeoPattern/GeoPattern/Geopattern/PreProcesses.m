@@ -48,7 +48,7 @@
 
     CGFloat xSize = squareSize * 3 * 0.943;
     
-    return CGSizeMake(xSize * 5, xSize * 5);
+    return CGSizeMake(xSize * 3, xSize * 3);
 }
 + (CGSize) sizeForSinewaves: (NSDictionary*) options {
     NSInteger period, amplitude, wavelength;
@@ -208,12 +208,8 @@
     
     CGFloat width = [Helpers mapValue:[Helpers intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:30 andUpperBound:80];
     CGFloat height = width;
-    return CGSizeMake(width * 6, height * 6);
+    return CGSizeMake(width * 6, height * 6 * 0.66);
     
 }
-
-// TODO: Add all image mode shapes
-
-
 
 @end
