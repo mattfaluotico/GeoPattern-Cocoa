@@ -8,7 +8,7 @@
 
 #import "GeoPatternView.h"
 #import "GeoPatternConstants.h"
-#import "Graphics.h"
+#import "Helpers.h"
 
 @interface GeoPatternView()
 @end
@@ -40,21 +40,25 @@
 
 - (void) drawRect: (CGRect)rect {
     
-    
     if (self.string || self.options) {
-        [self generateAtRect:rect];
+        [self generateAtRectUsingCGPatternMode:rect];
+    } else {
+        [super drawRect:rect];
     }
 
-    
 }
 
 #pragma mark - Primary generation method
 
 - (void) generateAtRect: (CGRect) rect {
+ 
+}
+
+- (void) generateAtRectUsingCGPatternMode: (CGRect) rect {
     // Adds String and Hash to the options dictionary
-    NSMutableDictionary *optionsWithHash = [self.options mutableCopy];
-    [optionsWithHash setObject:self.string forKey:kGeoPatternString];
-    [optionsWithHash setObject:[Graphics generateHash:self.string] forKey:kGeoPatternHash];
+    NSMutableDictionary *options = [self.options mutableCopy];
+    [options setObject:self.string forKey:kGeoPatternString];
+    [options setObject:[Helpers generateHash:self.string] forKey:kGeoPatternHash];
     
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -63,7 +67,7 @@
     static const CGPatternCallbacks callbacks = { 0, &DrawPattern, NULL };
     
     // Set the background color
-    UIColor *backgroundColor = [Graphics backgroundColor:optionsWithHash];
+    UIColor *backgroundColor = [Helpers backgroundColor:options];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
     
@@ -74,12 +78,12 @@
     CGColorSpaceRelease(patternSpace);
     
     // Get the size
-    CGSize size = [Pattern calculateSizeFromOptions:optionsWithHash];
-    [optionsWithHash setObject:[NSValue valueWithCGSize:size] forKey:@"size"];
+    CGSize size = [Pattern calculateSizeFromOptions:options];
+    [options setObject:[NSValue valueWithCGSize:size] forKey:@"size"];
 
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter
-    void *o = (void*)CFBridgingRetain(optionsWithHash);
+    void *o = (void*)CFBridgingRetain(options);
     
     
     
@@ -96,6 +100,10 @@
     CGPatternRelease(pattern);
     CGContextFillRect(context, self.bounds);
     CGContextRestoreGState(context);
+}
+
+- (void) generateAtRectUsingImageMode: (CGRect) rect {
+    
 }
 
 #pragma mark - Handling Callbacks

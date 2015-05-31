@@ -10,7 +10,6 @@
 #import "UIColor+Conversions.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "GeoPatternConstants.h"
-#import <math.h>
 
 @implementation Graphics
 
@@ -84,10 +83,6 @@
 
 #pragma mark - Process Helpers
 
-static inline double radians (double degrees)  {
-    return degrees * M_PI/180;
-}
-
 // Map value in the range lower and upper, to the new range (newUpper, newLower)
 + (CGFloat) mapValue: (CGFloat) value
         inRangeWithLower: (NSInteger) lower 
@@ -123,13 +118,6 @@ toNewRangeWithLowerBound: (double) newLower
     [scanner scanHexInt:&result];
     
     return (NSInteger)result;
-}
-
-+ (CGAffineTransform) rotate: (CGFloat) degrees aroundPoint: (CGPoint) point previousTransform: (CGAffineTransform) t {
-    CGAffineTransform tr1 = CGAffineTransformTranslate(t, point.x, point.y);
-    CGAffineTransform r = CGAffineTransformRotate(tr1, radians(degrees));
-    CGAffineTransform tr2 = CGAffineTransformTranslate(r, -point.x, -point.y);
-    return tr2;
 }
 
 #pragma mark - Defaults

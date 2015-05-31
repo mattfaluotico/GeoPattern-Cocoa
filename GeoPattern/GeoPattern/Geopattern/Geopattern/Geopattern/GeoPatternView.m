@@ -40,25 +40,21 @@
 
 - (void) drawRect: (CGRect)rect {
     
+    
     if (self.string || self.options) {
-        [self generateAtRectUsingCGPatternMode:rect];
-    } else {
-        [super drawRect:rect];
+        [self generateAtRect:rect];
     }
 
+    
 }
 
 #pragma mark - Primary generation method
 
 - (void) generateAtRect: (CGRect) rect {
- 
-}
-
-- (void) generateAtRectUsingCGPatternMode: (CGRect) rect {
     // Adds String and Hash to the options dictionary
-    NSMutableDictionary *options = [self.options mutableCopy];
-    [options setObject:self.string forKey:kGeoPatternString];
-    [options setObject:[Graphics generateHash:self.string] forKey:kGeoPatternHash];
+    NSMutableDictionary *optionsWithHash = [self.options mutableCopy];
+    [optionsWithHash setObject:self.string forKey:kGeoPatternString];
+    [optionsWithHash setObject:[Graphics generateHash:self.string] forKey:kGeoPatternHash];
     
     // Gathering context
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -67,7 +63,7 @@
     static const CGPatternCallbacks callbacks = { 0, &DrawPattern, NULL };
     
     // Set the background color
-    UIColor *backgroundColor = [Graphics backgroundColor:options];
+    UIColor *backgroundColor = [Graphics backgroundColor:optionsWithHash];
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
     
@@ -78,12 +74,12 @@
     CGColorSpaceRelease(patternSpace);
     
     // Get the size
-    CGSize size = [Pattern calculateSizeFromOptions:options];
-    [options setObject:[NSValue valueWithCGSize:size] forKey:@"size"];
-
+    CGSize size = [Pattern calculateSizeFromOptions:optionsWithHash];
+    [optionsWithHash setObject:[NSValue valueWithCGSize:size] forKey:@"size"];
+    
     // Passes the Objective-C NSDictionary to a void pointe
     // allowing it to be passed as a callback parameter
-    void *o = (void*)CFBridgingRetain(options);
+    void *o = (void*)CFBridgingRetain(optionsWithHash);
     
     
     
@@ -92,7 +88,7 @@
                                            CGAffineTransformIdentity,
                                            size.width,
                                            size.height,
-                                           kCGPatternTilingNoDistortion,
+                                           kCGPatternTilingConstantSpacing,
                                            true,
                                            &callbacks);
     CGFloat alpha = 1.0;
@@ -100,10 +96,6 @@
     CGPatternRelease(pattern);
     CGContextFillRect(context, self.bounds);
     CGContextRestoreGState(context);
-}
-
-- (void) generateAtRectUsingImageMode: (CGRect) rect {
-    
 }
 
 #pragma mark - Handling Callbacks

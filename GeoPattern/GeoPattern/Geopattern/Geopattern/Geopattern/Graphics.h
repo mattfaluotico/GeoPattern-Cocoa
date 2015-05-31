@@ -31,9 +31,6 @@ toNewRangeWithLowerBound: (double) newLower
 
 + (NSInteger) intFromHex: (NSString *) hash atIndex: (NSInteger) index withLength: (NSInteger) length;
 
-
-+ (CGAffineTransform) rotate: (CGFloat) degrees aroundPoint: (CGPoint) point previousTransform: (CGAffineTransform) t;
-
 #pragma mark - Defaults
 
 + (UIColor*) FILL_COLOR_DARK;

@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 MF. All rights reserved.
 //
 
-// TODO: rename to HELPER
 
-#import "Graphics.h"
+
+#import "Helpers.h"
 #import "UIColor+Conversions.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "GeoPatternConstants.h"
 #import <math.h>
 
-@implementation Graphics
+@implementation Helpers
 
 + (NSString *) generateHash: (NSString *) str {
     const char *cStr = [str UTF8String];
@@ -35,15 +35,15 @@
 #pragma mark - Color Helpers
 
 + (UIColor *) fillColor: (NSInteger) value {
-    return (value % 2 == 0) ? [Graphics FILL_COLOR_LIGHT] : [Graphics FILL_COLOR_DARK];
+    return (value % 2 == 0) ? [Helpers FILL_COLOR_LIGHT] : [Helpers FILL_COLOR_DARK];
 }
 
 + (CGFloat) opacity: (CGFloat) value {
-    return [Graphics mapValue:value
+    return [Helpers mapValue:value
                  inRangeWithLower:0
                 andUpperBound:15
-     toNewRangeWithLowerBound:[Graphics OPACITY_MIN]
-                andUpperBound:[Graphics OPACITY_MAX]];
+     toNewRangeWithLowerBound:[Helpers OPACITY_MIN]
+                andUpperBound:[Helpers OPACITY_MAX]];
 }
 
 + (UIColor *) backgroundColor: (NSDictionary *) options {
@@ -52,16 +52,16 @@
     
     if (!returnedColor) {
         NSString *hash = [options objectForKey:kGeoPatternHash];
-        NSInteger i = [Graphics intFromHex:hash atIndex:14 withLength:3];
-        NSInteger hueOffset = [Graphics
+        NSInteger i = [Helpers intFromHex:hash atIndex:14 withLength:3];
+        NSInteger hueOffset = [Helpers
                                mapValue:i
                                inRangeWithLower:0
                                andUpperBound:4095
                                toNewRangeWithLowerBound:0
                                andUpperBound:359];
-        NSInteger satOffset = [Graphics intFromHex:hash atIndex:17 withLength:1];
+        NSInteger satOffset = [Helpers intFromHex:hash atIndex:17 withLength:1];
         
-        UIColor *basedOptionColor = [Graphics BASE_COLOR];
+        UIColor *basedOptionColor = [Helpers BASE_COLOR];
         
         if ([options objectForKey:kGeoPatternBaseColor]) {
             basedOptionColor = [options objectForKey:kGeoPatternBaseColor];

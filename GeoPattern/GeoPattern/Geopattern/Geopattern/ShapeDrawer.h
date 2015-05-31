@@ -43,6 +43,15 @@
                       atWidth: (CGFloat) strokeWith
                     inContext: (CGContextRef) context;
 
+#pragma mark - Chevron 
+
++ (void) drawChevronWithWidth: (CGFloat) width
+                   withHeight: (CGFloat) height
+                     withFill: (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWidth
+                     inConext: (CGContextRef) context;
+
 #pragma mark - Generic Shape Drawing
 
 + (void) drawShapeWithPoints: (NSArray *) points
@@ -50,6 +59,7 @@
                    withStroke: (UIColor *) stroke
                       atWidth: (CGFloat) strokeWith
                     inContext: (CGContextRef) context;
+
 
 #pragma mark - Shapes that take Tranformation effects
 
@@ -61,11 +71,80 @@
                     inContext: (CGContextRef) context
              transformEffects: (CGAffineTransform)tranforms;
 
++ (void) drawChevronWithWidth: (CGFloat) width
+                   withHeight: (CGFloat) height
+                     withFill: (UIColor *) fill
+                   withStroke: (UIColor *) stroke
+                      atWidth: (CGFloat) strokeWidth
+                     inConext: (CGContextRef) context
+             transformEffects: (CGAffineTransform)tranforms;
+
 + (void) drawShapeWithPoints: (NSArray *) points
                    withFill : (UIColor *) fill
                   withStroke: (UIColor *) stroke
                      atWidth: (CGFloat) strokeWith
                    inContext: (CGContextRef) context
              transformEffects: (CGAffineTransform)tranforms;
+
++ (void)drawRightTriangleWithLength:(CGFloat)length
+                      withFill:(UIColor *)fill
+                    withStroke:(UIColor *)stroke
+                       atWidth:(CGFloat)strokeWidth
+                      inConext:(CGContextRef)context
+              transformEffects:(CGAffineTransform)tranforms;
+
++ (void)drawRotatedTriangleWithWidth: (CGFloat) width
+                      withSideLength: (CGFloat) sideLength
+                            withFill:(UIColor *)fill
+                          withStroke:(UIColor *)stroke
+                             atWidth:(CGFloat)strokeWidth
+                            inConext:(CGContextRef)context
+                    transformEffects:(CGAffineTransform)tranforms;
+
++ (void) drawRectangle: (CGRect) rect
+              withFill: (UIColor *) fill
+            withStroke: (UIColor *) stroke
+               atWidth: (CGFloat) width
+             inContext: (CGContextRef) context
+      transformEffects:(CGAffineTransform)tranforms;
+
++ (void) drawWaveWithPeriod: (NSInteger) period
+                  amplitude: (NSInteger) amplitude
+                  waveWidth: (NSInteger) waveWidth
+                    xOffset: (CGFloat) xOffset
+                       fill: (UIColor *) fill
+                     stroke: (UIColor *) stroke
+                strokeWidth: (CGFloat) strokeWidth
+                  inContext: (CGContextRef) context
+             withTransforms: (CGAffineTransform) transforms;
+
++ (void)drawOctogonWithSize:(CGFloat)size
+                   withFill:(UIColor *)fill
+                 withStroke:(UIColor *)stroke
+                    atWidth:(CGFloat)strokeWidth
+                   inConext:(CGContextRef)context
+           transformEffects:(CGAffineTransform)tranforms;
+
++ (void)drawHexagonWithSize:(CGFloat)size
+                   withFill:(UIColor *)fill
+                 withStroke:(UIColor *)stroke
+                    atWidth:(CGFloat)strokeWidth
+                   inConext:(CGContextRef)context
+           transformEffects:(CGAffineTransform)tranforms;
+
++ (void) drawPlusSignWithSize: (CGFloat) size
+                         fill: (UIColor *) fill
+                       stroke: (UIColor *) stroke
+                  strokeWidth: (CGFloat) strokeWidth
+                    inContext: (CGContextRef) context
+               withTransforms: (CGAffineTransform) transforms;
+
++ (void)drawTriangleWithSideLength:(CGFloat) sideLength
+                            height:(CGFloat) height
+                          withFill:(UIColor *)fill
+                        withStroke:(UIColor *)stroke
+                           atWidth:(CGFloat)strokeWidth
+                          inConext:(CGContextRef)context
+                  transformEffects:(CGAffineTransform)tranforms;
 
 @end

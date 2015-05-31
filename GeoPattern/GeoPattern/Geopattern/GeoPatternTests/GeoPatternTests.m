@@ -11,7 +11,7 @@
 
 // --
 
-#import "Helpers.h"
+#import "Graphics.h"
 #import "Pattern.h"
 #import "UIColor+Conversions.h"
 
@@ -48,7 +48,7 @@
 - (void) testGenerateHash {
     
     NSString *me = @"Matt";
-    NSString *hash = [Helpers generateHash:me];
+    NSString *hash = [Graphics generateHash:me];
     // #0f9fe690f38da67968280971584cf9c16541f07b From Jason Longs script
     
     XCTAssert([hash isEqualToString:@"0f9fe690f38da67968280971584cf9c16541f07b"], @"Matches Jason Long value");
@@ -56,7 +56,7 @@
 
 - (void) testGenerateHash2 {
     
-    NSString *hash = [Helpers generateHash:@"Matt Faluotico"];
+    NSString *hash = [Graphics generateHash:@"Matt Faluotico"];
     // #6e6c409873b65d686d9262e34ee6281c722bc786 From Jason Longs script
     
     XCTAssert([hash isEqualToString:@"6e6c409873b65d686d9262e34ee6281c722bc786"], @"Matches Jason Long value");

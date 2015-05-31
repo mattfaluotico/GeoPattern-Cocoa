@@ -7,10 +7,10 @@
 //
 
 #import "Pattern.h"
-#import "Graphics.h"
+#import "Helpers.h"
 #import "GeoPatternConstants.h"
 #import "ShapeDrawer.h"
-#import "SizeCalculator.h"
+#import "PreProcesses.h"
 
 @interface Pattern()
 @property CGContextRef context;
@@ -50,7 +50,7 @@
     if ([self.options objectForKey:kGeoPatternType]) {
         pattern = [[self.options objectForKey:kGeoPatternType] integerValue];
     } else {
-        pattern = [Graphics intFromHex:self.hashValue atIndex:20 withLength:1];
+        pattern = [Helpers intFromHex:self.hashValue atIndex:20 withLength:1];
     }
     
     switch (pattern) {
@@ -81,27 +81,27 @@
         pattern = [[options objectForKey:kGeoPatternType] integerValue];
     } else {
         NSString *hash = [options objectForKeyedSubscript:kGeoPatternHash];
-        pattern = [Graphics intFromHex:hash atIndex:20 withLength:1];
+        pattern = [Helpers intFromHex:hash atIndex:20 withLength:1];
     }
     
     switch (pattern) {
-        case GeoPatternOctogons          : return [SizeCalculator sizeForOctogons: options]; break;
-        case GeoPatternOverlappingcircles: return [SizeCalculator sizeForOverlappingcircles: options]; break;
-        case GeoPatternPlussigns         : return [SizeCalculator sizeForPlussigns: options]; break;
-        case GeoPatternXes               : return [SizeCalculator sizeForXes: options]; break;
-        case GeoPatternSinewaves         : return [SizeCalculator sizeForSinewaves: options]; break;
-        case GeoPatternHexagons          : return [SizeCalculator sizeForHexagons: options]; break;
-        case GeoPatternOverlappingrings  : return [SizeCalculator sizeForOverlappingrings: options]; break;
-        case GeoPatternPlaid             : return [SizeCalculator sizeForPlaid: options]; break;
-        case GeoPatternTriangles         : return [SizeCalculator sizeForTriangles: options]; break;
-        case GeoPatternSquares           : return [SizeCalculator sizeForSquares: options]; break;
-        case GeoPatternConcentriccircles : return [SizeCalculator sizeForConcentriccircles: options]; break;
-        case GeoPatternDiamonds          : return [SizeCalculator sizeForDiamonds: options]; break;
-        case GeoPatternTessellation      : return [SizeCalculator sizeForTessellation: options]; break;
-        case GeoPatternNestedsquares     : return [SizeCalculator sizeForNestedsquares: options]; break;
-        case GeoPatternMosaicsquares     : return [SizeCalculator sizeForMosaicsquares: options]; break;
-        case GeoPatternChevrons          : return [SizeCalculator sizeForChevrons: options]; break;
-        default                          : return [SizeCalculator sizeForSquares: options];
+        case GeoPatternOctogons          : return [PreProcesses sizeForOctogons: options]; break;
+        case GeoPatternOverlappingcircles: return [PreProcesses sizeForOverlappingcircles: options]; break;
+        case GeoPatternPlussigns         : return [PreProcesses sizeForPlussigns: options]; break;
+        case GeoPatternXes               : return [PreProcesses sizeForXes: options]; break;
+        case GeoPatternSinewaves         : return [PreProcesses sizeForSinewaves: options]; break;
+        case GeoPatternHexagons          : return [PreProcesses sizeForHexagons: options]; break;
+        case GeoPatternOverlappingrings  : return [PreProcesses sizeForOverlappingrings: options]; break;
+        case GeoPatternPlaid             : return [PreProcesses sizeForPlaid: options]; break;
+        case GeoPatternTriangles         : return [PreProcesses sizeForTriangles: options]; break;
+        case GeoPatternSquares           : return [PreProcesses sizeForSquares: options]; break;
+        case GeoPatternConcentriccircles : return [PreProcesses sizeForConcentriccircles: options]; break;
+        case GeoPatternDiamonds          : return [PreProcesses sizeForDiamonds: options]; break;
+        case GeoPatternTessellation      : return [PreProcesses sizeForTessellation: options]; break;
+        case GeoPatternNestedsquares     : return [PreProcesses sizeForNestedsquares: options]; break;
+        case GeoPatternMosaicsquares     : return [PreProcesses sizeForMosaicsquares: options]; break;
+        case GeoPatternChevrons          : return [PreProcesses sizeForChevrons: options]; break;
+        default                          : return [PreProcesses sizeForSquares: options];
     }
 }
 
@@ -119,16 +119,16 @@ static inline double radians (double degrees)  {
 
 - (void) generateOctogons {
     
-    CGFloat size = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    CGFloat size = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
     NSInteger counter = 0, x = 0, y = 0;
     
     for (y = 0;y< 6; y++) {
         for (x = 0;x<6; x++) {
         
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
             
             CGAffineTransform t = CGAffineTransformMakeTranslation(x * size, y * size);
             
@@ -145,18 +145,18 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateOverlappingcircles {
-    NSInteger hex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    NSInteger hex = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
     CGFloat scale = hex;
-    CGFloat diameter = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:25 andUpperBound:200];
+    CGFloat diameter = [Helpers mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:25 andUpperBound:200];
     CGFloat radius = diameter / 2.0;
     
     NSInteger counter = 0, x = 0, y =0;
     
     for (y=0; y<6; y++) {
         for (x = 0; x <6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
             
             CGPoint center = CGPointMake(x * radius, y *radius);
             [ShapeDrawer drawCircleWithCenter:center withRadius:radius withFill:fill withStroke:[UIColor clearColor] atWidth:0 inContext:self.context];
@@ -182,7 +182,7 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generatePlussigns {
-    CGFloat squareSize = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:25];
+    CGFloat squareSize = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:25];
     CGFloat plusSize = squareSize * 3;
     
     NSInteger counter = 0;
@@ -190,10 +190,10 @@ static inline double radians (double degrees)  {
     for (NSInteger y = 0; y < 6; y++) {
         for (NSInteger x  = 0; x < 6; x++) {
             
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
             
             NSInteger dx = (y % 2 == 0) ? 0 : 1;
             
@@ -267,7 +267,7 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateXes {
-    CGFloat squareSize = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:25];
+    CGFloat squareSize = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:25];
     CGFloat xSize = squareSize * 3 * 0.943;
     
     CGFloat tx,ty,dy;
@@ -276,9 +276,9 @@ static inline double radians (double degrees)  {
     
     for (y = 0; y < 6; y++) {
         for (x = 0; x < 6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
             UIColor *stroke = [UIColor clearColor];
             
             dy = x % 2 == 0 ? y * xSize - xSize * 0.5 : y * xSize - xSize * 0.5 + xSize / 4;
@@ -289,7 +289,7 @@ static inline double radians (double degrees)  {
             ty = dy - y * xSize / 2;
             
             t = CGAffineTransformMakeTranslation(tx, ty);
-            r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+            r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
             
             [ShapeDrawer drawPlusSignWithSize:squareSize
                                          fill:fill
@@ -303,7 +303,7 @@ static inline double radians (double degrees)  {
                 ty = dy - y * xSize / 2;
                 
                 t = CGAffineTransformMakeTranslation(tx, ty);
-                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
                 
                 [ShapeDrawer drawPlusSignWithSize:squareSize
                                              fill:fill
@@ -322,7 +322,7 @@ static inline double radians (double degrees)  {
                 ty = dy - 6 * xSize / 2;
                 
                 t = CGAffineTransformMakeTranslation(tx, ty);
-                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
                 
                 [ShapeDrawer drawPlusSignWithSize:squareSize
                                              fill:fill
@@ -339,7 +339,7 @@ static inline double radians (double degrees)  {
                 ty = dy - 11 * xSize / 2;
                 
                 t = CGAffineTransformMakeTranslation(tx, ty);
-                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
                 
                 [ShapeDrawer drawPlusSignWithSize:squareSize
                                              fill:fill
@@ -355,7 +355,7 @@ static inline double radians (double degrees)  {
                 ty = dy - 6 * xSize / 2;
                 
                 t = CGAffineTransformMakeTranslation(tx, ty);
-                r = [Graphics rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
+                r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
                 
                 [ShapeDrawer drawPlusSignWithSize:squareSize
                                              fill:fill
@@ -374,17 +374,17 @@ static inline double radians (double degrees)  {
 - (void) generateSinewaves {
     
     NSInteger period, amplitude, waveWidth;
-    period = floor([Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
+    period = floor([Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1]
                      inRangeWithLower:0
                         andUpperBound:15
              toNewRangeWithLowerBound:100
                         andUpperBound:400]);
-    amplitude = floor([Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:1 withLength:1]
+    amplitude = floor([Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:1 withLength:1]
                      inRangeWithLower:0
                         andUpperBound:15
              toNewRangeWithLowerBound:30
                         andUpperBound:100]);
-    waveWidth = floor([Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:2 withLength:1]
+    waveWidth = floor([Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:2 withLength:1]
                      inRangeWithLower:0
                         andUpperBound:15
              toNewRangeWithLowerBound:3
@@ -397,9 +397,9 @@ static inline double radians (double degrees)  {
     
     for (i=0;i < 36; i++) {
         
-        NSInteger val = [Graphics intFromHex:self.hashValue atIndex:i withLength:1];
-        CGFloat opacity = [Graphics opacity:val];
-        UIColor *stroke = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+        NSInteger val = [Helpers intFromHex:self.hashValue atIndex:i withLength:1];
+        CGFloat opacity = [Helpers opacity:val];
+        UIColor *stroke = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
         UIColor *fill = [UIColor clearColor];
         CGFloat strokeWidth = waveWidth;
         CGFloat xOffset = (period / 4) * 0.7;
@@ -417,8 +417,8 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateHexagons {
-    CGFloat scale = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
-    CGFloat size = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:8 andUpperBound:60];
+    CGFloat scale = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat size = [Helpers mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:8 andUpperBound:60];
     CGFloat hexHeight = size * sqrt(3);
     CGFloat hexWidth = size * 2;
     
@@ -429,11 +429,11 @@ static inline double radians (double degrees)  {
     for (y = 0;y< 6; y++) {
         for (x = 0;x<6; x++) {
             
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
             dy = (x % 2 == 0)? (y * hexHeight) : (y * hexHeight + (hexHeight / 2));
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
             
             CGAffineTransform t = CGAffineTransformMakeTranslation(x * size * 1.5 - hexWidth / 2,
                                                                    dy - hexHeight / 2);
@@ -488,18 +488,18 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateOverlappingrings {
-    NSInteger hex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    NSInteger hex = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
     CGFloat scale = hex;
-    CGFloat ringSize = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    CGFloat ringSize = [Helpers mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
     CGFloat strokeWidth = ringSize / 4.0;
     
     NSInteger counter = 0, x,y;
     
     for (y = 0; y <6; y++) {
         for (x=0;x<6;x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *stroke = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *stroke = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
             UIColor *fill = [UIColor clearColor];
             
             CGPoint center = CGPointMake(x * ringSize, y * ringSize);
@@ -566,11 +566,11 @@ static inline double radians (double degrees)  {
     
     
     while (counter < 36) {
-        space = [Graphics intFromHex:hex atIndex:counter withLength:1];
+        space = [Helpers intFromHex:hex atIndex:counter withLength:1];
         height += (space + 5);
-        val = [Graphics intFromHex:hex atIndex:counter + 1 withLength:1];
-        CGFloat opacity = [Graphics opacity:val];
-        UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+        val = [Helpers intFromHex:hex atIndex:counter + 1 withLength:1];
+        CGFloat opacity = [Helpers opacity:val];
+        UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
         NSInteger stripeHeight = val + 5;
 
         CGRect rect = CGRectMake(0, height, size.width, stripeHeight);
@@ -584,11 +584,11 @@ static inline double radians (double degrees)  {
     counter = 0;
     
     while (counter < 36) {
-        space = [Graphics intFromHex:hex atIndex:counter withLength:1];
+        space = [Helpers intFromHex:hex atIndex:counter withLength:1];
         width += (space + 5);
-        val = [Graphics intFromHex:hex atIndex:counter + 1 withLength:1];
-        CGFloat opacity = [Graphics opacity:val];
-        UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+        val = [Helpers intFromHex:hex atIndex:counter + 1 withLength:1];
+        CGFloat opacity = [Helpers opacity:val];
+        UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
         NSInteger stripeWidth = val + 5;
         
         CGRect rect = CGRectMake(width, 0, stripeWidth, size.height);
@@ -602,8 +602,8 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateTriangles {
-    CGFloat scale = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
-    CGFloat sideLength = [Graphics mapValue:scale
+    CGFloat scale = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat sideLength = [Helpers mapValue:scale
                            inRangeWithLower:0
                               andUpperBound:15
                    toNewRangeWithLowerBound:15
@@ -616,12 +616,12 @@ static inline double radians (double degrees)  {
     for (y = 0; y < 6; y++) {
         for (x = 0; x < 6; x++) {
             
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
             
             // style
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
             
             CGAffineTransform r, t;
             CGFloat rotationInDegs;
@@ -635,7 +635,7 @@ static inline double radians (double degrees)  {
             t = CGAffineTransformMakeTranslation(x * sideLength * 0.5 - sideLength / 2
                                                  , triangleHeight * y);
             
-            r = [Graphics rotate:rotationInDegs aroundPoint:CGPointMake(sideLength / 2, triangleHeight / 2) previousTransform:t];
+            r = [Helpers rotate:rotationInDegs aroundPoint:CGPointMake(sideLength / 2, triangleHeight / 2) previousTransform:t];
             
             [ShapeDrawer drawTriangleWithSideLength:sideLength
                                              height:triangleHeight
@@ -648,7 +648,7 @@ static inline double radians (double degrees)  {
             if (x == 0) {
                 t = CGAffineTransformMakeTranslation(6 * sideLength * 0.5 - sideLength / 2
                                                      , triangleHeight * y);
-                r = [Graphics rotate:rotationInDegs aroundPoint:CGPointMake(sideLength / 2, triangleHeight / 2) previousTransform:t];
+                r = [Helpers rotate:rotationInDegs aroundPoint:CGPointMake(sideLength / 2, triangleHeight / 2) previousTransform:t];
                 
                 [ShapeDrawer drawTriangleWithSideLength:sideLength
                                                  height:triangleHeight
@@ -667,8 +667,8 @@ static inline double radians (double degrees)  {
 
 - (void) generateSquares {
     
-    NSInteger fromHex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
-    double squareSize = [Graphics mapValue:fromHex
+    NSInteger fromHex = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
+    double squareSize = [Helpers mapValue:fromHex
                           inRangeWithLower:0
                              andUpperBound:15
                   toNewRangeWithLowerBound:10
@@ -680,12 +680,12 @@ static inline double radians (double degrees)  {
     
     for (y = 0; y < 6; y++) {
         for (x = 0; x < 6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fillColor = [Graphics fillColor:val];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fillColor = [Helpers fillColor:val];
             
             UIColor *fillOpacity = [fillColor colorWithAlphaComponent:opacity];
-            UIColor *strokeColor = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            UIColor *strokeColor = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
             CGRect rect = CGRectMake(x * squareSize, y * squareSize, squareSize, squareSize);
             
             [ShapeDrawer drawRectangle:rect withFill:fillOpacity withStroke:strokeColor atWidth: 1 inContext:self.context];
@@ -698,18 +698,18 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateConcentriccircles {
-    NSInteger hex = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
+    NSInteger hex = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
     CGFloat scale = hex;
-    CGFloat ringSize = [Graphics mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
+    CGFloat ringSize = [Helpers mapValue:scale inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
     CGFloat strokeWidth = ringSize / 5.0;
     
     NSInteger counter = 0, x = 0, y =0;
     
     for (y = 0; y < 6; y++) {
         for (x = 0; x < 6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *stroke = [Graphics fillColor:val];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *stroke = [Helpers fillColor:val];
             UIColor *fill = [UIColor clearColor];
             
             stroke = [stroke colorWithAlphaComponent:opacity];
@@ -720,9 +720,9 @@ static inline double radians (double degrees)  {
             
             [ShapeDrawer drawCircleWithCenter:center withRadius:ringSize / 2 withFill:fill withStroke:stroke atWidth:strokeWidth inContext:self.context];
             
-            val = [Graphics intFromHex:self.hashValue atIndex:39-counter withLength:1];
-            opacity = [Graphics opacity:val];
-            fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            val = [Helpers intFromHex:self.hashValue atIndex:39-counter withLength:1];
+            opacity = [Helpers opacity:val];
+            fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
             stroke = [UIColor clearColor];
             
             
@@ -735,17 +735,17 @@ static inline double radians (double degrees)  {
 }
 
 - (void) generateDiamonds {
-    CGFloat width = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
-    CGFloat height = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:1 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
+    CGFloat width = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
+    CGFloat height = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:1 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:50];
     
     NSInteger counter = 0, x, y;
     
     for (y=0; y<6; y++) {
         for (x=0; x <6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-            UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+            UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
             
             double dx = (y % 2 == 0) ? 0 : (width / 2.0);
             
@@ -810,7 +810,7 @@ static inline double radians (double degrees)  {
 
 - (void) generateTessellation {
  
-    CGFloat sideLength = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
+    CGFloat sideLength = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1]
                              inRangeWithLower:0
                                 andUpperBound:15
                      toNewRangeWithLowerBound:5
@@ -829,10 +829,10 @@ static inline double radians (double degrees)  {
         
         // STYLES
         
-        NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-        CGFloat opacity = [Graphics opacity:val];
-        UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-        UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+        NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+        CGFloat opacity = [Helpers opacity:val];
+        UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+        UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
         
         
         switch (counter) {
@@ -1021,7 +1021,7 @@ static inline double radians (double degrees)  {
             } case 14: {
                 CGAffineTransform t = CGAffineTransformMakeTranslation(sideLength / 2,
                                                                        tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
+                CGAffineTransform tr = [Helpers rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
                 break;
@@ -1031,7 +1031,7 @@ static inline double radians (double degrees)  {
                 CGAffineTransform t = CGAffineTransformTranslate(s,
                                                                  -tileWidth + sideLength / 2,
                                                                  tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
+                CGAffineTransform tr = [Helpers rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
@@ -1042,7 +1042,7 @@ static inline double radians (double degrees)  {
                 CGAffineTransform t = CGAffineTransformTranslate(s,
                                                                        sideLength / 2,
                                                                      -tileHeight + tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
+                CGAffineTransform tr = [Helpers rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
@@ -1052,7 +1052,7 @@ static inline double radians (double degrees)  {
                 CGAffineTransform s = CGAffineTransformMakeScale(-1, -1);
                 CGAffineTransform t = CGAffineTransformTranslate(s, -tileWidth + sideLength / 2,
                                                                        -tileHeight + tileHeight / 2 - sideLength / 2 - sideLength);
-                CGAffineTransform tr = [Graphics rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
+                CGAffineTransform tr = [Helpers rotate:30 aroundPoint:CGPointMake(0, sideLength) previousTransform:t];
                 
                 CGRect rect = CGRectMake(0, 0, sideLength, sideLength);
                 [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth:1 inContext:self.context transformEffects:tr];
@@ -1086,17 +1086,17 @@ static inline double radians (double degrees)  {
 
 - (void) generateNestedsquares {
     
-    NSInteger hashInt = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
-    CGFloat blockSize = [Graphics mapValue:hashInt inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:4 andUpperBound:12];
+    NSInteger hashInt = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat blockSize = [Helpers mapValue:hashInt inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:4 andUpperBound:12];
     CGFloat squareSize = blockSize * 7;
     
     NSInteger counter = 0, x = 0,y = 0;
     
     for (y = 0; y < 6; y++) {
         for (x = 0; x < 6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *stroke = [Graphics fillColor:val];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *stroke = [Helpers fillColor:val];
             UIColor *fill = [UIColor clearColor];
             
 //            fill = [fill colorWithAlphaComponent:opacity];
@@ -1109,9 +1109,9 @@ static inline double radians (double degrees)  {
             
             [ShapeDrawer drawRectangle:rect withFill:fill withStroke:stroke atWidth: blockSize inContext:self.context];
             
-            val = [Graphics intFromHex:self.hashValue atIndex:39-counter withLength:1];
-            opacity = [Graphics opacity:val];
-            stroke = [Graphics fillColor:val];
+            val = [Helpers intFromHex:self.hashValue atIndex:39-counter withLength:1];
+            opacity = [Helpers opacity:val];
+            stroke = [Helpers fillColor:val];
             
 //            fill = [fill colorWithAlphaComponent:opacity];
             stroke = [stroke colorWithAlphaComponent:opacity];
@@ -1132,8 +1132,8 @@ static inline double radians (double degrees)  {
 
 - (void) generateMosaicsquares {
     
-    NSInteger hexVal = [Graphics intFromHex:self.hashValue atIndex:0 withLength:1];
-    CGFloat triangleSize = [Graphics mapValue:hexVal inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:15 andUpperBound:50];
+    NSInteger hexVal = [Helpers intFromHex:self.hashValue atIndex:0 withLength:1];
+    CGFloat triangleSize = [Helpers mapValue:hexVal inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:15 andUpperBound:50];
     
     NSInteger counter = 0, x = 0, y = 0;
     
@@ -1141,7 +1141,7 @@ static inline double radians (double degrees)  {
         for (x = 0; x < 4; x++) {
             if (x % 2 == 0) {
                 if (y % 2 == 0) {
-                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSInteger i = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
                     NSArray *values = @[[NSNumber numberWithInteger:i]];
                     
                     [self doOuterTrianglesX:x * triangleSize * 2
@@ -1149,8 +1149,8 @@ static inline double radians (double degrees)  {
                                        size:triangleSize
                                      andVal:values];
                 } else{
-                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-                    NSInteger j = [Graphics intFromHex:self.hashValue atIndex:counter + 1 withLength:1];
+                    NSInteger i = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSInteger j = [Helpers intFromHex:self.hashValue atIndex:counter + 1 withLength:1];
                     
                     NSArray *values = @[[NSNumber numberWithInteger:i],
                                         [NSNumber numberWithInteger:j]];
@@ -1162,8 +1162,8 @@ static inline double radians (double degrees)  {
                 }
             } else {
                 if (y % 2 == 0) {
-                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-                    NSInteger j = [Graphics intFromHex:self.hashValue atIndex:counter + 1 withLength:1];
+                    NSInteger i = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSInteger j = [Helpers intFromHex:self.hashValue atIndex:counter + 1 withLength:1];
                     
                     NSArray *values = @[[NSNumber numberWithInteger:i],
                                         [NSNumber numberWithInteger:j]];
@@ -1173,7 +1173,7 @@ static inline double radians (double degrees)  {
                                        size:triangleSize
                                      andVal:values];
                 } else {
-                    NSInteger i = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
+                    NSInteger i = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
                     NSArray *values = @[[NSNumber numberWithInteger:i]];
                     
                     [self doOuterTrianglesX:x * triangleSize * 2
@@ -1190,7 +1190,7 @@ static inline double radians (double degrees)  {
 
 - (void) generateChevrons {
     
-    CGFloat width = [Graphics mapValue:[Graphics intFromHex:self.hashValue atIndex:0 withLength:1]
+    CGFloat width = [Helpers mapValue:[Helpers intFromHex:self.hashValue atIndex:0 withLength:1]
                       inRangeWithLower:0
                          andUpperBound:15
               toNewRangeWithLowerBound:30
@@ -1202,11 +1202,11 @@ static inline double radians (double degrees)  {
     
     for (y=0; y<6; y++) {
         for (x=0; x<6; x++) {
-            NSInteger val = [Graphics intFromHex:self.hashValue atIndex:counter withLength:1];
-            CGFloat opacity = [Graphics opacity:val];
-            UIColor *stroke = [[Graphics STROKE_COLOR]
-                                colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
-            UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+            NSInteger val = [Helpers intFromHex:self.hashValue atIndex:counter withLength:1];
+            CGFloat opacity = [Helpers opacity:val];
+            UIColor *stroke = [[Helpers STROKE_COLOR]
+                                colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
+            UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
             CGFloat strokeWidth = 1;
             
             CGFloat tx = x * width, ty = y * height * 0.66 - height / 2;
@@ -1242,9 +1242,9 @@ static inline double radians (double degrees)  {
 
 - (void) doInnerTrianglesX: (NSInteger) x y: (NSInteger) y size: (CGFloat) size andVal: (NSArray *) values {
     NSInteger val = [[values objectAtIndex:0] integerValue];
-    CGFloat opacity = [Graphics opacity:val];
-    UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-    UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+    CGFloat opacity = [Helpers opacity:val];
+    UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+    UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
     
     CGFloat tx = x + size,
     ty = y;
@@ -1274,8 +1274,8 @@ static inline double radians (double degrees)  {
     
     // update vals
     val = [[values objectAtIndex:1] integerValue];
-    opacity = [Graphics opacity: val];
-    fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
+    opacity = [Helpers opacity: val];
+    fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
     
     tx = x + size;
     ty = y + size * 2;
@@ -1311,9 +1311,9 @@ static inline double radians (double degrees)  {
 
 - (void) doOuterTrianglesX: (NSInteger) x y: (NSInteger) y size: (CGFloat) size andVal: (NSArray *) values {
     NSInteger val = [[values objectAtIndex:0] integerValue];
-    CGFloat opacity = [Graphics opacity:val];
-    UIColor *fill = [[Graphics fillColor:val] colorWithAlphaComponent:opacity];
-    UIColor *stroke = [[Graphics STROKE_COLOR] colorWithAlphaComponent:[Graphics STROKE_OPACITY]];
+    CGFloat opacity = [Helpers opacity:val];
+    UIColor *fill = [[Helpers fillColor:val] colorWithAlphaComponent:opacity];
+    UIColor *stroke = [[Helpers STROKE_COLOR] colorWithAlphaComponent:[Helpers STROKE_OPACITY]];
     
     CGFloat tx = x,
     ty = y + size;

@@ -37,6 +37,4 @@ extern NSString *const kGeoPatternBaseColor;
 extern NSString *const kGeoPatternType;
 extern NSString *const kGeoPatternHash;
 
-extern NSInteger const kGeoPatternString2;
-
 @end

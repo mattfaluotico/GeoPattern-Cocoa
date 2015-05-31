@@ -1,5 +1,4 @@
 //
-//  Graphics.h
 //  GeoPattern
 //
 //  Created by Matthew Faluotico on 5/7/15.
@@ -9,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface Graphics : NSObject
+@interface Helpers : NSObject
 
 + (NSString *) generateHash: (NSString *) str;
 

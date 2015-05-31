@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 MF. All rights reserved.
 //
 
-#import "SizeCalculator.h"
+#import "PreProcesses.h"
 #import "GeoPatternConstants.h"
 #import "Graphics.h"
 
-@implementation SizeCalculator
+@implementation PreProcesses
 
 + (CGSize) sizeForOctogons: (NSDictionary*) options {
     CGFloat size = [Graphics mapValue:[Graphics intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:10 andUpperBound:60];
