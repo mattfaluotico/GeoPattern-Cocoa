@@ -311,7 +311,7 @@ static inline double radians (double degrees)  {
             t = CGAffineTransformMakeTranslation(tx, ty);
             r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
             
-            [ShapeDrawer drawPlusSignWithSize:squareSize
+            [ShapeDrawer drawXWithSize:squareSize
                                          fill:fill
                                        stroke:stroke
                                   strokeWidth:0
@@ -325,7 +325,7 @@ static inline double radians (double degrees)  {
                 t = CGAffineTransformMakeTranslation(tx, ty);
                 r = [Helpers rotate:45 aroundPoint:CGPointMake(xSize / 2, xSize / 2) previousTransform:t];
                 
-                [ShapeDrawer drawPlusSignWithSize:squareSize
+                [ShapeDrawer drawXWithSize:squareSize
                                              fill:fill
                                            stroke:stroke
                                       strokeWidth:0

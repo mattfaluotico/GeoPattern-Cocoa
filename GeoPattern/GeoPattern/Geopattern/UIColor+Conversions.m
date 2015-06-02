@@ -30,7 +30,7 @@
 @implementation UIColor (Conversions)
 
 + (UIColor *)fromHSL:(HSLColor *)hsl {
-    
+        
     struct RGBColor rgb;
     
     CGFloat hue = hsl.hue;
@@ -73,7 +73,6 @@
             lroundf(colors.green * 255),
             lroundf(colors.blue * 255)];
 }
-
 
 - (HSLColor *)toHSL {
     struct RGBColor colors = [UIColor getComponentsFromColor:self];

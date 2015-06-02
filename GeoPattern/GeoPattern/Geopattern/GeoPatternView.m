@@ -23,7 +23,7 @@
 
 - (void) generateFromString: (NSString *) string {
     self.string = string;
-    self.options = [Pattern defaults];
+    self.options = [NSMutableDictionary new];
     [self generate];
 }
 
@@ -58,10 +58,11 @@
     CGSize size = [Pattern calculateSizeFromOptions:options];
     [options setObject:[NSValue valueWithCGSize:size] forKey:@"size"];
     
-    UIGraphicsBeginImageContextWithOptions(size, true, 0.0); // 0.0 = auto scale
+    UIGraphicsBeginImageContextWithOptions(size, false, 0.0); // 0.0 = auto scale
     CGContextRef imgContext = UIGraphicsGetCurrentContext();
     
     UIColor *backgroundColor = [Helpers backgroundColor:options];
+    NSLog(backgroundColor.description);
     CGContextSetFillColorWithColor(imgContext, backgroundColor.CGColor);
     CGContextFillRect(imgContext, rect);
     
@@ -80,6 +81,5 @@
     CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
     
 }
-
 
 @end

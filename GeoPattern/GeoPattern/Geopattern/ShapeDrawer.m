@@ -383,7 +383,7 @@
     UIGraphicsPopContext();
 }
 
-+ (void) drawPlusSignWithSize: (CGFloat) size
++ (void) drawXWithSize: (CGFloat) size
                        fill: (UIColor *) fill
                      stroke: (UIColor *) stroke
                 strokeWidth: (CGFloat) strokeWidth
@@ -426,6 +426,39 @@
 //    [path2 applyTransform:transforms];
     [path fill];
 //    [path2 fill];
+    
+    UIGraphicsPopContext();
+}
+
++ (void) drawPlusSignWithSize: (CGFloat) size
+                  fill: (UIColor *) fill
+                stroke: (UIColor *) stroke
+           strokeWidth: (CGFloat) strokeWidth
+             inContext: (CGContextRef) context
+        withTransforms: (CGAffineTransform) transforms {
+    
+    UIGraphicsPushContext(context);
+    [fill setFill];
+    [stroke setStroke];
+    
+    CGRect rect1 = CGRectMake(size, 0, size, size * 3);
+    CGRect rect2 = CGRectMake(0, size, size * 3, size);
+    
+    // drawing rectangle 1
+    UIBezierPath *path  = [UIBezierPath bezierPathWithRect:rect1];
+    UIBezierPath *path2 = [UIBezierPath bezierPathWithRect:rect2];
+    
+    if (strokeWidth > 0) {
+        path.lineWidth = strokeWidth;
+        path2.lineWidth = strokeWidth;
+    }
+    
+    [path applyTransform:transforms];
+    [path2 applyTransform:transforms];
+    [path stroke];
+    [path2 stroke];
+    [path fill];
+    [path2 fill];
     
     UIGraphicsPopContext();
 }

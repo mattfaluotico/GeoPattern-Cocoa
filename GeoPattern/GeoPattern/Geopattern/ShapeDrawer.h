@@ -132,6 +132,13 @@
                    inConext:(CGContextRef)context
            transformEffects:(CGAffineTransform)tranforms;
 
++ (void) drawXWithSize: (CGFloat) size
+                         fill: (UIColor *) fill
+                       stroke: (UIColor *) stroke
+                  strokeWidth: (CGFloat) strokeWidth
+                    inContext: (CGContextRef) context
+               withTransforms: (CGAffineTransform) transforms;
+
 + (void) drawPlusSignWithSize: (CGFloat) size
                          fill: (UIColor *) fill
                        stroke: (UIColor *) stroke

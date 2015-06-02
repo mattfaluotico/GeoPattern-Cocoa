@@ -53,12 +53,14 @@
     if (!returnedColor) {
         NSString *hash = [options objectForKey:kGeoPatternHash];
         NSInteger i = [Helpers intFromHex:hash atIndex:14 withLength:3];
-        NSInteger hueOffset = [Helpers
+
+        CGFloat hueOffset = [Helpers
                                mapValue:i
                                inRangeWithLower:0
                                andUpperBound:4095
                                toNewRangeWithLowerBound:0
                                andUpperBound:359];
+        
         NSInteger satOffset = [Helpers intFromHex:hash atIndex:17 withLength:1];
         
         UIColor *basedOptionColor = [Helpers BASE_COLOR];
@@ -72,6 +74,7 @@
         double f = ((base.hue * 360 - hueOffset) + 360);
         f = fmod(f, 360);
         base.hue = f / 360.0;
+        
         if (satOffset % 2 == 0) {
             base.saturation = MIN(1, ((base.saturation * 100 + satOffset) / 100) );
         } else {
