@@ -62,7 +62,6 @@
     CGContextRef imgContext = UIGraphicsGetCurrentContext();
     
     UIColor *backgroundColor = [Helpers backgroundColor:options];
-    NSLog(backgroundColor.description);
     CGContextSetFillColorWithColor(imgContext, backgroundColor.CGColor);
     CGContextFillRect(imgContext, rect);
     

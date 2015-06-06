@@ -176,7 +176,7 @@
     CGFloat sideLength = [Helpers mapValue:[Helpers intFromHex:[options objectForKey:kGeoPatternHash] atIndex:0 withLength:1] inRangeWithLower:0 andUpperBound:15 toNewRangeWithLowerBound:5 andUpperBound:40];
     CGFloat sq = 1.7320508075688772;
     CGFloat hexHeight = sideLength * sq;
-    CGFloat hexWidth = sideLength  * 2;
+//    CGFloat hexWidth = sideLength  * 2;
     CGFloat triangleHeight = sideLength / 2.0 * sq;
     CGFloat tileWidth = sideLength * 3 + triangleHeight * 2.0;
     CGFloat tileHeight = (hexHeight * 2) + (sideLength * 2);

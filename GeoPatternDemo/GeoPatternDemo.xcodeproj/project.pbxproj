@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ACE7BACB1B201D6600269647 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BACA1B201D6600269647 /* main.m */; };
+		ACE7BACE1B201D6600269647 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BACD1B201D6600269647 /* AppDelegate.m */; };
+		ACE7BAD11B201D6600269647 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAD01B201D6600269647 /* ViewController.m */; };
+		ACE7BAD41B201D6600269647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACE7BAD21B201D6600269647 /* Main.storyboard */; };
+		ACE7BAD61B201D6600269647 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACE7BAD51B201D6600269647 /* Images.xcassets */; };
+		ACE7BAD91B201D6600269647 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE7BAD71B201D6600269647 /* LaunchScreen.xib */; };
+		ACE7BAE51B201D6600269647 /* GeoPatternDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAE41B201D6600269647 /* GeoPatternDemoTests.m */; };
+		ACE7BB021B201ECF00269647 /* GeoPatternConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAF41B201ECF00269647 /* GeoPatternConstants.m */; };
+		ACE7BB031B201ECF00269647 /* GeoPatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAF71B201ECF00269647 /* GeoPatternView.m */; };
+		ACE7BB041B201ECF00269647 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAF91B201ECF00269647 /* Helpers.m */; };
+		ACE7BB051B201ECF00269647 /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAFB1B201ECF00269647 /* Pattern.m */; };
+		ACE7BB061B201ECF00269647 /* PreProcesses.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAFD1B201ECF00269647 /* PreProcesses.m */; };
+		ACE7BB071B201ECF00269647 /* ShapeDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BAFF1B201ECF00269647 /* ShapeDrawer.m */; };
+		ACE7BB081B201ECF00269647 /* UIColor+Conversions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7BB011B201ECF00269647 /* UIColor+Conversions.m */; };
+		ACE7BB0C1B2021CF00269647 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE7BB0B1B2021CF00269647 /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ACE7BADF1B201D6600269647 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ACE7BABD1B201D6600269647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ACE7BAC41B201D6600269647;
+			remoteInfo = GeoPatternDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ACE7BAC51B201D6600269647 /* GeoPatternDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoPatternDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACE7BAC91B201D6600269647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACE7BACA1B201D6600269647 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ACE7BACC1B201D6600269647 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ACE7BACD1B201D6600269647 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ACE7BACF1B201D6600269647 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		ACE7BAD01B201D6600269647 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ACE7BAD31B201D6600269647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ACE7BAD51B201D6600269647 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ACE7BAD81B201D6600269647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		ACE7BADE1B201D6600269647 /* GeoPatternDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoPatternDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACE7BAE31B201D6600269647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACE7BAE41B201D6600269647 /* GeoPatternDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoPatternDemoTests.m; sourceTree = "<group>"; };
+		ACE7BAF31B201ECF00269647 /* GeoPatternConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatternConstants.h; path = ../../GeoPattern/GeoPatternConstants.h; sourceTree = "<group>"; };
+		ACE7BAF41B201ECF00269647 /* GeoPatternConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPatternConstants.m; path = ../../GeoPattern/GeoPatternConstants.m; sourceTree = "<group>"; };
+		ACE7BAF51B201ECF00269647 /* GeoPatterns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatterns.h; path = ../../GeoPattern/GeoPatterns.h; sourceTree = "<group>"; };
+		ACE7BAF61B201ECF00269647 /* GeoPatternView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatternView.h; path = ../../GeoPattern/GeoPatternView.h; sourceTree = "<group>"; };
+		ACE7BAF71B201ECF00269647 /* GeoPatternView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPatternView.m; path = ../../GeoPattern/GeoPatternView.m; sourceTree = "<group>"; };
+		ACE7BAF81B201ECF00269647 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helpers.h; path = ../../GeoPattern/Helpers.h; sourceTree = "<group>"; };
+		ACE7BAF91B201ECF00269647 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Helpers.m; path = ../../GeoPattern/Helpers.m; sourceTree = "<group>"; };
+		ACE7BAFA1B201ECF00269647 /* Pattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pattern.h; path = ../../GeoPattern/Pattern.h; sourceTree = "<group>"; };
+		ACE7BAFB1B201ECF00269647 /* Pattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pattern.m; path = ../../GeoPattern/Pattern.m; sourceTree = "<group>"; };
+		ACE7BAFC1B201ECF00269647 /* PreProcesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreProcesses.h; path = ../../GeoPattern/PreProcesses.h; sourceTree = "<group>"; };
+		ACE7BAFD1B201ECF00269647 /* PreProcesses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreProcesses.m; path = ../../GeoPattern/PreProcesses.m; sourceTree = "<group>"; };
+		ACE7BAFE1B201ECF00269647 /* ShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeDrawer.h; path = ../../GeoPattern/ShapeDrawer.h; sourceTree = "<group>"; };
+		ACE7BAFF1B201ECF00269647 /* ShapeDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShapeDrawer.m; path = ../../GeoPattern/ShapeDrawer.m; sourceTree = "<group>"; };
+		ACE7BB001B201ECF00269647 /* UIColor+Conversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Conversions.h"; path = "../../GeoPattern/UIColor+Conversions.h"; sourceTree = "<group>"; };
+		ACE7BB011B201ECF00269647 /* UIColor+Conversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Conversions.m"; path = "../../GeoPattern/UIColor+Conversions.m"; sourceTree = "<group>"; };
+		ACE7BB0B1B2021CF00269647 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ACE7BAC21B201D6600269647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACE7BB0C1B2021CF00269647 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACE7BADB1B201D6600269647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ACE7BABC1B201D6600269647 = {
+			isa = PBXGroup;
+			children = (
+				ACE7BB0B1B2021CF00269647 /* Security.framework */,
+				ACE7BAC71B201D6600269647 /* GeoPatternDemo */,
+				ACE7BAE11B201D6600269647 /* GeoPatternDemoTests */,
+				ACE7BAC61B201D6600269647 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ACE7BAC61B201D6600269647 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BAC51B201D6600269647 /* GeoPatternDemo.app */,
+				ACE7BADE1B201D6600269647 /* GeoPatternDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ACE7BAC71B201D6600269647 /* GeoPatternDemo */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BAF01B201EAD00269647 /* GeoPattern */,
+				ACE7BAEF1B201EA600269647 /* Demo */,
+				ACE7BAC81B201D6600269647 /* Supporting Files */,
+			);
+			path = GeoPatternDemo;
+			sourceTree = "<group>";
+		};
+		ACE7BAC81B201D6600269647 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BAC91B201D6600269647 /* Info.plist */,
+				ACE7BACA1B201D6600269647 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ACE7BAE11B201D6600269647 /* GeoPatternDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BAE41B201D6600269647 /* GeoPatternDemoTests.m */,
+				ACE7BAE21B201D6600269647 /* Supporting Files */,
+			);
+			path = GeoPatternDemoTests;
+			sourceTree = "<group>";
+		};
+		ACE7BAE21B201D6600269647 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BAE31B201D6600269647 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ACE7BAEF1B201EA600269647 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BACC1B201D6600269647 /* AppDelegate.h */,
+				ACE7BACD1B201D6600269647 /* AppDelegate.m */,
+				ACE7BACF1B201D6600269647 /* ViewController.h */,
+				ACE7BAD01B201D6600269647 /* ViewController.m */,
+				ACE7BAD21B201D6600269647 /* Main.storyboard */,
+				ACE7BAD51B201D6600269647 /* Images.xcassets */,
+				ACE7BAD71B201D6600269647 /* LaunchScreen.xib */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+		ACE7BAF01B201EAD00269647 /* GeoPattern */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7BAF31B201ECF00269647 /* GeoPatternConstants.h */,
+				ACE7BAF41B201ECF00269647 /* GeoPatternConstants.m */,
+				ACE7BAF51B201ECF00269647 /* GeoPatterns.h */,
+				ACE7BAF61B201ECF00269647 /* GeoPatternView.h */,
+				ACE7BAF71B201ECF00269647 /* GeoPatternView.m */,
+				ACE7BAF81B201ECF00269647 /* Helpers.h */,
+				ACE7BAF91B201ECF00269647 /* Helpers.m */,
+				ACE7BAFA1B201ECF00269647 /* Pattern.h */,
+				ACE7BAFB1B201ECF00269647 /* Pattern.m */,
+				ACE7BAFC1B201ECF00269647 /* PreProcesses.h */,
+				ACE7BAFD1B201ECF00269647 /* PreProcesses.m */,
+				ACE7BAFE1B201ECF00269647 /* ShapeDrawer.h */,
+				ACE7BAFF1B201ECF00269647 /* ShapeDrawer.m */,
+				ACE7BB001B201ECF00269647 /* UIColor+Conversions.h */,
+				ACE7BB011B201ECF00269647 /* UIColor+Conversions.m */,
+			);
+			name = GeoPattern;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ACE7BAC41B201D6600269647 /* GeoPatternDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACE7BAE81B201D6600269647 /* Build configuration list for PBXNativeTarget "GeoPatternDemo" */;
+			buildPhases = (
+				ACE7BAC11B201D6600269647 /* Sources */,
+				ACE7BAC21B201D6600269647 /* Frameworks */,
+				ACE7BAC31B201D6600269647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeoPatternDemo;
+			productName = GeoPatternDemo;
+			productReference = ACE7BAC51B201D6600269647 /* GeoPatternDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ACE7BADD1B201D6600269647 /* GeoPatternDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACE7BAEB1B201D6600269647 /* Build configuration list for PBXNativeTarget "GeoPatternDemoTests" */;
+			buildPhases = (
+				ACE7BADA1B201D6600269647 /* Sources */,
+				ACE7BADB1B201D6600269647 /* Frameworks */,
+				ACE7BADC1B201D6600269647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ACE7BAE01B201D6600269647 /* PBXTargetDependency */,
+			);
+			name = GeoPatternDemoTests;
+			productName = GeoPatternDemoTests;
+			productReference = ACE7BADE1B201D6600269647 /* GeoPatternDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ACE7BABD1B201D6600269647 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = MF;
+				TargetAttributes = {
+					ACE7BAC41B201D6600269647 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					ACE7BADD1B201D6600269647 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = ACE7BAC41B201D6600269647;
+					};
+				};
+			};
+			buildConfigurationList = ACE7BAC01B201D6600269647 /* Build configuration list for PBXProject "GeoPatternDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ACE7BABC1B201D6600269647;
+			productRefGroup = ACE7BAC61B201D6600269647 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ACE7BAC41B201D6600269647 /* GeoPatternDemo */,
+				ACE7BADD1B201D6600269647 /* GeoPatternDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ACE7BAC31B201D6600269647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACE7BAD41B201D6600269647 /* Main.storyboard in Resources */,
+				ACE7BAD91B201D6600269647 /* LaunchScreen.xib in Resources */,
+				ACE7BAD61B201D6600269647 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACE7BADC1B201D6600269647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ACE7BAC11B201D6600269647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACE7BB031B201ECF00269647 /* GeoPatternView.m in Sources */,
+				ACE7BAD11B201D6600269647 /* ViewController.m in Sources */,
+				ACE7BACE1B201D6600269647 /* AppDelegate.m in Sources */,
+				ACE7BB041B201ECF00269647 /* Helpers.m in Sources */,
+				ACE7BB071B201ECF00269647 /* ShapeDrawer.m in Sources */,
+				ACE7BB021B201ECF00269647 /* GeoPatternConstants.m in Sources */,
+				ACE7BACB1B201D6600269647 /* main.m in Sources */,
+				ACE7BB051B201ECF00269647 /* Pattern.m in Sources */,
+				ACE7BB061B201ECF00269647 /* PreProcesses.m in Sources */,
+				ACE7BB081B201ECF00269647 /* UIColor+Conversions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACE7BADA1B201D6600269647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACE7BAE51B201D6600269647 /* GeoPatternDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ACE7BAE01B201D6600269647 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ACE7BAC41B201D6600269647 /* GeoPatternDemo */;
+			targetProxy = ACE7BADF1B201D6600269647 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ACE7BAD21B201D6600269647 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACE7BAD31B201D6600269647 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ACE7BAD71B201D6600269647 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACE7BAD81B201D6600269647 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ACE7BAE61B201D6600269647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ACE7BAE71B201D6600269647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ACE7BAE91B201D6600269647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GeoPatternDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ACE7BAEA1B201D6600269647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GeoPatternDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ACE7BAEC1B201D6600269647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GeoPatternDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeoPatternDemo.app/GeoPatternDemo";
+			};
+			name = Debug;
+		};
+		ACE7BAED1B201D6600269647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GeoPatternDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeoPatternDemo.app/GeoPatternDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ACE7BAC01B201D6600269647 /* Build configuration list for PBXProject "GeoPatternDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACE7BAE61B201D6600269647 /* Debug */,
+				ACE7BAE71B201D6600269647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACE7BAE81B201D6600269647 /* Build configuration list for PBXNativeTarget "GeoPatternDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACE7BAE91B201D6600269647 /* Debug */,
+				ACE7BAEA1B201D6600269647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACE7BAEB1B201D6600269647 /* Build configuration list for PBXNativeTarget "GeoPatternDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACE7BAEC1B201D6600269647 /* Debug */,
+				ACE7BAED1B201D6600269647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ACE7BABD1B201D6600269647 /* Project object */;
+}

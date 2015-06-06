@@ -11,7 +11,7 @@
 
 @interface GeoPatternView : UIView
 
-@property NSString *string;
+@property (strong) NSString *string;
 @property NSDictionary *options;
 
 // Generate with a passed string
@@ -19,8 +19,5 @@
 
 // generate with a passed string and options
 - (void) generateFromString: (NSString *) string withOptions: (NSDictionary *) options;
-
-// generate when the string and options have already been set
-- (void) generate;
 
 @end
