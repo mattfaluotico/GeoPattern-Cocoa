@@ -19,6 +19,7 @@
     [super viewDidLoad];
     GeoPatternView *v = [GeoPatternView new];
     v.frame = CGRectMake(0, 0, 100, 100);
+    [v generateFromString:@"Matt"];
     [self.view addSubview:v];
     
 }
