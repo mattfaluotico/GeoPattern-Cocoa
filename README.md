@@ -10,7 +10,7 @@ This is a port of Jason Long's [GeoPattern](https://github.com/jasonlong/geo_pat
 
 Using Cocoapods.
 
-`pod 'GeoPattern', ~> 1.0`
+`pod 'GeoPattern', ~> 1.0.3`
 
 Otherwise, copy the GeoPattern folder into your project and include the Security framework in your project build.
 
