@@ -4,7 +4,12 @@ Create beautiful patterns using native CoreGraphics.
 
 This is a port of Jason Long's [GeoPattern](https://github.com/jasonlong/geo_pattern), originally written in Ruby to use SVGs. As SVGs require external support in Cocoa projects, this version uses CoreGraphics. GeoPattern just creates a sexy view.
 
-<!-- Screenie -->
+![one](https://github.com/MattFaluotico/GeoPattern-Cocoa/blob/master/screens/one.png)
+
+![two](https://github.com/MattFaluotico/GeoPattern-Cocoa/blob/master/screens/two.png)
+
+![three](https://github.com/MattFaluotico/GeoPattern-Cocoa/blob/master/screens/three.png)
+
 
 ## Installing
 
