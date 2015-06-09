@@ -2,7 +2,7 @@
 
 Create beautiful patterns using native CoreGraphics.
 
-This is a port of Jason Long's [GeoPattern](https://github.com/jasonlong/geo_pattern), originally written in Ruby to use SVGs. As SVGs require external support in Cocoa projects, this version uses CoreGraphics. GeoPattern just creates a sexy view.
+This is a port of Jason Long's [GeoPattern](https://github.com/jasonlong/geo_pattern), originally written in Ruby to use SVGs. As SVGs require external support in Cocoa projects, this version uses CoreGraphics. GeoPattern just creates a sexy view. Since it's just a UIView, it can be used nearly anywhere.
 
 ![one](https://github.com/MattFaluotico/GeoPattern-Cocoa/blob/master/screens/one.png)
 
@@ -35,15 +35,23 @@ to generate a pattern based on a string using preset options.
 
 ## Options
 
-- Color
-- BaseColor
-- Type - the type of pattern of you want to use.
+- `kGeoPatternColor`: UIColor, the exact background color
+- `kGeoPatternBaseColor` : UIColor to be edited by the algorithm. Hue and saturation are modified based on the input stirng.
+- `kGeoPatternType` - the type of pattern of you want to use. (see list below)
 
 ## Pattern Types
 
 This includes all of the patterns from the original project. Each pattern is accessed with an enum. To generate a GeoPatternView using a specific type of pattern, just add the key to the options parameter.
 
-`NSDictionary * options = @{ kGeoPatternType: [NSNumber numberWithInteger: GeoPatternXes};`
+```objective-c
+NSDictionary * options = @{
+      kGeoPatternType: [NSNumber numberWithInteger: GeoPatternXes,
+      kGeoPatternColor: [UIColor redColor]
+    };
+
+[view generateFromString: @"Matthew" withOptions: options;]
+
+```
 
 - Octogons => `GeoPatternOctogons`
 - Overlappingcircles => `GeoPatternOverlappingcircles`
