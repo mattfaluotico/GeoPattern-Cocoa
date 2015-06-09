@@ -16,6 +16,5 @@ Pod::Spec.new do |s|
     'GeoPattern' => ['Pod/Assets/*.png']
   }
 
-  s.public_header_files = 'GeoPattern/{GeoPattern, GeoPatternView, GeoPatternConstants}.h'
   s.frameworks = 'Security'
 end
