@@ -1,26 +1,26 @@
 # GeoPatternCocoa
 
-Create beautiful patterns using native CoreGraphics. 
+Create beautiful patterns using native CoreGraphics.
 
-This is a port of Jason Long's GeoPattern, originally written in Ruby to use SVGs. As SVGs require external support in Cocoa projects, this version uses CoreGraphics. GeoPattern just creates a sexy view.
+This is a port of Jason Long's [GeoPattern](https://github.com/jasonlong/geo_pattern), originally written in Ruby to use SVGs. As SVGs require external support in Cocoa projects, this version uses CoreGraphics. GeoPattern just creates a sexy view.
 
 <!-- Screenie -->
 
 ## Installing
 
-Using Cocoapods. 
+Using Cocoapods.
 
 `pod 'GeoPattern', ~> 1.0`
 
-Otherwise, copy the GeoPattern folder into your project and include the Security framework in your project build. 
+Otherwise, copy the GeoPattern folder into your project and include the Security framework in your project build.
 
 ## Using
 
-You simply need to import `GeoPattern.h` and you're good to go. 
+You simply need to import `GeoPattern.h` and you're good to go.
 
-You can create a GeoPatternView using storyboard or by initializing a new one. There are really only two methods. 
+You can create a GeoPatternView using storyboard or by initializing a new one. There are really only two methods.
 
-To simply generate a pattern based off of a string: 
+To simply generate a pattern based off of a string:
 
 `generateWithString: (NSString *) string`
 

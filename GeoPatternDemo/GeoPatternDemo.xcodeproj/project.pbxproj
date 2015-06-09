@@ -50,7 +50,7 @@
 		ACE7BAE41B201D6600269647 /* GeoPatternDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoPatternDemoTests.m; sourceTree = "<group>"; };
 		ACE7BAF31B201ECF00269647 /* GeoPatternConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatternConstants.h; path = ../../GeoPattern/GeoPatternConstants.h; sourceTree = "<group>"; };
 		ACE7BAF41B201ECF00269647 /* GeoPatternConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPatternConstants.m; path = ../../GeoPattern/GeoPatternConstants.m; sourceTree = "<group>"; };
-		ACE7BAF51B201ECF00269647 /* GeoPatterns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatterns.h; path = ../../GeoPattern/GeoPatterns.h; sourceTree = "<group>"; };
+		ACE7BAF51B201ECF00269647 /* GeoPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPattern.h; path = ../../GeoPattern/GeoPattern.h; sourceTree = "<group>"; };
 		ACE7BAF61B201ECF00269647 /* GeoPatternView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPatternView.h; path = ../../GeoPattern/GeoPatternView.h; sourceTree = "<group>"; };
 		ACE7BAF71B201ECF00269647 /* GeoPatternView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPatternView.m; path = ../../GeoPattern/GeoPatternView.m; sourceTree = "<group>"; };
 		ACE7BAF81B201ECF00269647 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helpers.h; path = ../../GeoPattern/Helpers.h; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 			children = (
 				ACE7BAF31B201ECF00269647 /* GeoPatternConstants.h */,
 				ACE7BAF41B201ECF00269647 /* GeoPatternConstants.m */,
-				ACE7BAF51B201ECF00269647 /* GeoPatterns.h */,
+				ACE7BAF51B201ECF00269647 /* GeoPattern.h */,
 				ACE7BAF61B201ECF00269647 /* GeoPatternView.h */,
 				ACE7BAF71B201ECF00269647 /* GeoPatternView.m */,
 				ACE7BAF81B201ECF00269647 /* Helpers.h */,

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "GeoPattern"
-  s.version          = "1.0.1"
-  s.summary          = "Generated beautiful patterns from a string."
+  s.version          = "1.0.2"
+  s.summary          = "Generated awesome patterns from simply a string."
   s.homepage         = "https://github.com/MattFaluotico/GeoPattern-Cocoa"
   s.license          = 'MIT'
   s.author           = { "mattfaluotico" => "matt.faluotico@gmail.com" }
@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
     'GeoPattern' => ['Pod/Assets/*.png']
   }
 
-  s.public_header_files = 'GeoPattern/{GeoPatterns, GeoPatternView, GeoPatternConstants}.h'
+  # s.public_header_files = 'GeoPattern/**/*.h'
   s.frameworks = 'Security'
 end

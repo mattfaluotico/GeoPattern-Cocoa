@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "GeoPatterns.h"
+#import "GeoPattern.h"
 
 @interface ViewController ()
 
