@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "GeoPattern.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet GeoPatternView *geoview;
+@property (weak, nonatomic) IBOutlet UITextField *text;
 
 @end
 
@@ -17,16 +19,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    GeoPatternView *v = [GeoPatternView new];
-    v.frame = CGRectMake(0, 0, 100, 100);
-    [v generateFromString:@"Matt"];
-    [self.view addSubview:v];
-    
+    [self.geoview generateFromString:@"Matt"];
+    self.text.delegate = self;
+    self.navigationController.toolbarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *s = [NSString stringWithFormat: @"%@%@", self.text.text, string ];
+    [self.geoview generateFromString:s];
+    return YES;
 }
 
 @end
