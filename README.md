@@ -44,6 +44,9 @@ to generate a pattern based on a string using preset options.
 This includes all of the patterns from the original project. Each pattern is accessed with an enum. To generate a GeoPatternView using a specific type of pattern, just add the key to the options parameter.
 
 ```objective-c
+
+GeoPatternView *view = [[GeoPatternView alloc] initWithFrame....];
+
 NSDictionary * options = @{
       kGeoPatternType: [NSNumber numberWithInteger: GeoPatternXes,
       kGeoPatternColor: [UIColor redColor]
