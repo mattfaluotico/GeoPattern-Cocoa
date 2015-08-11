@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "GeoPattern"
-  s.version          = "1.0.3"
+  s.version          = "1.0.5"
   s.summary          = "Generated awesome patterns from simply a string."
   s.homepage         = "https://github.com/mattfxyz/GeoPattern-Cocoa"
   s.license          = 'MIT'
