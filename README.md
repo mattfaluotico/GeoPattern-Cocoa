@@ -13,7 +13,7 @@ This is a port of Jason Long's [GeoPattern](https://github.com/jasonlong/geo_pat
 
 ## Installing
 
-Using Cocoapods.
+Using CocoaPods.
 
 `pod 'GeoPattern', ~> 1.0.3`
 
